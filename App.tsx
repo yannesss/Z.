@@ -5,7 +5,7 @@ import { TransactionTable } from './components/TransactionTable';
 import { AddTransactionForm } from './components/AddTransactionForm';
 import { SmartEntry } from './components/SmartEntry';
 import { FinancialCharts } from './components/Charts';
-import { LayoutDashboard, Table2, TrendingUp, TrendingDown, Wallet, Languages, CalendarRange, Filter } from 'lucide-react';
+import { LayoutDashboard, Table2, TrendingUp, TrendingDown, Wallet, Languages, CalendarRange, Filter, Printer } from 'lucide-react';
 
 const App: React.FC = () => {
   const [transactions, setTransactions] = useState<Transaction[]>(INITIAL_TRANSACTIONS);
@@ -42,6 +42,10 @@ const App: React.FC = () => {
     setLang(prev => prev === 'en' ? 'zh' : 'en');
   };
 
+  const handlePrint = () => {
+    window.print();
+  };
+
   // Filter transactions based on date range
   const filteredTransactions = useMemo(() => {
     return transactions.filter(t => {
@@ -65,9 +69,20 @@ const App: React.FC = () => {
   }, [filteredTransactions]);
 
   return (
-    <div className="min-h-screen bg-gray-50 text-gray-800 pb-20">
-      {/* Header */}
-      <header className="bg-white border-b border-gray-200 sticky top-0 z-20 shadow-sm">
+    <div className="min-h-screen bg-gray-50 text-gray-800 pb-20 print:pb-0 print:bg-white">
+      
+      {/* Print Only Header */}
+      <div className="print-only mb-8 text-center border-b pb-4">
+        <h1 className="text-3xl font-bold text-gray-900 mb-2">{t.printHeader}</h1>
+        {dateRange.start && dateRange.end && (
+          <p className="text-gray-600">
+             {t.period}: {dateRange.start} - {dateRange.end}
+          </p>
+        )}
+      </div>
+
+      {/* Screen Header */}
+      <header className="bg-white border-b border-gray-200 sticky top-0 z-20 shadow-sm no-print">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center text-white font-bold">
@@ -79,6 +94,14 @@ const App: React.FC = () => {
           </div>
           
           <div className="flex items-center gap-2">
+            <button
+              onClick={handlePrint}
+              className="flex items-center gap-1 px-3 py-1.5 rounded-md text-sm font-medium bg-emerald-50 text-emerald-700 hover:bg-emerald-100 transition-colors mr-2 border border-emerald-200"
+            >
+              <Printer className="w-4 h-4" />
+              <span className="hidden sm:inline">{t.exportPDF}</span>
+            </button>
+
             <button
               onClick={toggleLanguage}
               className="flex items-center gap-1 px-3 py-1.5 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-100 transition-colors mr-2"
@@ -95,7 +118,7 @@ const App: React.FC = () => {
                 }`}
               >
                 <Table2 className="w-4 h-4" />
-                {t.report}
+                <span className="hidden sm:inline">{t.report}</span>
               </button>
               <button
                 onClick={() => setView(AppView.DASHBOARD)}
@@ -104,7 +127,7 @@ const App: React.FC = () => {
                 }`}
               >
                 <LayoutDashboard className="w-4 h-4" />
-                {t.analysis}
+                <span className="hidden sm:inline">{t.analysis}</span>
               </button>
             </div>
           </div>
@@ -113,8 +136,8 @@ const App: React.FC = () => {
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         
-        {/* Date Filter Bar */}
-        <div className="bg-white p-4 rounded-xl border border-gray-200 shadow-sm mb-6 flex flex-wrap items-center gap-4">
+        {/* Date Filter Bar - Hide in print */}
+        <div className="bg-white p-4 rounded-xl border border-gray-200 shadow-sm mb-6 flex flex-wrap items-center gap-4 no-print">
           <div className="flex items-center gap-2 text-gray-700 font-medium">
             <Filter className="w-4 h-4 text-indigo-600" />
             <span>{t.filter}:</span>
@@ -149,57 +172,61 @@ const App: React.FC = () => {
         </div>
 
         {/* Top Summary Metrics */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <div className="bg-white p-5 rounded-xl border border-emerald-100 shadow-sm flex items-center justify-between">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 print:grid-cols-3 print:gap-4 print:mb-4">
+          <div className="bg-white p-5 rounded-xl border border-emerald-100 shadow-sm flex items-center justify-between print:border-gray-200">
             <div>
               <p className="text-sm text-gray-500 font-medium">{t.totalIncome}</p>
               <p className="text-2xl font-bold text-emerald-600 mt-1">
                 HKD {summary.income.toLocaleString()}
               </p>
             </div>
-            <div className="w-10 h-10 rounded-full bg-emerald-50 flex items-center justify-center">
+            <div className="w-10 h-10 rounded-full bg-emerald-50 flex items-center justify-center print:hidden">
               <TrendingUp className="w-5 h-5 text-emerald-600" />
             </div>
           </div>
-          <div className="bg-white p-5 rounded-xl border border-rose-100 shadow-sm flex items-center justify-between">
+          <div className="bg-white p-5 rounded-xl border border-rose-100 shadow-sm flex items-center justify-between print:border-gray-200">
             <div>
               <p className="text-sm text-gray-500 font-medium">{t.totalExpense}</p>
               <p className="text-2xl font-bold text-rose-600 mt-1">
                 HKD {summary.expense.toLocaleString()}
               </p>
             </div>
-            <div className="w-10 h-10 rounded-full bg-rose-50 flex items-center justify-center">
+            <div className="w-10 h-10 rounded-full bg-rose-50 flex items-center justify-center print:hidden">
               <TrendingDown className="w-5 h-5 text-rose-600" />
             </div>
           </div>
-          <div className={`bg-white p-5 rounded-xl border shadow-sm flex items-center justify-between ${summary.net >= 0 ? 'border-indigo-100' : 'border-orange-100'}`}>
+          <div className={`bg-white p-5 rounded-xl border shadow-sm flex items-center justify-between print:border-gray-200 ${summary.net >= 0 ? 'border-indigo-100' : 'border-orange-100'}`}>
             <div>
               <p className="text-sm text-gray-500 font-medium">{t.netIncome}</p>
               <p className={`text-2xl font-bold mt-1 ${summary.net >= 0 ? 'text-indigo-600' : 'text-orange-600'}`}>
                 HKD {summary.net.toLocaleString()}
               </p>
             </div>
-            <div className={`w-10 h-10 rounded-full flex items-center justify-center ${summary.net >= 0 ? 'bg-indigo-50' : 'bg-orange-50'}`}>
+            <div className={`w-10 h-10 rounded-full flex items-center justify-center print:hidden ${summary.net >= 0 ? 'bg-indigo-50' : 'bg-orange-50'}`}>
               <Wallet className={`w-5 h-5 ${summary.net >= 0 ? 'text-indigo-600' : 'text-orange-600'}`} />
             </div>
           </div>
         </div>
 
-        {/* Gemini Smart Entry */}
-        <SmartEntry onParsed={setAiDraft} t={t} />
+        {/* Gemini Smart Entry - Hide in print */}
+        <div className="no-print">
+          <SmartEntry onParsed={setAiDraft} t={t} />
+        </div>
 
-        {/* Manual Entry Form */}
-        <AddTransactionForm 
-          onAdd={handleAddTransaction} 
-          aiDraft={aiDraft} 
-          onClearDraft={() => setAiDraft(null)}
-          t={t}
-        />
+        {/* Manual Entry Form - Hide in print */}
+        <div className="no-print">
+          <AddTransactionForm 
+            onAdd={handleAddTransaction} 
+            aiDraft={aiDraft} 
+            onClearDraft={() => setAiDraft(null)}
+            t={t}
+          />
+        </div>
 
         {/* Main Content Area */}
         {view === AppView.TABLE ? (
           <>
-            <div className="flex justify-between items-center mb-4">
+            <div className="flex justify-between items-center mb-4 no-print">
               <h2 className="text-lg font-semibold text-gray-800">{t.monthlyLedger}</h2>
               {dateRange.start && dateRange.end && (
                  <span className="text-xs bg-indigo-50 text-indigo-700 px-2 py-1 rounded border border-indigo-100 flex items-center gap-1">

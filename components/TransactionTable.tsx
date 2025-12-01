@@ -27,7 +27,7 @@ export const TransactionTable: React.FC<TransactionTableProps> = ({ transactions
   };
 
   return (
-    <div className="overflow-hidden rounded-lg border border-gray-200 shadow-sm bg-white">
+    <div className="overflow-hidden rounded-lg border border-gray-200 shadow-sm bg-white print:border-0 print:shadow-none">
       <div className="overflow-x-auto custom-scrollbar">
         <table className="w-full text-sm text-left">
           <thead className="bg-gray-50 text-gray-700 font-semibold border-b border-gray-200 uppercase tracking-wider">
@@ -38,7 +38,7 @@ export const TransactionTable: React.FC<TransactionTableProps> = ({ transactions
               <th className="px-6 py-3 text-right whitespace-nowrap text-emerald-600">{t.income} (HKD)</th>
               <th className="px-6 py-3 text-right whitespace-nowrap text-rose-600">{t.expense} (HKD)</th>
               <th className="px-6 py-3 text-right whitespace-nowrap text-blue-600">{t.netIncome} (HKD)</th>
-              <th className="px-4 py-3 text-center w-10"></th>
+              <th className="px-4 py-3 text-center w-10 no-print"></th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-100">
@@ -65,7 +65,7 @@ export const TransactionTable: React.FC<TransactionTableProps> = ({ transactions
                       {formatCurrency(tItem.income - tItem.expense)}
                     </span>
                   </td>
-                  <td className="px-4 py-3 text-center">
+                  <td className="px-4 py-3 text-center no-print">
                     <button
                       onClick={() => onDelete(tItem.id)}
                       className="text-gray-400 hover:text-red-500 transition-colors p-1"
@@ -78,15 +78,15 @@ export const TransactionTable: React.FC<TransactionTableProps> = ({ transactions
               ))
             )}
             {/* Total Row */}
-            <tr className="bg-yellow-50 font-bold border-t-2 border-gray-200">
+            <tr className="bg-yellow-50 font-bold border-t-2 border-gray-200 print:bg-gray-100">
               <td className="px-6 py-4 text-gray-900">{t.total}:</td>
               <td colSpan={2}></td>
               <td className="px-6 py-4 text-right text-emerald-700">{formatCurrency(stats.totalIncome)}</td>
               <td className="px-6 py-4 text-right text-rose-700">{formatCurrency(stats.totalExpense)}</td>
-              <td className="px-6 py-4 text-right bg-yellow-300 text-gray-900 border border-yellow-400">
+              <td className="px-6 py-4 text-right bg-yellow-300 text-gray-900 border border-yellow-400 print:bg-transparent print:border-gray-300">
                 {formatCurrency(stats.netIncome)}
               </td>
-              <td></td>
+              <td className="no-print"></td>
             </tr>
           </tbody>
         </table>

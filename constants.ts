@@ -105,6 +105,9 @@ export const TRANSLATIONS = {
     endDate: 'End Date',
     filter: 'Filter',
     clearFilter: 'Clear',
+    exportPDF: 'Export PDF / Print',
+    printHeader: 'Financial Monthly Report',
+    period: 'Period',
   },
   zh: {
     appTitle: '財務報表',
@@ -137,5 +140,8 @@ export const TRANSLATIONS = {
     endDate: '結束日期',
     filter: '篩選',
     clearFilter: '清除',
+    exportPDF: '匯出 PDF / 列印',
+    printHeader: '財務月度報表',
+    period: '報表週期',
   }
 };

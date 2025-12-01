@@ -108,6 +108,11 @@ export const TRANSLATIONS = {
     exportPDF: 'Export PDF / Print',
     printHeader: 'Financial Monthly Report',
     period: 'Period',
+    backup: 'Backup Data',
+    restore: 'Restore Data',
+    restoreConfirm: 'This will overwrite your current data. Are you sure?',
+    importSuccess: 'Data restored successfully!',
+    importError: 'Invalid data file.',
   },
   zh: {
     appTitle: '財務報表',
@@ -143,5 +148,10 @@ export const TRANSLATIONS = {
     exportPDF: '匯出 PDF / 列印',
     printHeader: '財務月度報表',
     period: '報表週期',
+    backup: '備份數據 (下載)',
+    restore: '還原數據 (上傳)',
+    restoreConfirm: '這將覆蓋現有的所有數據。確定要還原嗎？',
+    importSuccess: '數據已還原！',
+    importError: '無效的數據文件。',
   }
 };

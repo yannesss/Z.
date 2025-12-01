@@ -5,7 +5,7 @@ import { TransactionTable } from './components/TransactionTable';
 import { AddTransactionForm } from './components/AddTransactionForm';
 import { SmartEntry } from './components/SmartEntry';
 import { FinancialCharts } from './components/Charts';
-import { LayoutDashboard, Table2, TrendingUp, TrendingDown, Wallet, Languages, CalendarRange, Filter, Printer } from 'lucide-react';
+import { LayoutDashboard, Table2, TrendingUp, TrendingDown, Wallet, Languages, CalendarRange, Filter, Printer, Download, Upload } from 'lucide-react';
 
 const App: React.FC = () => {
   // Initialize transactions from Local Storage to fix data persistence issue
@@ -81,6 +81,54 @@ const App: React.FC = () => {
     window.print();
   };
 
+  const handleExportData = () => {
+    const dataStr = JSON.stringify(transactions, null, 2);
+    const blob = new Blob([dataStr], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    const date = new Date().toISOString().split('T')[0];
+    link.download = `finreport_data_${date}.json`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  const handleImportData = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      try {
+        const content = e.target?.result as string;
+        const parsed = JSON.parse(content);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          if (window.confirm(t.restoreConfirm)) {
+             setTransactions(parsed);
+             alert(t.importSuccess);
+          }
+        } else {
+           // Allow empty array imports if someone wants to clear data, or handle error
+           if(Array.isArray(parsed) && parsed.length === 0) {
+              if (window.confirm(t.restoreConfirm)) {
+                setTransactions([]);
+                alert(t.importSuccess);
+             }
+           } else {
+             alert(t.importError);
+           }
+        }
+      } catch (err) {
+        console.error(err);
+        alert(t.importError);
+      }
+    };
+    reader.readAsText(file);
+    // Reset the input value so the same file can be selected again if needed
+    event.target.value = '';
+  };
+
   // Filter transactions based on date range
   const filteredTransactions = useMemo(() => {
     return transactions.filter(t => {
@@ -129,6 +177,21 @@ const App: React.FC = () => {
           </div>
           
           <div className="flex items-center gap-2">
+            {/* Data Management Controls */}
+            <div className="flex items-center mr-2 border-r border-gray-200 pr-2 gap-1">
+              <button
+                onClick={handleExportData}
+                className="p-2 text-gray-500 hover:text-indigo-600 hover:bg-indigo-50 rounded-full transition-colors"
+                title={t.backup}
+              >
+                <Download className="w-5 h-5" />
+              </button>
+              <label className="p-2 text-gray-500 hover:text-indigo-600 hover:bg-indigo-50 rounded-full transition-colors cursor-pointer" title={t.restore}>
+                <Upload className="w-5 h-5" />
+                <input type="file" accept=".json" onChange={handleImportData} className="hidden" />
+              </label>
+            </div>
+
             <button
               onClick={handlePrint}
               className="flex items-center gap-1 px-3 py-1.5 rounded-md text-sm font-medium bg-emerald-50 text-emerald-700 hover:bg-emerald-100 transition-colors mr-2 border border-emerald-200"

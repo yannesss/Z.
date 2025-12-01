@@ -1,7 +1,7 @@
 import React from 'react';
 import { Transaction, SummaryStats } from '../types';
-import { Trash2 } from 'lucide-react';
 import { TRANSLATIONS } from '../constants';
+import { Trash2 } from 'lucide-react';
 
 interface TransactionTableProps {
   transactions: Transaction[];
@@ -38,7 +38,7 @@ export const TransactionTable: React.FC<TransactionTableProps> = ({ transactions
               <th className="px-6 py-3 text-right whitespace-nowrap text-emerald-600">{t.income} (HKD)</th>
               <th className="px-6 py-3 text-right whitespace-nowrap text-rose-600">{t.expense} (HKD)</th>
               <th className="px-6 py-3 text-right whitespace-nowrap text-blue-600">{t.netIncome} (HKD)</th>
-              <th className="px-4 py-3 text-center w-10 no-print"></th>
+              <th className="px-6 py-3 text-center whitespace-nowrap w-16 no-print"></th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-100">
@@ -50,7 +50,7 @@ export const TransactionTable: React.FC<TransactionTableProps> = ({ transactions
               </tr>
             ) : (
               transactions.map((tItem) => (
-                <tr key={tItem.id} className="hover:bg-gray-50 transition-colors">
+                <tr key={tItem.id} className="hover:bg-gray-50 transition-colors group">
                   <td className="px-6 py-3 whitespace-nowrap font-medium text-gray-900">{tItem.date}</td>
                   <td className="px-6 py-3 whitespace-nowrap text-gray-600">{tItem.category}</td>
                   <td className="px-6 py-3 text-gray-600">{tItem.description}</td>
@@ -65,10 +65,10 @@ export const TransactionTable: React.FC<TransactionTableProps> = ({ transactions
                       {formatCurrency(tItem.income - tItem.expense)}
                     </span>
                   </td>
-                  <td className="px-4 py-3 text-center no-print">
+                  <td className="px-6 py-3 text-center no-print">
                     <button
                       onClick={() => onDelete(tItem.id)}
-                      className="text-gray-400 hover:text-red-500 transition-colors p-1"
+                      className="p-1.5 text-gray-400 hover:text-rose-600 hover:bg-rose-50 rounded-md transition-colors opacity-0 group-hover:opacity-100 focus:opacity-100"
                       title={t.deleteTitle}
                     >
                       <Trash2 className="w-4 h-4" />

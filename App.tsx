@@ -33,7 +33,7 @@ const App: React.FC = () => {
   };
 
   const handleDeleteTransaction = (id: string) => {
-    if (confirm(lang === 'zh' ? '確定要刪除此記錄嗎？' : 'Are you sure you want to delete this record?')) {
+    if (window.confirm(lang === 'zh' ? '確定要刪除此記錄嗎？' : 'Are you sure you want to delete this record?')) {
       setTransactions(prev => prev.filter(t => t.id !== id));
     }
   };
@@ -235,7 +235,11 @@ const App: React.FC = () => {
                  </span>
               )}
             </div>
-            <TransactionTable transactions={filteredTransactions} onDelete={handleDeleteTransaction} t={t} />
+            <TransactionTable 
+              transactions={filteredTransactions} 
+              onDelete={handleDeleteTransaction}
+              t={t} 
+            />
           </>
         ) : (
           <FinancialCharts transactions={filteredTransactions} t={t} />

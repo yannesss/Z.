@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { Transaction, AppView, AiParsedResult, Language } from './types';
 import { INITIAL_TRANSACTIONS, TRANSLATIONS } from './constants';
 import { TransactionTable } from './components/TransactionTable';
@@ -8,15 +8,47 @@ import { FinancialCharts } from './components/Charts';
 import { LayoutDashboard, Table2, TrendingUp, TrendingDown, Wallet, Languages, CalendarRange, Filter, Printer } from 'lucide-react';
 
 const App: React.FC = () => {
-  const [transactions, setTransactions] = useState<Transaction[]>(INITIAL_TRANSACTIONS);
+  // Initialize transactions from Local Storage to fix data persistence issue
+  const [transactions, setTransactions] = useState<Transaction[]>(() => {
+    try {
+      const savedData = localStorage.getItem('finreport_transactions');
+      if (savedData) {
+        return JSON.parse(savedData);
+      }
+    } catch (e) {
+      console.error("Failed to load transactions from local storage", e);
+    }
+    return INITIAL_TRANSACTIONS;
+  });
+
+  // Save to Local Storage whenever transactions change
+  useEffect(() => {
+    localStorage.setItem('finreport_transactions', JSON.stringify(transactions));
+  }, [transactions]);
+
   const [view, setView] = useState<AppView>(AppView.TABLE);
   const [aiDraft, setAiDraft] = useState<AiParsedResult | null>(null);
   const [lang, setLang] = useState<Language>('zh');
   
-  // Date filter state
-  const [dateRange, setDateRange] = useState({
-    start: '2025-09-01',
-    end: '2025-10-31'
+  // Date filter state - Defaults to Current Month
+  const [dateRange, setDateRange] = useState(() => {
+    const now = new Date();
+    // Get first day of current month
+    const start = new Date(now.getFullYear(), now.getMonth(), 1);
+    // Get last day of current month
+    const end = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+    
+    const fmt = (d: Date) => {
+       const y = d.getFullYear();
+       const m = String(d.getMonth() + 1).padStart(2, '0');
+       const day = String(d.getDate()).padStart(2, '0');
+       return `${y}-${m}-${day}`;
+    };
+
+    return {
+      start: fmt(start),
+      end: fmt(end)
+    };
   });
 
   const t = TRANSLATIONS[lang];
@@ -139,42 +171,7 @@ const App: React.FC = () => {
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         
-        {/* Date Filter Bar - Hide in print */}
-        <div className="bg-white p-4 rounded-xl border border-gray-200 shadow-sm mb-6 flex flex-wrap items-center gap-4 no-print">
-          <div className="flex items-center gap-2 text-gray-700 font-medium">
-            <Filter className="w-4 h-4 text-indigo-600" />
-            <span>{t.filter}:</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <label className="text-sm text-gray-500">{t.startDate}</label>
-            <input 
-              type="date" 
-              value={dateRange.start}
-              onChange={(e) => setDateRange(prev => ({ ...prev, start: e.target.value }))}
-              className="px-3 py-1.5 border border-gray-300 rounded-md text-sm focus:ring-2 focus:ring-indigo-500 outline-none"
-            />
-          </div>
-          <div className="text-gray-400">-</div>
-          <div className="flex items-center gap-2">
-            <label className="text-sm text-gray-500">{t.endDate}</label>
-            <input 
-              type="date" 
-              value={dateRange.end}
-              onChange={(e) => setDateRange(prev => ({ ...prev, end: e.target.value }))}
-              className="px-3 py-1.5 border border-gray-300 rounded-md text-sm focus:ring-2 focus:ring-indigo-500 outline-none"
-            />
-          </div>
-          {(dateRange.start || dateRange.end) && (
-             <button 
-               onClick={() => setDateRange({ start: '', end: '' })}
-               className="text-xs text-indigo-600 hover:text-indigo-800 underline ml-2"
-             >
-               {t.clearFilter}
-             </button>
-          )}
-        </div>
-
-        {/* Top Summary Metrics */}
+        {/* Top Summary Metrics - Always visible to show current status */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 print:grid-cols-3 print:gap-4 print:mb-4">
           <div className="bg-white p-5 rounded-xl border border-emerald-100 shadow-sm flex items-center justify-between print:border-gray-200">
             <div>
@@ -211,7 +208,7 @@ const App: React.FC = () => {
           </div>
         </div>
 
-        {/* Gemini Smart Entry - Hide in print */}
+        {/* Smart Entry - Hide in print */}
         <div className="no-print">
           <SmartEntry onParsed={setAiDraft} t={t} />
         </div>
@@ -224,6 +221,41 @@ const App: React.FC = () => {
             onClearDraft={() => setAiDraft(null)}
             t={t}
           />
+        </div>
+
+        {/* Date Filter Bar - Moved below input forms as requested, above report */}
+        <div className="bg-white p-4 rounded-xl border border-gray-200 shadow-sm mb-4 flex flex-wrap items-center gap-4 no-print">
+          <div className="flex items-center gap-2 text-gray-700 font-medium">
+            <Filter className="w-4 h-4 text-indigo-600" />
+            <span>{t.filter}:</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <label className="text-sm text-gray-500">{t.startDate}</label>
+            <input 
+              type="date" 
+              value={dateRange.start}
+              onChange={(e) => setDateRange(prev => ({ ...prev, start: e.target.value }))}
+              className="px-3 py-1.5 border border-gray-300 rounded-md text-sm focus:ring-2 focus:ring-indigo-500 outline-none"
+            />
+          </div>
+          <div className="text-gray-400">-</div>
+          <div className="flex items-center gap-2">
+            <label className="text-sm text-gray-500">{t.endDate}</label>
+            <input 
+              type="date" 
+              value={dateRange.end}
+              onChange={(e) => setDateRange(prev => ({ ...prev, end: e.target.value }))}
+              className="px-3 py-1.5 border border-gray-300 rounded-md text-sm focus:ring-2 focus:ring-indigo-500 outline-none"
+            />
+          </div>
+          {(dateRange.start || dateRange.end) && (
+             <button 
+               onClick={() => setDateRange({ start: '', end: '' })}
+               className="text-xs text-indigo-600 hover:text-indigo-800 underline ml-2"
+             >
+               {t.clearFilter}
+             </button>
+          )}
         </div>
 
         {/* Main Content Area */}

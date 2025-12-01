@@ -68,7 +68,7 @@ export const TransactionTable: React.FC<TransactionTableProps> = ({ transactions
                   <td className="px-6 py-3 text-center no-print">
                     <button
                       onClick={() => onDelete(tItem.id)}
-                      className="p-1.5 text-gray-400 hover:text-rose-600 hover:bg-rose-50 rounded-md transition-colors opacity-0 group-hover:opacity-100 focus:opacity-100"
+                      className="p-1.5 text-gray-400 hover:text-rose-600 hover:bg-rose-50 rounded-md transition-colors"
                       title={t.deleteTitle}
                     >
                       <Trash2 className="w-4 h-4" />

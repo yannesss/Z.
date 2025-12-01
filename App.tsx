@@ -22,9 +22,12 @@ const App: React.FC = () => {
   const t = TRANSLATIONS[lang];
 
   const handleAddTransaction = (newTx: Omit<Transaction, 'id'>) => {
+    // Generate a safer random ID that works in all contexts (including non-secure HTTP)
+    const newId = Date.now().toString(36) + Math.random().toString(36).substr(2, 5);
+    
     const transaction: Transaction = {
       ...newTx,
-      id: crypto.randomUUID(),
+      id: newId,
     };
     // Sort by date descending when adding
     setTransactions(prev => [...prev, transaction].sort((a, b) => 

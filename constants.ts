@@ -1,63 +1,6 @@
 import { Transaction } from './types';
 
-export const INITIAL_TRANSACTIONS: Transaction[] = [
-  {
-    id: '1',
-    date: '2025-09-30',
-    category: '薪金 SALARY',
-    description: 'Pinky',
-    income: 0,
-    expense: 30000.00
-  },
-  {
-    id: '2',
-    date: '2025-09-30',
-    category: '薪金 SALARY',
-    description: 'Mi',
-    income: 0,
-    expense: 63120.00
-  },
-  {
-    id: '3',
-    date: '2025-09-30',
-    category: '薪金 SALARY',
-    description: 'KK',
-    income: 0,
-    expense: 40285.29
-  },
-  {
-    id: '4',
-    date: '2025-10-01',
-    category: '租金 Rental Fee',
-    description: 'October Office Rent',
-    income: 0,
-    expense: 25000.00
-  },
-  {
-    id: '5',
-    date: '2025-10-02',
-    category: '銷售 Sales',
-    description: 'Client Project A - Deposit',
-    income: 45000.00,
-    expense: 0
-  },
-  {
-    id: '6',
-    date: '2025-10-03',
-    category: '公司用品 Supplies',
-    description: '紋繡針 Tattoo Needles',
-    income: 0,
-    expense: 1200.50
-  },
-  {
-    id: '7',
-    date: '2025-10-05',
-    category: '銀行手續費 Bank Charge',
-    description: 'Visa*1.8%',
-    income: 0,
-    expense: 230.00
-  }
-];
+export const INITIAL_TRANSACTIONS: Transaction[] = [];
 
 export const CATEGORIES = [
   '租金 Rental Fee',
@@ -113,6 +56,7 @@ export const TRANSLATIONS = {
     restoreConfirm: 'This will overwrite your current data. Are you sure?',
     importSuccess: 'Data restored successfully!',
     importError: 'Invalid data file.',
+    others: 'Others',
   },
   zh: {
     appTitle: '財務報表',
@@ -153,5 +97,6 @@ export const TRANSLATIONS = {
     restoreConfirm: '這將覆蓋現有的所有數據。確定要還原嗎？',
     importSuccess: '數據已還原！',
     importError: '無效的數據文件。',
+    others: '其他 (Others)',
   }
 };

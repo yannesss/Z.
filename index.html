@@ -29,13 +29,14 @@
       /* Print Styles for PDF Export */
       @media print {
         @page {
-          size: A4;
+          size: landscape; /* Force landscape to fit wide tables */
           margin: 1cm;
         }
         body {
           background-color: white;
           color: black;
-          font-size: 12pt;
+          font-size: 11pt;
+          width: 100%;
         }
         /* Hide interactive elements */
         .no-print, 
@@ -56,11 +57,11 @@
         table {
           width: 100% !important;
           border-collapse: collapse !important;
-          font-size: 10pt;
         }
         th, td {
           border: 1px solid #e5e7eb !important;
-          padding: 8px !important;
+          padding: 6px 8px !important;
+          font-size: 10pt;
         }
         th {
           background-color: #f3f4f6 !important;
@@ -77,10 +78,9 @@
         .overflow-x-auto {
           overflow: visible !important;
         }
-        /* Ensure charts print if visible */
+        /* Ensure charts print properly */
         .recharts-responsive-container {
           width: 100% !important;
-          height: 300px !important;
         }
       }
       

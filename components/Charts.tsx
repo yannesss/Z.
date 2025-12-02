@@ -81,11 +81,11 @@ export const FinancialCharts: React.FC<ChartsProps> = ({ transactions, t }) => {
   }
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8 print:block print:w-full">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8 print:grid print:grid-cols-2 print:gap-4 print:w-full">
       {/* Expense Distribution */}
-      <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm flex flex-col items-center print:mb-6 print:border-0 print:shadow-none print:break-inside-avoid">
+      <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm flex flex-col items-center print:border-0 print:shadow-none print:break-inside-avoid print:p-0">
         <h3 className="text-lg font-semibold text-gray-800 mb-4 w-full text-left">{t.expenseBreakdown}</h3>
-        <div className="w-full h-[300px] print:h-[400px]">
+        <div className="w-full h-[300px] print:h-[300px]">
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>
               <Pie
@@ -110,9 +110,9 @@ export const FinancialCharts: React.FC<ChartsProps> = ({ transactions, t }) => {
       </div>
 
       {/* Cash Flow Timeline */}
-      <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm print:border-0 print:shadow-none print:break-inside-avoid">
+      <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm print:border-0 print:shadow-none print:break-inside-avoid print:p-0">
         <h3 className="text-lg font-semibold text-gray-800 mb-4">{t.dailyCashFlow}</h3>
-        <div className="w-full h-[300px] print:h-[400px]">
+        <div className="w-full h-[300px] print:h-[300px]">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart
               data={dailyFlow}

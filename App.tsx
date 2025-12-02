@@ -151,14 +151,17 @@ const App: React.FC = () => {
     }), { income: 0, expense: 0, net: 0 });
   }, [filteredTransactions]);
 
+  // Get current date/time for footer
+  const printDate = new Date().toLocaleString(lang === 'zh' ? 'zh-HK' : 'en-HK');
+
   return (
-    <div className="min-h-screen bg-gray-50 text-gray-800 pb-20 print:pb-0 print:bg-white">
+    <div className="min-h-screen bg-gray-50 text-gray-800 pb-20 print:pb-0 print:bg-white relative">
       
       {/* Print Only Header */}
-      <div className="print-only mb-8 text-center border-b pb-4">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">{t.printHeader}</h1>
+      <div className="print-only mb-4 text-center border-b pb-2">
+        <h1 className="text-2xl font-bold text-gray-900 mb-1">{t.printHeader}</h1>
         {dateRange.start && dateRange.end && (
-          <p className="text-gray-600">
+          <p className="text-gray-600 text-sm">
              {t.period}: {dateRange.start} - {dateRange.end}
           </p>
         )}
@@ -343,6 +346,12 @@ const App: React.FC = () => {
           <FinancialCharts transactions={filteredTransactions} t={t} />
         )}
       </main>
+
+      {/* Print Footer */}
+      <footer className="hidden print:block fixed bottom-2 right-4 text-right text-gray-400 text-[10px]">
+        <p>{printDate}</p>
+        <p>Website Author: Z.</p>
+      </footer>
     </div>
   );
 };

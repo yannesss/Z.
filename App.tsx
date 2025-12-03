@@ -5,13 +5,14 @@ import { TransactionTable } from './components/TransactionTable';
 import { AddTransactionForm } from './components/AddTransactionForm';
 import { SmartEntry } from './components/SmartEntry';
 import { FinancialCharts } from './components/Charts';
-import { LayoutDashboard, Table2, TrendingUp, TrendingDown, Wallet, Languages, CalendarRange, Filter, Printer, Download, Upload } from 'lucide-react';
+import { LayoutDashboard, Table2, TrendingUp, TrendingDown, Wallet, Languages, CalendarRange, Filter, Printer, Download, Upload, ArrowUpDown } from 'lucide-react';
 
 const App: React.FC = () => {
   // Initialize transactions from Local Storage to fix data persistence issue
+  // UPDATED KEY to 'finreport_transactions_v3' to clear old data for the user
   const [transactions, setTransactions] = useState<Transaction[]>(() => {
     try {
-      const savedData = localStorage.getItem('finreport_transactions');
+      const savedData = localStorage.getItem('finreport_transactions_v3');
       if (savedData) {
         return JSON.parse(savedData);
       }
@@ -23,12 +24,13 @@ const App: React.FC = () => {
 
   // Save to Local Storage whenever transactions change
   useEffect(() => {
-    localStorage.setItem('finreport_transactions', JSON.stringify(transactions));
+    localStorage.setItem('finreport_transactions_v3', JSON.stringify(transactions));
   }, [transactions]);
 
   const [view, setView] = useState<AppView>(AppView.TABLE);
   const [aiDraft, setAiDraft] = useState<AiParsedResult | null>(null);
   const [lang, setLang] = useState<Language>('zh');
+  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc'); // Default to 'desc' (Newest first)
   
   // Date filter state - Defaults to Current Month
   const [dateRange, setDateRange] = useState(() => {
@@ -61,10 +63,8 @@ const App: React.FC = () => {
       ...newTx,
       id: newId,
     };
-    // Sort by date descending when adding
-    setTransactions(prev => [...prev, transaction].sort((a, b) => 
-      new Date(a.date).getTime() - new Date(b.date).getTime()
-    ));
+    // Add to list
+    setTransactions(prev => [...prev, transaction]);
   };
 
   const handleDeleteTransaction = (id: string) => {
@@ -75,6 +75,10 @@ const App: React.FC = () => {
 
   const toggleLanguage = () => {
     setLang(prev => prev === 'en' ? 'zh' : 'en');
+  };
+
+  const toggleSortOrder = () => {
+    setSortOrder(prev => prev === 'asc' ? 'desc' : 'asc');
   };
 
   const handlePrint = () => {
@@ -106,6 +110,9 @@ const App: React.FC = () => {
         if (Array.isArray(parsed) && parsed.length > 0) {
           if (window.confirm(t.restoreConfirm)) {
              setTransactions(parsed);
+             // CRITICAL FIX: Clear the date range filter immediately after import.
+             // This ensures imported data from other months is visible immediately.
+             setDateRange({ start: '', end: '' });
              alert(t.importSuccess);
           }
         } else {
@@ -113,6 +120,7 @@ const App: React.FC = () => {
            if(Array.isArray(parsed) && parsed.length === 0) {
               if (window.confirm(t.restoreConfirm)) {
                 setTransactions([]);
+                setDateRange({ start: '', end: '' });
                 alert(t.importSuccess);
              }
            } else {
@@ -129,9 +137,9 @@ const App: React.FC = () => {
     event.target.value = '';
   };
 
-  // Filter transactions based on date range
+  // Filter and Sort transactions
   const filteredTransactions = useMemo(() => {
-    return transactions.filter(t => {
+    let result = transactions.filter(t => {
       const tDate = new Date(t.date);
       const start = dateRange.start ? new Date(dateRange.start) : null;
       const end = dateRange.end ? new Date(dateRange.end) : null;
@@ -140,7 +148,16 @@ const App: React.FC = () => {
       if (end && tDate > end) return false;
       return true;
     });
-  }, [transactions, dateRange]);
+
+    // Apply Sorting
+    result.sort((a, b) => {
+      const dateA = new Date(a.date).getTime();
+      const dateB = new Date(b.date).getTime();
+      return sortOrder === 'desc' ? dateB - dateA : dateA - dateB;
+    });
+
+    return result;
+  }, [transactions, dateRange, sortOrder]);
 
   // Summary Cards logic (based on filtered data)
   const summary = useMemo(() => {
@@ -328,7 +345,17 @@ const App: React.FC = () => {
         {view === AppView.TABLE ? (
           <>
             <div className="flex justify-between items-center mb-4 no-print">
-              <h2 className="text-lg font-semibold text-gray-800">{t.monthlyLedger}</h2>
+              <div className="flex items-center gap-3">
+                <h2 className="text-lg font-semibold text-gray-800">{t.monthlyLedger}</h2>
+                <button
+                  onClick={toggleSortOrder}
+                  className="flex items-center gap-1 text-xs px-2 py-1 bg-gray-100 hover:bg-gray-200 rounded text-gray-600 transition-colors border border-gray-200"
+                  title={t.sortDate}
+                >
+                  <ArrowUpDown className="w-3 h-3" />
+                  {sortOrder === 'asc' ? t.sortAsc : t.sortDesc}
+                </button>
+              </div>
               {dateRange.start && dateRange.end && (
                  <span className="text-xs bg-indigo-50 text-indigo-700 px-2 py-1 rounded border border-indigo-100 flex items-center gap-1">
                    <CalendarRange className="w-3 h-3" />

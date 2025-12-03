@@ -57,6 +57,9 @@ export const TRANSLATIONS = {
     importSuccess: 'Data restored successfully!',
     importError: 'Invalid data file.',
     others: 'Others',
+    sortDate: 'Sort Date',
+    sortAsc: 'Oldest First',
+    sortDesc: 'Newest First',
   },
   zh: {
     appTitle: '財務報表',
@@ -95,8 +98,11 @@ export const TRANSLATIONS = {
     backup: '備份數據 (下載)',
     restore: '還原數據 (上傳)',
     restoreConfirm: '這將覆蓋現有的所有數據。確定要還原嗎？',
-    importSuccess: '數據已還原！',
+    importSuccess: '數據已還原！已清除日期篩選以顯示所有數據。',
     importError: '無效的數據文件。',
     others: '其他 (Others)',
+    sortDate: '日期排序',
+    sortAsc: '日期 (舊→新)',
+    sortDesc: '日期 (新→舊)',
   }
 };

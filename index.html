@@ -82,6 +82,11 @@
         .recharts-responsive-container {
           width: 100% !important;
         }
+        /* Page break utilities */
+        .break-before-page {
+          page-break-before: always !important;
+          break-before: page !important;
+        }
       }
       
       /* Helper to hide print-only elements on screen */
@@ -92,11 +97,11 @@
 <script type="importmap">
 {
   "imports": {
-    "react": "https://aistudiocdn.com/react@^19.2.0",
-    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
     "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "recharts": "https://aistudiocdn.com/recharts@^3.5.1",
     "lucide-react": "https://aistudiocdn.com/lucide-react@^0.555.0",
-    "recharts": "https://aistudiocdn.com/recharts@^3.5.1"
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/"
   }
 }
 </script>

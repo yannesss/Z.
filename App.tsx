@@ -5,14 +5,14 @@ import { TransactionTable } from './components/TransactionTable';
 import { AddTransactionForm } from './components/AddTransactionForm';
 import { SmartEntry } from './components/SmartEntry';
 import { FinancialCharts } from './components/Charts';
-import { LayoutDashboard, Table2, TrendingUp, TrendingDown, Wallet, Languages, CalendarRange, Filter, Printer, Download, Upload, ArrowUpDown } from 'lucide-react';
+import { LayoutDashboard, Table2, TrendingUp, TrendingDown, Wallet, Languages, CalendarRange, Filter, Printer, Download, Upload, ArrowUpDown, FileSpreadsheet } from 'lucide-react';
 
 const App: React.FC = () => {
   // Initialize transactions from Local Storage to fix data persistence issue
-  // UPDATED KEY to 'finreport_transactions_v3' to clear old data for the user
+  // UPDATED KEY to 'finreport_transactions_v4' to clear old data for the user and load NEW DATA
   const [transactions, setTransactions] = useState<Transaction[]>(() => {
     try {
-      const savedData = localStorage.getItem('finreport_transactions_v3');
+      const savedData = localStorage.getItem('finreport_transactions_v4');
       if (savedData) {
         return JSON.parse(savedData);
       }
@@ -24,7 +24,7 @@ const App: React.FC = () => {
 
   // Save to Local Storage whenever transactions change
   useEffect(() => {
-    localStorage.setItem('finreport_transactions_v3', JSON.stringify(transactions));
+    localStorage.setItem('finreport_transactions_v4', JSON.stringify(transactions));
   }, [transactions]);
 
   const [view, setView] = useState<AppView>(AppView.TABLE);
@@ -93,6 +93,40 @@ const App: React.FC = () => {
     link.href = url;
     const date = new Date().toISOString().split('T')[0];
     link.download = `finreport_data_${date}.json`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  const handleExportCSV = () => {
+    // BOM for UTF-8 in Excel
+    const BOM = "\uFEFF";
+    const headers = [t.date, t.category, t.description, t.income, t.expense, t.netIncome];
+    
+    // Sort transactions by date (desc) for export or match current filter?
+    // Let's use filtered transactions to respect user's view
+    const csvRows = filteredTransactions.map(tx => {
+      // Escape quotes in description and category
+      const safeDesc = `"${tx.description.replace(/"/g, '""')}"`;
+      const safeCat = `"${tx.category.replace(/"/g, '""')}"`;
+      const net = tx.income - tx.expense;
+      return [
+        tx.date,
+        safeCat,
+        safeDesc,
+        tx.income.toFixed(2),
+        tx.expense.toFixed(2),
+        net.toFixed(2)
+      ].join(",");
+    });
+
+    const csvContent = BOM + headers.join(",") + "\n" + csvRows.join("\n");
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    const date = new Date().toISOString().split('T')[0];
+    link.download = `finreport_export_${date}.csv`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -199,6 +233,13 @@ const App: React.FC = () => {
           <div className="flex items-center gap-2">
             {/* Data Management Controls */}
             <div className="flex items-center mr-2 border-r border-gray-200 pr-2 gap-1">
+               <button
+                onClick={handleExportCSV}
+                className="p-2 text-gray-500 hover:text-emerald-600 hover:bg-emerald-50 rounded-full transition-colors"
+                title={t.exportExcel}
+              >
+                <FileSpreadsheet className="w-5 h-5" />
+              </button>
               <button
                 onClick={handleExportData}
                 className="p-2 text-gray-500 hover:text-indigo-600 hover:bg-indigo-50 rounded-full transition-colors"
@@ -341,10 +382,10 @@ const App: React.FC = () => {
           )}
         </div>
 
-        {/* Main Content Area */}
-        {view === AppView.TABLE ? (
-          <>
-            <div className="flex justify-between items-center mb-4 no-print">
+        {/* Main Content Area - Render BOTH but toggle visibility */}
+        {/* Table View */}
+        <div className={view === AppView.TABLE ? 'block' : 'hidden print:block'}>
+           <div className="flex justify-between items-center mb-4 no-print">
               <div className="flex items-center gap-3">
                 <h2 className="text-lg font-semibold text-gray-800">{t.monthlyLedger}</h2>
                 <button
@@ -368,10 +409,15 @@ const App: React.FC = () => {
               onDelete={handleDeleteTransaction}
               t={t} 
             />
-          </>
-        ) : (
-          <FinancialCharts transactions={filteredTransactions} t={t} />
-        )}
+        </div>
+
+        {/* Analysis/Charts View */}
+        {/* Force page break before charts in print mode */}
+        <div className={`print:break-before-page ${view === AppView.DASHBOARD ? 'block' : 'hidden print:block'}`}>
+           <h2 className="hidden print:block text-xl font-bold mb-4 mt-8">{t.analysis}</h2>
+           <FinancialCharts transactions={filteredTransactions} t={t} />
+        </div>
+
       </main>
 
       {/* Print Footer */}

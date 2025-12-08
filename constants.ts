@@ -148,6 +148,8 @@ export const INITIAL_TRANSACTIONS: Transaction[] = [
   { id: 'nov-35', date: '2025-11-30', category: '薪金 SALARY', description: 'Pinky', income: 0, expense: 30000 },
   { id: 'nov-36', date: '2025-11-30', category: '銷售 Sales', description: 'FPS', income: 32240, expense: 0 },
   { id: 'nov-37', date: '2025-11-30', category: '銷售 Sales', description: '儲值', income: 15000, expense: 0 },
+  { id: 'nov-38', date: '2025-11-30', category: '薪金 SALARY', description: 'Frankie', income: 0, expense: 14700 },
+  { id: 'nov-39', date: '2025-11-30', category: '薪金 SALARY', description: 'Ling', income: 0, expense: 68681.80 },
 ];
 
 export const CATEGORIES = [

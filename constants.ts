@@ -1,3 +1,4 @@
+
 import { Transaction } from './types';
 
 export const INITIAL_TRANSACTIONS: Transaction[] = [
@@ -106,7 +107,7 @@ export const INITIAL_TRANSACTIONS: Transaction[] = [
   { id: 'oct-35', date: '2025-10-31', category: '薪金 SALARY', description: 'Mi', income: 0, expense: 63120 },
   { id: 'oct-36', date: '2025-10-31', category: '薪金 SALARY', description: 'Yuki', income: 0, expense: 16275.42 },
   { id: 'oct-37', date: '2025-10-31', category: '薪金 SALARY', description: 'KK', income: 0, expense: 29551.29 },
-  { id: 'oct-38', date: '2025-10-31', category: '薪金 SALARY', description: 'Ling (多付$1,125.00)', income: 0, expense: 65296 },
+  { id: 'oct-38', date: '2025-10-31', category: '薪金 SALARY', description: 'Ling', income: 0, expense: 65296 },
   { id: 'oct-39', date: '2025-10-31', category: '薪金 SALARY', description: 'Z', income: 0, expense: 800 },
 
   // November 2025

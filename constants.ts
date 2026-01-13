@@ -29,7 +29,8 @@ export const INITIAL_TRANSACTIONS: Transaction[] = [
   { id: 'aug-23', date: '2025-08-31', category: '薪金 SALARY', description: 'Ada', income: 0, expense: 21128 },
   { id: 'aug-24', date: '2025-08-31', category: '薪金 SALARY', description: 'Ling', income: 0, expense: 34296 },
   // Z record deleted
-  { id: 'aug-new-1', date: '2025-08-31', category: '薪金 SALARY', description: 'Accounting Fee', income: 0, expense: 800 },
+  // UPDATED: Accounting Fee -> 營運費用 / 會計費
+  { id: 'aug-new-1', date: '2025-08-31', category: '營運費用 Operating Expense', description: '會計費 Accounting Fees', income: 0, expense: 800 },
 
   // September 2025
   { id: 'sep-1', date: '2025-09-01', category: '廣告費 Advertising Fees', description: '/', income: 0, expense: 76400 },
@@ -69,7 +70,8 @@ export const INITIAL_TRANSACTIONS: Transaction[] = [
   { id: 'sep-35', date: '2025-09-30', category: '薪金 SALARY', description: 'Mi', income: 0, expense: 36876 },
   { id: 'sep-36', date: '2025-09-30', category: '薪金 SALARY', description: 'Ling', income: 0, expense: 48530 },
   { id: 'sep-37', date: '2025-09-30', category: '薪金 SALARY', description: 'KK', income: 0, expense: 27500 },
-  { id: 'sep-38', date: '2025-09-30', category: '薪金 SALARY', description: 'Accounting Fee', income: 0, expense: 800 },
+  // UPDATED: Accounting Fee -> 營運費用 / 會計費
+  { id: 'sep-38', date: '2025-09-30', category: '營運費用 Operating Expense', description: '會計費 Accounting Fees', income: 0, expense: 800 },
 
   // October 2025
   { id: 'oct-1', date: '2025-10-01', category: '廣告費 Advertising Fees', description: '/', income: 0, expense: 93725 },
@@ -110,7 +112,8 @@ export const INITIAL_TRANSACTIONS: Transaction[] = [
   { id: 'oct-36', date: '2025-10-31', category: '薪金 SALARY', description: 'Yuki', income: 0, expense: 16275.42 },
   { id: 'oct-37', date: '2025-10-31', category: '薪金 SALARY', description: 'KK', income: 0, expense: 29551.29 },
   { id: 'oct-38', date: '2025-10-31', category: '薪金 SALARY', description: 'Ling', income: 0, expense: 65296 },
-  { id: 'oct-39', date: '2025-10-31', category: '薪金 SALARY', description: 'Accounting Fee', income: 0, expense: 800 },
+  // UPDATED: Accounting Fee -> 營運費用 / 會計費
+  { id: 'oct-39', date: '2025-10-31', category: '營運費用 Operating Expense', description: '會計費 Accounting Fees', income: 0, expense: 800 },
 
   // November 2025
   { id: 'nov-1', date: '2025-11-01', category: '廣告費 Advertising Fees', description: '/', income: 0, expense: 91250 },
@@ -156,7 +159,8 @@ export const INITIAL_TRANSACTIONS: Transaction[] = [
   { id: 'nov-39', date: '2025-11-30', category: '薪金 SALARY', description: 'Ling', income: 0, expense: 68681.80 },
   { id: 'nov-40', date: '2025-11-30', category: '薪金 SALARY', description: 'Mi', income: 0, expense: 60745.40 },
   { id: 'nov-41', date: '2025-11-30', category: '薪金 SALARY', description: 'Yuki', income: 0, expense: 28212.00 },
-  { id: 'nov-44', date: '2025-11-30', category: '薪金 SALARY', description: 'Accounting Fee', income: 0, expense: 800 },
+  // UPDATED: Accounting Fee -> 營運費用 / 會計費
+  { id: 'nov-44', date: '2025-11-30', category: '營運費用 Operating Expense', description: '會計費 Accounting Fees', income: 0, expense: 800 },
 
   // December 2025
   { id: 'dec-1', date: '2025-12-01', category: '租金 Rental Fee', description: '/', income: 0, expense: 20675.00 },
@@ -194,7 +198,8 @@ export const INITIAL_TRANSACTIONS: Transaction[] = [
   { id: 'dec-33', date: '2025-12-31', category: '銀行手續費 Bank Charge', description: '銀聯*1.8%', income: 0, expense: 2084.76 },
   { id: 'dec-34', date: '2025-12-31', category: '銷售 Sales', description: 'Payme', income: 18980.00, expense: 0 },
   { id: 'dec-35', date: '2025-12-31', category: '銷售 Sales', description: 'FPS', income: 67800.00, expense: 0 },
-  { id: 'dec-36', date: '2025-12-31', category: '薪金 SALARY', description: 'Accounting Fee', income: 0, expense: 800 },
+  // UPDATED: Accounting Fee -> 營運費用 / 會計費
+  { id: 'dec-36', date: '2025-12-31', category: '營運費用 Operating Expense', description: '會計費 Accounting Fees', income: 0, expense: 800 },
 ];
 
 export const CATEGORIES = [
@@ -259,6 +264,8 @@ export const TRANSLATIONS = {
     sortDate: 'Sort Date',
     sortAsc: 'Oldest First',
     sortDesc: 'Newest First',
+    search: 'Search description or category...',
+    percentage: 'Percentage',
   },
   zh: {
     appTitle: '財務報表',
@@ -304,5 +311,7 @@ export const TRANSLATIONS = {
     sortDate: '日期排序',
     sortAsc: '日期 (舊→新)',
     sortDesc: '日期 (新→舊)',
+    search: '搜尋說明或類別...',
+    percentage: '百分比',
   }
 };

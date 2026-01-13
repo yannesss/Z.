@@ -7,14 +7,14 @@ import { TransactionTable } from './components/TransactionTable';
 import { AddTransactionForm } from './components/AddTransactionForm';
 import { SmartEntry } from './components/SmartEntry';
 import { FinancialCharts } from './components/Charts';
-import { LayoutDashboard, Table2, TrendingUp, TrendingDown, Wallet, Languages, CalendarRange, Filter, Printer, Download, Upload, ArrowUpDown, FileSpreadsheet } from 'lucide-react';
+import { LayoutDashboard, Table2, TrendingUp, TrendingDown, Wallet, Languages, CalendarRange, Filter, Printer, Download, Upload, ArrowUpDown, FileSpreadsheet, Search } from 'lucide-react';
 
 const App: React.FC = () => {
   // Initialize transactions from Local Storage to fix data persistence issue
-  // UPDATED KEY to 'finreport_transactions_v10' to clear old data for the user and load NEW DATA
+  // UPDATED KEY to 'finreport_transactions_v11' to clear old data for the user and load NEW DATA
   const [transactions, setTransactions] = useState<Transaction[]>(() => {
     try {
-      const savedData = localStorage.getItem('finreport_transactions_v10');
+      const savedData = localStorage.getItem('finreport_transactions_v11');
       if (savedData) {
         return JSON.parse(savedData);
       }
@@ -26,13 +26,14 @@ const App: React.FC = () => {
 
   // Save to Local Storage whenever transactions change
   useEffect(() => {
-    localStorage.setItem('finreport_transactions_v10', JSON.stringify(transactions));
+    localStorage.setItem('finreport_transactions_v11', JSON.stringify(transactions));
   }, [transactions]);
 
   const [view, setView] = useState<AppView>(AppView.TABLE);
   const [aiDraft, setAiDraft] = useState<AiParsedResult | null>(null);
   const [lang, setLang] = useState<Language>('zh');
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc'); // Default to 'desc' (Newest first)
+  const [searchTerm, setSearchTerm] = useState('');
   
   // Date filter state - Defaults to Current Month
   const [dateRange, setDateRange] = useState(() => {
@@ -182,6 +183,15 @@ const App: React.FC = () => {
 
       if (start && tDate < start) return false;
       if (end && tDate > end) return false;
+      
+      // Search filter
+      if (searchTerm) {
+        const term = searchTerm.toLowerCase();
+        const matchesDesc = t.description.toLowerCase().includes(term);
+        const matchesCat = t.category.toLowerCase().includes(term);
+        if (!matchesDesc && !matchesCat) return false;
+      }
+      
       return true;
     });
 
@@ -193,7 +203,7 @@ const App: React.FC = () => {
     });
 
     return result;
-  }, [transactions, dateRange, sortOrder]);
+  }, [transactions, dateRange, sortOrder, searchTerm]);
 
   // Summary Cards logic (based on filtered data)
   const summary = useMemo(() => {
@@ -374,10 +384,26 @@ const App: React.FC = () => {
               className="px-3 py-1.5 border border-gray-300 rounded-md text-sm focus:ring-2 focus:ring-indigo-500 outline-none"
             />
           </div>
-          {(dateRange.start || dateRange.end) && (
+          
+          {/* Search Bar */}
+          <div className="flex items-center gap-2 ml-auto lg:ml-4 w-full lg:w-auto relative">
+             <Search className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
+             <input
+               type="text"
+               value={searchTerm}
+               onChange={(e) => setSearchTerm(e.target.value)}
+               placeholder={t.search}
+               className="w-full lg:w-64 pl-9 pr-3 py-1.5 border border-gray-300 rounded-md text-sm focus:ring-2 focus:ring-indigo-500 outline-none"
+             />
+          </div>
+
+          {(dateRange.start || dateRange.end || searchTerm) && (
              <button 
-               onClick={() => setDateRange({ start: '', end: '' })}
-               className="text-xs text-indigo-600 hover:text-indigo-800 underline ml-2"
+               onClick={() => {
+                 setDateRange({ start: '', end: '' });
+                 setSearchTerm('');
+               }}
+               className="text-xs text-indigo-600 hover:text-indigo-800 underline ml-2 whitespace-nowrap"
              >
                {t.clearFilter}
              </button>

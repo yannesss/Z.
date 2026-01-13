@@ -1,5 +1,4 @@
 
-
 import React from 'react';
 import {
   BarChart,
@@ -41,13 +40,13 @@ export const FinancialCharts: React.FC<ChartsProps> = ({ transactions, t }) => {
   
   const totalExpense = rawExpenses.reduce((sum, item) => sum + item.value, 0);
 
-  // Group small items into "Others" if there are too many categories for the chart
+  // Group small items into "Others" if there are too many categories for the chart visualization
   let expenseByCategory: { name: string; value: number; displayName: string }[] = [];
 
   if (rawExpenses.length > 8) {
     const top7 = rawExpenses.slice(0, 7).map(item => ({
       ...item,
-      displayName: item.name.split(' ')[0] // Display only the main part (Chinese usually)
+      displayName: item.name.split(' ')[0] 
     }));
     
     const othersValue = rawExpenses.slice(7).reduce((sum, item) => sum + item.value, 0);
@@ -63,7 +62,7 @@ export const FinancialCharts: React.FC<ChartsProps> = ({ transactions, t }) => {
     }));
   }
 
-  // Calculate detailed breakdown for list (Use all raw expenses, do not group)
+  // Calculate detailed breakdown for list (Use all raw expenses)
   const detailedBreakdown = rawExpenses.map(item => ({
       ...item,
       percent: totalExpense > 0 ? (item.value / totalExpense) * 100 : 0
@@ -91,90 +90,109 @@ export const FinancialCharts: React.FC<ChartsProps> = ({ transactions, t }) => {
   }
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8 print:grid print:grid-cols-2 print:gap-4 print:w-full">
-      {/* Expense Distribution */}
-      <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm flex flex-col items-center print:border-0 print:shadow-none print:break-inside-avoid print:p-0">
-        <h3 className="text-lg font-semibold text-gray-800 mb-4 w-full text-left">{t.expenseBreakdown}</h3>
+    <div className="flex flex-col gap-8 mb-8">
+      {/* Expense Distribution Card - Full Width */}
+      <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm print:border-0 print:shadow-none print:break-inside-avoid print:p-0">
+        <h3 className="text-lg font-semibold text-gray-800 mb-6">{t.expenseBreakdown}</h3>
         
-        {/* Chart */}
-        <div className="w-full h-[300px] print:h-[250px] mb-6">
-          <ResponsiveContainer width="100%" height="100%">
-            <PieChart>
-              <Pie
-                data={expenseByCategory}
-                cx="50%"
-                cy="50%"
-                labelLine={true}
-                label={({ displayName, percent }: any) => `${displayName} ${(percent * 100).toFixed(0)}%`}
-                outerRadius={90}
-                fill="#8884d8"
-                dataKey="value"
-                isAnimationActive={false} // Disable animation for better printing
-              >
-                {expenseByCategory.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                ))}
-              </Pie>
-              <Tooltip formatter={(value: number) => `HKD ${value.toLocaleString()}`} />
-            </PieChart>
-          </ResponsiveContainer>
-        </div>
+        <div className="flex flex-col md:flex-row items-center gap-8">
+          {/* Donut Chart Section */}
+          <div className="w-full md:w-5/12 h-[300px] relative">
+            <ResponsiveContainer width="100%" height="100%">
+              <PieChart>
+                <Pie
+                  data={expenseByCategory}
+                  cx="50%"
+                  cy="50%"
+                  labelLine={false} // Cleaner look without lines
+                  outerRadius={110}
+                  innerRadius={75} // Donut style
+                  fill="#8884d8"
+                  dataKey="value"
+                  paddingAngle={2}
+                  isAnimationActive={false}
+                >
+                  {expenseByCategory.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} strokeWidth={0} />
+                  ))}
+                </Pie>
+                <Tooltip formatter={(value: number) => `HKD ${value.toLocaleString()}`} />
+              </PieChart>
+            </ResponsiveContainer>
+            {/* Center Label */}
+            <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+              <span className="text-sm text-gray-500 font-medium">{t.total}</span>
+              <span className="text-xl font-bold text-gray-800">${totalExpense.toLocaleString()}</span>
+            </div>
+          </div>
 
-        {/* Detailed List */}
-        <div className="w-full overflow-x-auto">
-             <table className="w-full text-sm text-left">
-                <thead className="bg-gray-50 text-gray-600 font-medium">
-                    <tr>
-                        <th className="px-3 py-2">{t.category}</th>
-                        <th className="px-3 py-2 text-right">{t.amount}</th>
-                        <th className="px-3 py-2 text-right">{t.percentage}</th>
-                    </tr>
-                </thead>
-                <tbody className="divide-y divide-gray-100">
-                    {detailedBreakdown.map((item, index) => (
-                        <tr key={index} className="hover:bg-gray-50">
-                            <td className="px-3 py-2 flex items-center gap-2">
-                                <span 
-                                    className="w-2.5 h-2.5 rounded-full block" 
-                                    style={{ backgroundColor: COLORS[index % COLORS.length] || '#ccc' }}
-                                ></span>
-                                <span className="truncate max-w-[120px]" title={item.name}>{item.name.split(' ')[0]}</span>
-                            </td>
-                            <td className="px-3 py-2 text-right text-gray-900">
-                                ${item.value.toLocaleString()}
-                            </td>
-                             <td className="px-3 py-2 text-right text-gray-500">
-                                {item.percent.toFixed(1)}%
-                            </td>
-                        </tr>
-                    ))}
-                    <tr className="border-t-2 border-gray-100 font-semibold bg-gray-50">
-                        <td className="px-3 py-2">{t.total}</td>
-                        <td className="px-3 py-2 text-right">${totalExpense.toLocaleString()}</td>
-                        <td className="px-3 py-2 text-right">100.0%</td>
-                    </tr>
-                </tbody>
-             </table>
+          {/* Detailed Breakdown Table */}
+          <div className="w-full md:w-7/12 overflow-x-auto">
+             <div className="max-h-[320px] overflow-y-auto custom-scrollbar pr-2">
+               <table className="w-full text-sm text-left">
+                  <thead className="bg-gray-50 text-gray-600 font-medium sticky top-0 z-10">
+                      <tr>
+                          <th className="px-3 py-2 rounded-l-md">{t.category}</th>
+                          <th className="px-3 py-2 text-right">{t.amount}</th>
+                          <th className="px-3 py-2 text-right rounded-r-md">{t.percentage}</th>
+                      </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-100">
+                      {detailedBreakdown.map((item, index) => (
+                          <tr key={index} className="hover:bg-gray-50 transition-colors">
+                              <td className="px-3 py-2.5 flex items-center gap-2.5">
+                                  <span 
+                                      className="w-3 h-3 rounded-full flex-shrink-0" 
+                                      style={{ backgroundColor: COLORS[index % COLORS.length] || '#ccc' }}
+                                  ></span>
+                                  <span className="font-medium text-gray-700">{item.name}</span>
+                              </td>
+                              <td className="px-3 py-2.5 text-right text-gray-600 tabular-nums">
+                                  ${item.value.toLocaleString()}
+                              </td>
+                               <td className="px-3 py-2.5 text-right font-medium text-gray-800 tabular-nums">
+                                  {item.percent.toFixed(1)}%
+                              </td>
+                          </tr>
+                      ))}
+                  </tbody>
+               </table>
+             </div>
+          </div>
         </div>
-
       </div>
 
-      {/* Cash Flow Timeline */}
+      {/* Cash Flow Timeline - Full Width */}
       <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm print:border-0 print:shadow-none print:break-inside-avoid print:p-0">
-        <h3 className="text-lg font-semibold text-gray-800 mb-4">{t.dailyCashFlow}</h3>
-        <div className="w-full h-[300px] print:h-[300px]">
+        <h3 className="text-lg font-semibold text-gray-800 mb-6">{t.dailyCashFlow}</h3>
+        <div className="w-full h-[320px]">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart
               data={dailyFlow}
-              margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+              margin={{ top: 20, right: 30, left: 10, bottom: 5 }}
             >
-              <CartesianGrid strokeDasharray="3 3" vertical={false} />
-              <XAxis dataKey="date" tick={{fontSize: 12}} />
-              <YAxis tick={{fontSize: 12}} />
-              <Tooltip formatter={(value: number) => `HKD ${value.toLocaleString()}`} />
-              <Legend />
-              <Bar dataKey="income" name={t.income} fill="#10b981" radius={[4, 4, 0, 0]} isAnimationActive={false} />
-              <Bar dataKey="expense" name={t.expense} fill="#ef4444" radius={[4, 4, 0, 0]} isAnimationActive={false} />
+              <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e5e7eb" />
+              <XAxis 
+                dataKey="date" 
+                tick={{fontSize: 12, fill: '#6b7280'}} 
+                axisLine={false}
+                tickLine={false}
+                tickMargin={10}
+              />
+              <YAxis 
+                tick={{fontSize: 12, fill: '#6b7280'}} 
+                axisLine={false}
+                tickLine={false}
+                tickFormatter={(value) => `$${value/1000}k`}
+              />
+              <Tooltip 
+                cursor={{fill: '#f3f4f6'}}
+                formatter={(value: number) => `HKD ${value.toLocaleString()}`}
+                contentStyle={{borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)'}}
+              />
+              <Legend wrapperStyle={{paddingTop: '20px'}} />
+              <Bar dataKey="income" name={t.income} fill="#10b981" radius={[4, 4, 0, 0]} isAnimationActive={false} barSize={20} />
+              <Bar dataKey="expense" name={t.expense} fill="#ef4444" radius={[4, 4, 0, 0]} isAnimationActive={false} barSize={20} />
             </BarChart>
           </ResponsiveContainer>
         </div>

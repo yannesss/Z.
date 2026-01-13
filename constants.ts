@@ -251,8 +251,8 @@ export const INITIAL_TRANSACTIONS: Transaction[] = [
   { id: 'dec-14', date: '2025-12-22', category: '美容療程用品 Supplies – Beauty & Treatment', description: '紋髮針', income: 0, expense: 226.00 },
   { id: 'dec-15', date: '2025-12-22', category: '電費 Electricity For Office', description: '/', income: 0, expense: 952.00 },
   { id: 'dec-16', date: '2025-12-24', category: '營運費用 Operating Expense', description: '系統訂閱費', income: 0, expense: 8640.00 },
-  // UPDATED: Management Fees -> Building Management Fees, Amount to 3935
-  { id: 'dec-17', date: '2025-12-30', category: '大廈管理費 Building Management Fees', description: '/', income: 0, expense: 3935.00 },
+  // UPDATED: Management Fees -> Building Management Fees, Amount to 3955
+  { id: 'dec-17', date: '2025-12-30', category: '大廈管理費 Building Management Fees', description: '/', income: 0, expense: 3955.00 },
   { id: 'dec-18', date: '2025-12-31', category: '強積金供款 MPF Contribution', description: '/', income: 0, expense: 7000.00 },
   { id: 'dec-19', date: '2025-12-31', category: '薪金 SALARY', description: 'Pinky', income: 0, expense: 30000.00 },
   { id: 'dec-20', date: '2025-12-31', category: '薪金 SALARY', description: 'Mi', income: 0, expense: 95028.00 },

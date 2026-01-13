@@ -99,30 +99,43 @@ export const INITIAL_TRANSACTIONS: Transaction[] = [
   { id: 'oct-1', date: '2025-10-01', category: '廣告費 Advertising Fees', description: '/', income: 0, expense: 93725 },
   { id: 'oct-2', date: '2025-10-01', category: '租金 Rental Fee', description: '/', income: 0, expense: 20675 },
   { id: 'oct-3', date: '2025-10-06', category: '電費 Electricity For Office', description: '/', income: 0, expense: 1339 },
-  { id: 'oct-4', date: '2025-10-09', category: '公司用品 Supplies Expenses', description: '瓶子', income: 0, expense: 74 },
-  { id: 'oct-5', date: '2025-10-09', category: '公司用品 Supplies Expenses', description: '袋子', income: 0, expense: 83 },
-  { id: 'oct-6', date: '2025-10-11', category: '公司用品 Supplies Expenses', description: '色料', income: 0, expense: 1800 },
-  { id: 'oct-7', date: '2025-10-12', category: '公司用品 Supplies Expenses', description: '紋繡用品', income: 0, expense: 190 },
+  // UPDATED: Office Supplies
+  { id: 'oct-4', date: '2025-10-09', category: '辦公用品 Supplies – Office', description: '瓶子', income: 0, expense: 74 },
+  // UPDATED: Office Supplies
+  { id: 'oct-5', date: '2025-10-09', category: '辦公用品 Supplies – Office', description: '袋子', income: 0, expense: 83 },
+  // UPDATED: Beauty Treatment
+  { id: 'oct-6', date: '2025-10-11', category: '美容療程用品 Supplies – Beauty & Treatment', description: '色料', income: 0, expense: 1800 },
+  // UPDATED: Beauty Treatment
+  { id: 'oct-7', date: '2025-10-12', category: '美容療程用品 Supplies – Beauty & Treatment', description: '紋繡用品', income: 0, expense: 190 },
   // UPDATED: Logistics
   { id: 'oct-8', date: '2025-10-13', category: '集運及運費 Logistics & Shipping Expenses', description: '集運費', income: 0, expense: 66 },
-  { id: 'oct-9', date: '2025-10-14', category: '公司用品 Supplies Expenses', description: '生髮精華', income: 0, expense: 2531 },
-  { id: 'oct-10', date: '2025-10-16', category: '公司用品 Supplies Expenses', description: '修護霜', income: 0, expense: 4737 },
+  // UPDATED: Beauty Treatment
+  { id: 'oct-9', date: '2025-10-14', category: '美容療程用品 Supplies – Beauty & Treatment', description: '生髮精華', income: 0, expense: 2531 },
+  // UPDATED: Beauty Treatment
+  { id: 'oct-10', date: '2025-10-16', category: '美容療程用品 Supplies – Beauty & Treatment', description: '修護霜', income: 0, expense: 4737 },
   // UPDATED: Management Fees -> Building Management Fees
   { id: 'oct-11', date: '2025-10-20', category: '大廈管理費 Building Management Fees', description: '/', income: 0, expense: 3735 },
   { id: 'oct-12', date: '2025-10-20', category: '網絡費 Internet Service', description: '/', income: 0, expense: 228 },
   // UPDATED: Rates
   { id: 'oct-13', date: '2025-10-21', category: '差餉及地租 Rates & Government Rent', description: '差餉', income: 0, expense: 2550 },
-  { id: 'oct-14', date: '2025-10-23', category: '公司用品 Supplies Expenses', description: '紋繡用品', income: 0, expense: 60 },
-  { id: 'oct-15', date: '2025-10-24', category: '公司用品 Supplies Expenses', description: '紋繡機', income: 0, expense: 548 },
+  // UPDATED: Beauty Treatment
+  { id: 'oct-14', date: '2025-10-23', category: '美容療程用品 Supplies – Beauty & Treatment', description: '紋繡用品', income: 0, expense: 60 },
+  // UPDATED: Beauty Treatment
+  { id: 'oct-15', date: '2025-10-24', category: '美容療程用品 Supplies – Beauty & Treatment', description: '紋繡機', income: 0, expense: 548 },
   // UPDATED: Logistics
   { id: 'oct-16', date: '2025-10-25', category: '集運及運費 Logistics & Shipping Expenses', description: '集運費', income: 0, expense: 138 },
-  { id: 'oct-17', date: '2025-10-26', category: '公司用品 Supplies Expenses', description: '棉片', income: 0, expense: 492 },
-  { id: 'oct-18', date: '2025-10-29', category: '公司用品 Supplies Expenses', description: '紋繡針', income: 0, expense: 688 },
+  // UPDATED: Medical Consumables
+  { id: 'oct-17', date: '2025-10-26', category: '醫療耗材 Supplies – Medical & Consumables', description: '棉片', income: 0, expense: 492 },
+  // UPDATED: Beauty Treatment
+  { id: 'oct-18', date: '2025-10-29', category: '美容療程用品 Supplies – Beauty & Treatment', description: '紋繡針', income: 0, expense: 688 },
   // UPDATED: Logistics
   { id: 'oct-19', date: '2025-10-29', category: '集運及運費 Logistics & Shipping Expenses', description: '集運費', income: 0, expense: 191 },
-  { id: 'oct-20', date: '2025-10-29', category: '公司用品 Supplies Expenses', description: '黃金微針', income: 0, expense: 4143.84 },
-  { id: 'oct-21', date: '2025-10-30', category: '公司用品 Supplies Expenses', description: '紋繡針', income: 0, expense: 143 },
-  { id: 'oct-22', date: '2025-10-30', category: '其他 Others', description: '公司墻面板', income: 0, expense: 7126 },
+  // UPDATED: Beauty Treatment
+  { id: 'oct-20', date: '2025-10-29', category: '美容療程用品 Supplies – Beauty & Treatment', description: '黃金微針', income: 0, expense: 4143.84 },
+  // UPDATED: Beauty Treatment
+  { id: 'oct-21', date: '2025-10-30', category: '美容療程用品 Supplies – Beauty & Treatment', description: '紋繡針', income: 0, expense: 143 },
+  // UPDATED: Fixed Asset - Renovation
+  { id: 'oct-22', date: '2025-10-30', category: '固定資產－裝修費 Fixed Asset – Renovation', description: '公司墻面板', income: 0, expense: 7126 },
   { id: 'oct-23', date: '2025-10-31', category: '現金 Cash', description: '/', income: 38900, expense: 0 },
   { id: 'oct-24', date: '2025-10-31', category: '銷售 Sales', description: 'Visa', income: 404660, expense: 0 },
   { id: 'oct-25', date: '2025-10-31', category: '銀行手續費 Bank Charge', description: 'Visa 1.8%', income: 0, expense: 7283.88 },

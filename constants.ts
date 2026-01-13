@@ -8,7 +8,8 @@ export const INITIAL_TRANSACTIONS: Transaction[] = [
   { id: 'aug-2', date: '2025-08-02', category: '廣告費 Advertising Fees', description: '/', income: 0, expense: 78380 },
   { id: 'aug-3', date: '2025-08-07', category: '電費 Electricity For Office', description: '/', income: 0, expense: 1252 },
   { id: 'aug-4', date: '2025-08-08', category: '公司用品 Supplies Expenses', description: '紋繡針', income: 0, expense: 630 },
-  { id: 'aug-5', date: '2025-08-20', category: '管理費 Management Fees', description: '/', income: 0, expense: 3735 },
+  // UPDATED: Management Fees -> Building Management Fees
+  { id: 'aug-5', date: '2025-08-20', category: '大廈管理費 Building Management Fees', description: '/', income: 0, expense: 3735 },
   { id: 'aug-6', date: '2025-08-20', category: '網絡費 Internet Service', description: '/', income: 0, expense: 228 },
   { id: 'aug-7', date: '2025-08-23', category: '公司用品 Supplies Expenses', description: '紋繡機器針', income: 0, expense: 80 },
   { id: 'aug-8', date: '2025-08-24', category: '租金 Rental Fee', description: '/', income: 4500, expense: 0 },
@@ -45,11 +46,14 @@ export const INITIAL_TRANSACTIONS: Transaction[] = [
   { id: 'sep-10', date: '2025-09-13', category: '公司用品 Supplies Expenses', description: '紋繡針', income: 0, expense: 283 },
   { id: 'sep-11', date: '2025-09-13', category: '其他 Others', description: '集運費', income: 0, expense: 238 },
   { id: 'sep-12', date: '2025-09-15', category: '公司用品 Supplies Expenses', description: '紋繡針', income: 0, expense: 101 },
-  { id: 'sep-13', date: '2025-09-15', category: '其他 Others', description: '利得稅交稅', income: 0, expense: 1643 },
-  { id: 'sep-14', date: '2025-09-15', category: '其他 Others', description: '利得稅(預繳)', income: 0, expense: 502 },
+  // UPDATED: Tax Expense
+  { id: 'sep-13', date: '2025-09-15', category: '利得稅－交稅 Tax Expense – Profits Tax', description: '/', income: 0, expense: 1643 },
+  // UPDATED: Tax Prepayment
+  { id: 'sep-14', date: '2025-09-15', category: '利得稅－預繳 Tax Prepayment – Profits Tax', description: '/', income: 0, expense: 502 },
   { id: 'sep-15', date: '2025-09-16', category: '公司用品 Supplies Expenses', description: '公司紙巾雜物', income: 0, expense: 217.90 },
   { id: 'sep-16', date: '2025-09-20', category: '網絡費 Internet Service', description: '/', income: 0, expense: 228 },
-  { id: 'sep-17', date: '2025-09-20', category: '管理費 Management Fees', description: '/', income: 0, expense: 3735 },
+  // UPDATED: Management Fees -> Building Management Fees
+  { id: 'sep-17', date: '2025-09-20', category: '大廈管理費 Building Management Fees', description: '/', income: 0, expense: 3735 },
   { id: 'sep-18', date: '2025-09-25', category: '公司用品 Supplies Expenses', description: '紋繡針', income: 0, expense: 100 },
   { id: 'sep-19', date: '2025-09-25', category: '公司用品 Supplies Expenses', description: '紋繡用品', income: 0, expense: 45 },
   { id: 'sep-20', date: '2025-09-26', category: '公司用品 Supplies Expenses', description: '黃金微針頭', income: 0, expense: 439.85 },
@@ -84,9 +88,11 @@ export const INITIAL_TRANSACTIONS: Transaction[] = [
   { id: 'oct-8', date: '2025-10-13', category: '其他 Others', description: '集運費', income: 0, expense: 66 },
   { id: 'oct-9', date: '2025-10-14', category: '公司用品 Supplies Expenses', description: '生髮精華', income: 0, expense: 2531 },
   { id: 'oct-10', date: '2025-10-16', category: '公司用品 Supplies Expenses', description: '修護霜', income: 0, expense: 4737 },
-  { id: 'oct-11', date: '2025-10-20', category: '管理費 Management Fees', description: '/', income: 0, expense: 3735 },
+  // UPDATED: Management Fees -> Building Management Fees
+  { id: 'oct-11', date: '2025-10-20', category: '大廈管理費 Building Management Fees', description: '/', income: 0, expense: 3735 },
   { id: 'oct-12', date: '2025-10-20', category: '網絡費 Internet Service', description: '/', income: 0, expense: 228 },
-  { id: 'oct-13', date: '2025-10-21', category: '其他 Others', description: '差餉', income: 0, expense: 2550 },
+  // UPDATED: Rates
+  { id: 'oct-13', date: '2025-10-21', category: '差餉及地租 Rates & Government Rent', description: '差餉', income: 0, expense: 2550 },
   { id: 'oct-14', date: '2025-10-23', category: '公司用品 Supplies Expenses', description: '紋繡用品', income: 0, expense: 60 },
   { id: 'oct-15', date: '2025-10-24', category: '公司用品 Supplies Expenses', description: '紋繡機', income: 0, expense: 548 },
   { id: 'oct-16', date: '2025-10-25', category: '其他 Others', description: '集運費', income: 0, expense: 138 },
@@ -131,7 +137,8 @@ export const INITIAL_TRANSACTIONS: Transaction[] = [
   { id: 'nov-13', date: '2025-11-14', category: '公司用品 Supplies Expenses', description: '拖鞋', income: 0, expense: 217 },
   { id: 'nov-42', date: '2025-11-14', category: '公司用品 Supplies Expenses', description: '生髮精華細', income: 0, expense: 2955.50 },
   { id: 'nov-14', date: '2025-11-17', category: '公司用品 Supplies Expenses', description: '集運費', income: 0, expense: 250 },
-  { id: 'nov-15', date: '2025-11-20', category: '管理費 Management Fees', description: '/', income: 0, expense: 3735 },
+  // UPDATED: Management Fees -> Building Management Fees
+  { id: 'nov-15', date: '2025-11-20', category: '大廈管理費 Building Management Fees', description: '/', income: 0, expense: 3735 },
   { id: 'nov-16', date: '2025-11-20', category: '其他 Others', description: '勞工保險', income: 0, expense: 5092.34 },
   { id: 'nov-17', date: '2025-11-20', category: '公司用品 Supplies Expenses', description: '精華', income: 0, expense: 454 },
   { id: 'nov-18', date: '2025-11-20', category: '網絡費 Internet Service', description: '/', income: 0, expense: 228 },
@@ -179,7 +186,8 @@ export const INITIAL_TRANSACTIONS: Transaction[] = [
   { id: 'dec-14', date: '2025-12-22', category: '公司用品 Supplies Expenses', description: '紋髮針', income: 0, expense: 226.00 },
   { id: 'dec-15', date: '2025-12-22', category: '電費 Electricity For Office', description: '/', income: 0, expense: 952.00 },
   { id: 'dec-16', date: '2025-12-24', category: '營運費用 Operating Expense', description: '系統訂閱費', income: 0, expense: 8640.00 },
-  { id: 'dec-17', date: '2025-12-30', category: '管理費 Management Fees', description: '/', income: 0, expense: 3955.00 },
+  // UPDATED: Management Fees -> Building Management Fees, Amount to 3935
+  { id: 'dec-17', date: '2025-12-30', category: '大廈管理費 Building Management Fees', description: '/', income: 0, expense: 3935.00 },
   { id: 'dec-18', date: '2025-12-31', category: '強積金供款 MPF Contribution', description: '/', income: 0, expense: 7000.00 },
   { id: 'dec-19', date: '2025-12-31', category: '薪金 SALARY', description: 'Pinky', income: 0, expense: 30000.00 },
   { id: 'dec-20', date: '2025-12-31', category: '薪金 SALARY', description: 'Mi', income: 0, expense: 95028.00 },

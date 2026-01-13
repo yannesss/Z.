@@ -7,13 +7,16 @@ export const INITIAL_TRANSACTIONS: Transaction[] = [
   { id: 'aug-1', date: '2025-08-01', category: '租金 Rental Fee', description: '/', income: 0, expense: 20675 },
   { id: 'aug-2', date: '2025-08-02', category: '廣告費 Advertising Fees', description: '/', income: 0, expense: 78380 },
   { id: 'aug-3', date: '2025-08-07', category: '電費 Electricity For Office', description: '/', income: 0, expense: 1252 },
-  { id: 'aug-4', date: '2025-08-08', category: '公司用品 Supplies Expenses', description: '紋繡針', income: 0, expense: 630 },
+  // UPDATED: Beauty Treatment
+  { id: 'aug-4', date: '2025-08-08', category: '美容療程用品 Supplies – Beauty & Treatment', description: '紋繡針', income: 0, expense: 630 },
   // UPDATED: Management Fees -> Building Management Fees
   { id: 'aug-5', date: '2025-08-20', category: '大廈管理費 Building Management Fees', description: '/', income: 0, expense: 3735 },
   { id: 'aug-6', date: '2025-08-20', category: '網絡費 Internet Service', description: '/', income: 0, expense: 228 },
-  { id: 'aug-7', date: '2025-08-23', category: '公司用品 Supplies Expenses', description: '紋繡機器針', income: 0, expense: 80 },
+  // UPDATED: Beauty Treatment
+  { id: 'aug-7', date: '2025-08-23', category: '美容療程用品 Supplies – Beauty & Treatment', description: '紋繡機器針', income: 0, expense: 80 },
   { id: 'aug-8', date: '2025-08-24', category: '租金 Rental Fee', description: '/', income: 4500, expense: 0 },
-  { id: 'aug-9', date: '2025-08-25', category: '公司用品 Supplies Expenses', description: '止痛膏', income: 0, expense: 953 },
+  // UPDATED: Medical Consumables
+  { id: 'aug-9', date: '2025-08-25', category: '醫療耗材 Supplies – Medical & Consumables', description: '止痛膏', income: 0, expense: 953 },
   { id: 'aug-10', date: '2025-08-31', category: '現金 Cash', description: '/', income: 15780, expense: 0 },
   { id: 'aug-11', date: '2025-08-31', category: '銷售 Sales', description: 'Visa', income: 159892, expense: 0 },
   { id: 'aug-12', date: '2025-08-31', category: '銀行手續費 Bank Charge', description: 'Visa 1.8%', income: 0, expense: 2878.06 },
@@ -159,8 +162,7 @@ export const INITIAL_TRANSACTIONS: Transaction[] = [
   { id: 'nov-32', date: '2025-11-30', category: '銷售 Sales', description: '銀聯', income: 30680, expense: 0 },
   { id: 'nov-33', date: '2025-11-30', category: '銀行手續費 Bank Charge', description: '銀聯*1.8%', income: 0, expense: 552.24 },
   { id: 'nov-34', date: '2025-11-30', category: '銷售 Sales', description: 'Payme', income: 18200, expense: 0 },
-  { id: 'nov-35', date: '2025-11-30', category: '薪金 SALARY', description: 'Pinky', income: 0, expense: 30000 },
-  { id: 'nov-36', date: '2025-11-30', category: '銷售 Sales', description: 'FPS', income: 32240, expense: 0 },
+  { id: 'nov-35', date: '2025-11-30', category: '銷售 Sales', description: 'FPS', income: 32240, expense: 0 },
   { id: 'nov-37', date: '2025-11-30', category: '銷售 Sales', description: '儲值', income: 15000, expense: 0 },
   { id: 'nov-38', date: '2025-11-30', category: '薪金 SALARY', description: 'Frankie', income: 0, expense: 14700 },
   { id: 'nov-39', date: '2025-11-30', category: '薪金 SALARY', description: 'Ling', income: 0, expense: 68681.80 },

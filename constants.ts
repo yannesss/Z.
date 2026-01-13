@@ -28,7 +28,8 @@ export const INITIAL_TRANSACTIONS: Transaction[] = [
   { id: 'aug-22', date: '2025-08-31', category: '薪金 SALARY', description: 'Mi', income: 0, expense: 27523.20 },
   { id: 'aug-23', date: '2025-08-31', category: '薪金 SALARY', description: 'Ada', income: 0, expense: 21128 },
   { id: 'aug-24', date: '2025-08-31', category: '薪金 SALARY', description: 'Ling', income: 0, expense: 34296 },
-  { id: 'aug-25', date: '2025-08-31', category: '薪金 SALARY', description: 'Z', income: 0, expense: 800 },
+  // Z record deleted
+  { id: 'aug-new-1', date: '2025-08-31', category: '薪金 SALARY', description: 'Accounting Fee', income: 0, expense: 800 },
 
   // September 2025
   { id: 'sep-1', date: '2025-09-01', category: '廣告費 Advertising Fees', description: '/', income: 0, expense: 76400 },
@@ -158,7 +159,42 @@ export const INITIAL_TRANSACTIONS: Transaction[] = [
   { id: 'nov-44', date: '2025-11-30', category: '薪金 SALARY', description: 'Accounting Fee', income: 0, expense: 800 },
 
   // December 2025
-  { id: 'dec-1', date: '2025-12-31', category: '薪金 SALARY', description: 'Accounting Fee', income: 0, expense: 800 },
+  { id: 'dec-1', date: '2025-12-01', category: '租金 Rental Fee', description: '/', income: 0, expense: 20675.00 },
+  { id: 'dec-2', date: '2025-12-01', category: '廣告費 Advertising Fees', description: '/', income: 0, expense: 98840.00 },
+  { id: 'dec-3', date: '2025-12-02', category: '公司用品 Supplies Expenses', description: '生髮精華(細)', income: 0, expense: 2955.50 },
+  { id: 'dec-4', date: '2025-12-09', category: '公司用品 Supplies Expenses', description: '手套@1箱', income: 0, expense: 182.00 },
+  { id: 'dec-5', date: '2025-12-17', category: '公司用品 Supplies Expenses', description: '黃金針頭', income: 0, expense: 3750.00 },
+  { id: 'dec-6', date: '2025-12-19', category: '公司用品 Supplies Expenses', description: '紋繡針', income: 0, expense: 222.00 },
+  { id: 'dec-7', date: '2025-12-19', category: '公司用品 Supplies Expenses', description: '紋繡針', income: 0, expense: 197.00 },
+  { id: 'dec-8', date: '2025-12-19', category: '員工福利 Staff Entertainment', description: '員工活動餐飲費', income: 0, expense: 1115.00 },
+  { id: 'dec-9', date: '2025-12-19', category: '公司用品 Supplies Expenses', description: '美容產品', income: 0, expense: 4121.00 },
+  { id: 'dec-10', date: '2025-12-20', category: '公司用品 Supplies Expenses', description: '紋繡機', income: 0, expense: 876.00 },
+  { id: 'dec-11', date: '2025-12-20', category: '員工福利 Staff Entertainment', description: '員工節日禮物費', income: 0, expense: 2311.00 },
+  { id: 'dec-12', date: '2025-12-20', category: '網絡費 Internet Service', description: '/', income: 0, expense: 228.00 },
+  { id: 'dec-13', date: '2025-12-21', category: '公司用品 Supplies Expenses', description: '一次性床單', income: 0, expense: 310.00 },
+  { id: 'dec-14', date: '2025-12-22', category: '公司用品 Supplies Expenses', description: '紋髮針', income: 0, expense: 226.00 },
+  { id: 'dec-15', date: '2025-12-22', category: '電費 Electricity For Office', description: '/', income: 0, expense: 952.00 },
+  { id: 'dec-16', date: '2025-12-24', category: '營運費用 Operating Expense', description: '系統訂閱費', income: 0, expense: 8640.00 },
+  { id: 'dec-17', date: '2025-12-30', category: '管理費 Management Fees', description: '/', income: 0, expense: 3955.00 },
+  { id: 'dec-18', date: '2025-12-31', category: '強積金供款 MPF Contribution', description: '/', income: 0, expense: 7000.00 },
+  { id: 'dec-19', date: '2025-12-31', category: '薪金 SALARY', description: 'Pinky', income: 0, expense: 30000.00 },
+  { id: 'dec-20', date: '2025-12-31', category: '薪金 SALARY', description: 'Mi', income: 0, expense: 95028.00 },
+  { id: 'dec-21', date: '2025-12-31', category: '薪金 SALARY', description: '鄧麗萍 Ling', income: 0, expense: 60765.20 },
+  { id: 'dec-22', date: '2025-12-31', category: '薪金 SALARY', description: '劉敏 KK', income: 0, expense: 45648.80 },
+  { id: 'dec-23', date: '2025-12-31', category: '薪金 SALARY', description: '盧慧縈 Frankie', income: 0, expense: 39620.00 },
+  { id: 'dec-24', date: '2025-12-31', category: '薪金 SALARY', description: '梁桂梅 Yuki', income: 0, expense: 37918.20 },
+  { id: 'dec-25', date: '2025-12-31', category: '現金 Cash', description: '/', income: 52720.00, expense: 0 },
+  { id: 'dec-26', date: '2025-12-31', category: '銷售 Sales', description: 'Visa', income: 436630.00, expense: 0 },
+  { id: 'dec-27', date: '2025-12-31', category: '銀行手續費 Bank Charge', description: 'Visa*1.8%', income: 0, expense: 7859.34 },
+  { id: 'dec-28', date: '2025-12-31', category: '銷售 Sales', description: 'Master', income: 213030.00, expense: 0 },
+  { id: 'dec-29', date: '2025-12-31', category: '銀行手續費 Bank Charge', description: 'Master*1.8%', income: 0, expense: 3834.54 },
+  { id: 'dec-30', date: '2025-12-31', category: '銷售 Sales', description: 'Alipay', income: 45300.00, expense: 0 },
+  { id: 'dec-31', date: '2025-12-31', category: '銀行手續費 Bank Charge', description: 'Alipay*1.2%', income: 0, expense: 543.60 },
+  { id: 'dec-32', date: '2025-12-31', category: '銷售 Sales', description: '銀聯', income: 115820.00, expense: 0 },
+  { id: 'dec-33', date: '2025-12-31', category: '銀行手續費 Bank Charge', description: '銀聯*1.8%', income: 0, expense: 2084.76 },
+  { id: 'dec-34', date: '2025-12-31', category: '銷售 Sales', description: 'Payme', income: 18980.00, expense: 0 },
+  { id: 'dec-35', date: '2025-12-31', category: '銷售 Sales', description: 'FPS', income: 67800.00, expense: 0 },
+  { id: 'dec-36', date: '2025-12-31', category: '薪金 SALARY', description: 'Accounting Fee', income: 0, expense: 800 },
 ];
 
 export const CATEGORIES = [
@@ -171,6 +207,9 @@ export const CATEGORIES = [
   '現金 Cash',
   '銀行手續費 Bank Charge',
   '薪金 SALARY',
+  '強積金供款 MPF Contribution',
+  '員工福利 Staff Entertainment',
+  '營運費用 Operating Expense',
   '銷售 Sales',
   '其他 Others'
 ];

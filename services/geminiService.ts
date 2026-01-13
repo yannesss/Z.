@@ -1,3 +1,5 @@
+
+
 import { AiParsedResult } from "../types";
 
 // Local "AI" Logic - Rule based parser
@@ -60,6 +62,9 @@ export const parseTransactionSmart = async (text: string): Promise<AiParsedResul
     '現金 Cash': ['cash', 'withdraw', 'atm', '現金', '提款'],
     '銀行手續費 Bank Charge': ['bank', 'charge', 'fee', 'handling', '手續費', '銀行'],
     '薪金 SALARY': ['salary', 'wage', 'payroll', 'bonus', 'mpf', '薪金', '人工', '糧', '佣金'],
+    '強積金供款 MPF Contribution': ['mpf', 'contribution', 'pension', '強積金', '供款'],
+    '員工福利 Staff Entertainment': ['staff', 'entertainment', 'welfare', 'meal', 'gift', '福利', '員工餐', '禮物'],
+    '營運費用 Operating Expense': ['operation', 'operating', 'subscription', 'system', 'software', '營運', '系統', '訂閱'],
     '銷售 Sales': ['sales', 'sell', 'sold', 'revenue', 'client', 'customer', '銷售', '生意', '客'],
   };
 

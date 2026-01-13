@@ -68,7 +68,7 @@ export const INITIAL_TRANSACTIONS: Transaction[] = [
   { id: 'sep-35', date: '2025-09-30', category: '薪金 SALARY', description: 'Mi', income: 0, expense: 36876 },
   { id: 'sep-36', date: '2025-09-30', category: '薪金 SALARY', description: 'Ling', income: 0, expense: 48530 },
   { id: 'sep-37', date: '2025-09-30', category: '薪金 SALARY', description: 'KK', income: 0, expense: 27500 },
-  { id: 'sep-38', date: '2025-09-30', category: '薪金 SALARY', description: 'Z', income: 0, expense: 800 },
+  { id: 'sep-38', date: '2025-09-30', category: '薪金 SALARY', description: 'Accounting Fee', income: 0, expense: 800 },
 
   // October 2025
   { id: 'oct-1', date: '2025-10-01', category: '廣告費 Advertising Fees', description: '/', income: 0, expense: 93725 },
@@ -109,7 +109,7 @@ export const INITIAL_TRANSACTIONS: Transaction[] = [
   { id: 'oct-36', date: '2025-10-31', category: '薪金 SALARY', description: 'Yuki', income: 0, expense: 16275.42 },
   { id: 'oct-37', date: '2025-10-31', category: '薪金 SALARY', description: 'KK', income: 0, expense: 29551.29 },
   { id: 'oct-38', date: '2025-10-31', category: '薪金 SALARY', description: 'Ling', income: 0, expense: 65296 },
-  { id: 'oct-39', date: '2025-10-31', category: '薪金 SALARY', description: 'Z', income: 0, expense: 800 },
+  { id: 'oct-39', date: '2025-10-31', category: '薪金 SALARY', description: 'Accounting Fee', income: 0, expense: 800 },
 
   // November 2025
   { id: 'nov-1', date: '2025-11-01', category: '廣告費 Advertising Fees', description: '/', income: 0, expense: 91250 },
@@ -125,6 +125,7 @@ export const INITIAL_TRANSACTIONS: Transaction[] = [
   { id: 'nov-11', date: '2025-11-13', category: '公司用品 Supplies Expenses', description: '八槍機針', income: 0, expense: 145 },
   { id: 'nov-12', date: '2025-11-13', category: '公司用品 Supplies Expenses', description: '紋繡針', income: 0, expense: 44 },
   { id: 'nov-13', date: '2025-11-14', category: '公司用品 Supplies Expenses', description: '拖鞋', income: 0, expense: 217 },
+  { id: 'nov-42', date: '2025-11-14', category: '公司用品 Supplies Expenses', description: '生髮精華細', income: 0, expense: 2955.50 },
   { id: 'nov-14', date: '2025-11-17', category: '公司用品 Supplies Expenses', description: '集運費', income: 0, expense: 250 },
   { id: 'nov-15', date: '2025-11-20', category: '管理費 Management Fees', description: '/', income: 0, expense: 3735 },
   { id: 'nov-16', date: '2025-11-20', category: '其他 Others', description: '勞工保險', income: 0, expense: 5092.34 },
@@ -135,6 +136,7 @@ export const INITIAL_TRANSACTIONS: Transaction[] = [
   { id: 'nov-21', date: '2025-11-25', category: '其他 Others', description: '模特拍攝費用', income: 0, expense: 900 },
   { id: 'nov-22', date: '2025-11-25', category: '其他 Others', description: '拍攝飲食支出', income: 0, expense: 606 },
   { id: 'nov-23', date: '2025-11-26', category: '公司用品 Supplies Expenses', description: '紋繡機器', income: 0, expense: 2138 },
+  { id: 'nov-43', date: '2025-11-27', category: '廣告費 Advertising Fees', description: '拍攝（靚仔費用）', income: 0, expense: 1500 },
   { id: 'nov-24', date: '2025-11-30', category: '公司用品 Supplies Expenses', description: '紋繡機', income: 0, expense: 1633 },
   { id: 'nov-25', date: '2025-11-30', category: '現金 Cash', description: '/', income: 29120, expense: 0 },
   { id: 'nov-26', date: '2025-11-30', category: '銷售 Sales', description: 'Visa', income: 308514, expense: 0 },
@@ -153,7 +155,10 @@ export const INITIAL_TRANSACTIONS: Transaction[] = [
   { id: 'nov-39', date: '2025-11-30', category: '薪金 SALARY', description: 'Ling', income: 0, expense: 68681.80 },
   { id: 'nov-40', date: '2025-11-30', category: '薪金 SALARY', description: 'Mi', income: 0, expense: 60745.40 },
   { id: 'nov-41', date: '2025-11-30', category: '薪金 SALARY', description: 'Yuki', income: 0, expense: 28212.00 },
-  { id: 'nov-42', date: '2025-11-30', category: '薪金 SALARY', description: 'Z', income: 0, expense: 800.00 },
+  { id: 'nov-44', date: '2025-11-30', category: '薪金 SALARY', description: 'Accounting Fee', income: 0, expense: 800 },
+
+  // December 2025
+  { id: 'dec-1', date: '2025-12-31', category: '薪金 SALARY', description: 'Accounting Fee', income: 0, expense: 800 },
 ];
 
 export const CATEGORIES = [

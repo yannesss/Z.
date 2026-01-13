@@ -187,7 +187,8 @@ export const INITIAL_TRANSACTIONS: Transaction[] = [
   { id: 'nov-22', date: '2025-11-25', category: '市場推廣－拍攝及模特費 Marketing & Promotion – Shooting & Model', description: '拍攝飲食支出', income: 0, expense: 606 },
   // UPDATED: Beauty Treatment
   { id: 'nov-23', date: '2025-11-26', category: '美容療程用品 Supplies – Beauty & Treatment', description: '紋繡機器', income: 0, expense: 2138 },
-  { id: 'nov-43', date: '2025-11-27', category: '廣告費 Advertising Fees', description: '拍攝（靚仔費用）', income: 0, expense: 1500 },
+  // UPDATED: Advertising -> Marketing & Promotion
+  { id: 'nov-43', date: '2025-11-27', category: '市場推廣－拍攝及模特費 Marketing & Promotion – Shooting & Model', description: '拍攝（靚仔費用）', income: 0, expense: 1500 },
   // UPDATED: Beauty Treatment
   { id: 'nov-24', date: '2025-11-30', category: '美容療程用品 Supplies – Beauty & Treatment', description: '紋繡機', income: 0, expense: 1633 },
   { id: 'nov-25', date: '2025-11-30', category: '現金 Cash', description: '/', income: 29120, expense: 0 },
@@ -206,6 +207,8 @@ export const INITIAL_TRANSACTIONS: Transaction[] = [
   { id: 'nov-39', date: '2025-11-30', category: '薪金 SALARY', description: 'Ling', income: 0, expense: 68681.80 },
   { id: 'nov-40', date: '2025-11-30', category: '薪金 SALARY', description: 'Mi', income: 0, expense: 60745.40 },
   { id: 'nov-41', date: '2025-11-30', category: '薪金 SALARY', description: 'Yuki', income: 0, expense: 28212.00 },
+  // NEW ADDITION: Pinky Salary
+  { id: 'nov-45', date: '2025-11-30', category: '薪金 SALARY', description: 'Pinky', income: 0, expense: 30000 },
   // UPDATED: Accounting Fee -> 營運費用 / 會計費
   { id: 'nov-44', date: '2025-11-30', category: '營運費用 Operating Expense', description: '會計費 Accounting Fees', income: 0, expense: 800 },
 

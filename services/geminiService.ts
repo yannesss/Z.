@@ -66,6 +66,20 @@ export const parseTransactionSmart = async (text: string): Promise<AiParsedResul
     '員工福利 Staff Entertainment': ['staff', 'entertainment', 'welfare', 'meal', 'gift', '福利', '員工餐', '禮物'],
     '營運費用 Operating Expense': ['operation', 'operating', 'subscription', 'system', 'software', '營運', '系統', '訂閱'],
     '銷售 Sales': ['sales', 'sell', 'sold', 'revenue', 'client', 'customer', '銷售', '生意', '客'],
+    // New Categories
+    '集運及運費 Logistics & Shipping Expenses': ['shipping', 'logistics', 'delivery', '集運', '運費', '快遞', 'sf', '順豐'],
+    '利得稅－交稅 Tax Expense – Profits Tax': ['profits tax', 'tax expense', '利得稅', '交稅'],
+    '利得稅－預繳 Tax Prepayment – Profits Tax': ['tax prepayment', 'provisional tax', '預繳稅', '預繳'],
+    '差餉及地租 Rates & Government Rent': ['rates', 'government rent', '差餉', '地租'],
+    '固定資產－裝修費 Fixed Asset – Renovation': ['renovation', 'decoration', 'fitting', '裝修', '裝飾'],
+    '員工保險－勞工保險 Staff Insurance – Employees\' Compensation': ['insurance', 'compensation', 'ec', '勞保', '保險'],
+    '維修及安裝費 Repair & Installation': ['repair', 'fix', 'maintain', 'installation', 'install', '維修', '安裝', '修理'],
+    '市場推廣－拍攝及模特費 Marketing & Promotion – Shooting & Model': ['shooting', 'model', 'photo', 'video', '拍攝', '模特', '攝影'],
+    '美容療程用品 Supplies – Beauty & Treatment': ['beauty', 'treatment', 'facial', 'mask', 'cream', '美容', '療程', '精華', '面膜'],
+    '辦公用品 Supplies – Office': ['office supplies', 'paper', 'stationery', '辦公', '文具', '紙'],
+    '醫療耗材 Supplies – Medical & Consumables': ['medical', 'consumable', 'glove', 'mask', 'needle', '醫療', '耗材', '手套', '針', '口罩'],
+    '制服及鞋類 Supplies – Uniform & Shoes': ['uniform', 'shoes', 'clothes', '制服', '鞋', '工作服'],
+    '大廈管理費 Building Management Fees': ['building management', 'mgt fee', '大廈管理', '管理費'],
   };
 
   for (const [catName, keywords] of Object.entries(categoryMap)) {

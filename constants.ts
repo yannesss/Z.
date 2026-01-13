@@ -216,7 +216,20 @@ export const CATEGORIES = [
   '員工福利 Staff Entertainment',
   '營運費用 Operating Expense',
   '銷售 Sales',
-  '其他 Others'
+  '其他 Others',
+  '集運及運費 Logistics & Shipping Expenses',
+  '利得稅－交稅 Tax Expense – Profits Tax',
+  '利得稅－預繳 Tax Prepayment – Profits Tax',
+  '差餉及地租 Rates & Government Rent',
+  '固定資產－裝修費 Fixed Asset – Renovation',
+  '員工保險－勞工保險 Staff Insurance – Employees\' Compensation',
+  '維修及安裝費 Repair & Installation',
+  '市場推廣－拍攝及模特費 Marketing & Promotion – Shooting & Model',
+  '美容療程用品 Supplies – Beauty & Treatment',
+  '辦公用品 Supplies – Office',
+  '醫療耗材 Supplies – Medical & Consumables',
+  '制服及鞋類 Supplies – Uniform & Shoes',
+  '大廈管理費 Building Management Fees'
 ];
 
 export const TRANSLATIONS = {

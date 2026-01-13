@@ -228,18 +228,27 @@ export const INITIAL_TRANSACTIONS: Transaction[] = [
   // December 2025
   { id: 'dec-1', date: '2025-12-01', category: '租金 Rental Fee', description: '/', income: 0, expense: 20675.00 },
   { id: 'dec-2', date: '2025-12-01', category: '廣告費 Advertising Fees', description: '/', income: 0, expense: 98840.00 },
-  { id: 'dec-3', date: '2025-12-02', category: '公司用品 Supplies Expenses', description: '生髮精華(細)', income: 0, expense: 2955.50 },
-  { id: 'dec-4', date: '2025-12-09', category: '公司用品 Supplies Expenses', description: '手套@1箱', income: 0, expense: 182.00 },
-  { id: 'dec-5', date: '2025-12-17', category: '公司用品 Supplies Expenses', description: '黃金針頭', income: 0, expense: 3750.00 },
-  { id: 'dec-6', date: '2025-12-19', category: '公司用品 Supplies Expenses', description: '紋繡針', income: 0, expense: 222.00 },
-  { id: 'dec-7', date: '2025-12-19', category: '公司用品 Supplies Expenses', description: '紋繡針', income: 0, expense: 197.00 },
+  // UPDATED: Beauty Treatment
+  { id: 'dec-3', date: '2025-12-02', category: '美容療程用品 Supplies – Beauty & Treatment', description: '生髮精華(細)', income: 0, expense: 2955.50 },
+  // UPDATED: Office Supplies
+  { id: 'dec-4', date: '2025-12-09', category: '辦公用品 Supplies – Office', description: '手套@1箱', income: 0, expense: 182.00 },
+  // UPDATED: Beauty Treatment
+  { id: 'dec-5', date: '2025-12-17', category: '美容療程用品 Supplies – Beauty & Treatment', description: '黃金針頭', income: 0, expense: 3750.00 },
+  // UPDATED: Beauty Treatment
+  { id: 'dec-6', date: '2025-12-19', category: '美容療程用品 Supplies – Beauty & Treatment', description: '紋繡針', income: 0, expense: 222.00 },
+  // UPDATED: Beauty Treatment
+  { id: 'dec-7', date: '2025-12-19', category: '美容療程用品 Supplies – Beauty & Treatment', description: '紋繡針', income: 0, expense: 197.00 },
   { id: 'dec-8', date: '2025-12-19', category: '員工福利 Staff Entertainment', description: '員工活動餐飲費', income: 0, expense: 1115.00 },
-  { id: 'dec-9', date: '2025-12-19', category: '公司用品 Supplies Expenses', description: '美容產品', income: 0, expense: 4121.00 },
-  { id: 'dec-10', date: '2025-12-20', category: '公司用品 Supplies Expenses', description: '紋繡機', income: 0, expense: 876.00 },
+  // UPDATED: Beauty Treatment
+  { id: 'dec-9', date: '2025-12-19', category: '美容療程用品 Supplies – Beauty & Treatment', description: '美容產品', income: 0, expense: 4121.00 },
+  // UPDATED: Beauty Treatment
+  { id: 'dec-10', date: '2025-12-20', category: '美容療程用品 Supplies – Beauty & Treatment', description: '紋繡機', income: 0, expense: 876.00 },
   { id: 'dec-11', date: '2025-12-20', category: '員工福利 Staff Entertainment', description: '員工節日禮物費', income: 0, expense: 2311.00 },
   { id: 'dec-12', date: '2025-12-20', category: '網絡費 Internet Service', description: '/', income: 0, expense: 228.00 },
-  { id: 'dec-13', date: '2025-12-21', category: '公司用品 Supplies Expenses', description: '一次性床單', income: 0, expense: 310.00 },
-  { id: 'dec-14', date: '2025-12-22', category: '公司用品 Supplies Expenses', description: '紋髮針', income: 0, expense: 226.00 },
+  // UPDATED: Medical Consumables
+  { id: 'dec-13', date: '2025-12-21', category: '醫療耗材 Supplies – Medical & Consumables', description: '一次性床單', income: 0, expense: 310.00 },
+  // UPDATED: Beauty Treatment
+  { id: 'dec-14', date: '2025-12-22', category: '美容療程用品 Supplies – Beauty & Treatment', description: '紋髮針', income: 0, expense: 226.00 },
   { id: 'dec-15', date: '2025-12-22', category: '電費 Electricity For Office', description: '/', income: 0, expense: 952.00 },
   { id: 'dec-16', date: '2025-12-24', category: '營運費用 Operating Expense', description: '系統訂閱費', income: 0, expense: 8640.00 },
   // UPDATED: Management Fees -> Building Management Fees, Amount to 3935

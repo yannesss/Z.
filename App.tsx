@@ -10,10 +10,10 @@ import { LayoutDashboard, Table2, TrendingUp, TrendingDown, Wallet, Languages, C
 
 const App: React.FC = () => {
   // Initialize transactions from Local Storage to fix data persistence issue
-  // UPDATED KEY to 'finreport_transactions_v13' to clear old data for the user and load NEW DATA
+  // UPDATED KEY to 'finreport_transactions_v14' to clear old data for the user and load NEW DATA
   const [transactions, setTransactions] = useState<Transaction[]>(() => {
     try {
-      const savedData = localStorage.getItem('finreport_transactions_v13');
+      const savedData = localStorage.getItem('finreport_transactions_v14');
       if (savedData) {
         return JSON.parse(savedData);
       }
@@ -25,7 +25,7 @@ const App: React.FC = () => {
 
   // Save to Local Storage whenever transactions change
   useEffect(() => {
-    localStorage.setItem('finreport_transactions_v13', JSON.stringify(transactions));
+    localStorage.setItem('finreport_transactions_v14', JSON.stringify(transactions));
   }, [transactions]);
 
   const [view, setView] = useState<AppView>(AppView.TABLE);

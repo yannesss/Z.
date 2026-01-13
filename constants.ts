@@ -39,7 +39,8 @@ export const INITIAL_TRANSACTIONS: Transaction[] = [
   // September 2025
   { id: 'sep-1', date: '2025-09-01', category: '廣告費 Advertising Fees', description: '/', income: 0, expense: 76400 },
   { id: 'sep-2', date: '2025-09-01', category: '租金 Rental Fee', description: '/', income: 0, expense: 20675 },
-  { id: 'sep-3', date: '2025-09-03', category: '其他 Others', description: '集運費', income: 0, expense: 112 },
+  // UPDATED: Logistics
+  { id: 'sep-3', date: '2025-09-03', category: '集運及運費 Logistics & Shipping Expenses', description: '集運費', income: 0, expense: 112 },
   { id: 'sep-4', date: '2025-09-04', category: '公司用品 Supplies Expenses', description: '八槍機', income: 0, expense: 818 },
   { id: 'sep-5', date: '2025-09-04', category: '公司用品 Supplies Expenses', description: '八槍機針', income: 0, expense: 442 },
   { id: 'sep-6', date: '2025-09-04', category: '公司用品 Supplies Expenses', description: '手套20盒', income: 0, expense: 313 },
@@ -47,7 +48,8 @@ export const INITIAL_TRANSACTIONS: Transaction[] = [
   { id: 'sep-8', date: '2025-09-09', category: '公司用品 Supplies Expenses', description: '手套20盒', income: 0, expense: 342 },
   { id: 'sep-9', date: '2025-09-10', category: '公司用品 Supplies Expenses', description: '生理鹽水', income: 0, expense: 109 },
   { id: 'sep-10', date: '2025-09-13', category: '公司用品 Supplies Expenses', description: '紋繡針', income: 0, expense: 283 },
-  { id: 'sep-11', date: '2025-09-13', category: '其他 Others', description: '集運費', income: 0, expense: 238 },
+  // UPDATED: Logistics
+  { id: 'sep-11', date: '2025-09-13', category: '集運及運費 Logistics & Shipping Expenses', description: '集運費', income: 0, expense: 238 },
   { id: 'sep-12', date: '2025-09-15', category: '公司用品 Supplies Expenses', description: '紋繡針', income: 0, expense: 101 },
   // UPDATED: Tax Expense
   { id: 'sep-13', date: '2025-09-15', category: '利得稅－交稅 Tax Expense – Profits Tax', description: '/', income: 0, expense: 1643 },
@@ -88,7 +90,8 @@ export const INITIAL_TRANSACTIONS: Transaction[] = [
   { id: 'oct-5', date: '2025-10-09', category: '公司用品 Supplies Expenses', description: '袋子', income: 0, expense: 83 },
   { id: 'oct-6', date: '2025-10-11', category: '公司用品 Supplies Expenses', description: '色料', income: 0, expense: 1800 },
   { id: 'oct-7', date: '2025-10-12', category: '公司用品 Supplies Expenses', description: '紋繡用品', income: 0, expense: 190 },
-  { id: 'oct-8', date: '2025-10-13', category: '其他 Others', description: '集運費', income: 0, expense: 66 },
+  // UPDATED: Logistics
+  { id: 'oct-8', date: '2025-10-13', category: '集運及運費 Logistics & Shipping Expenses', description: '集運費', income: 0, expense: 66 },
   { id: 'oct-9', date: '2025-10-14', category: '公司用品 Supplies Expenses', description: '生髮精華', income: 0, expense: 2531 },
   { id: 'oct-10', date: '2025-10-16', category: '公司用品 Supplies Expenses', description: '修護霜', income: 0, expense: 4737 },
   // UPDATED: Management Fees -> Building Management Fees
@@ -98,10 +101,12 @@ export const INITIAL_TRANSACTIONS: Transaction[] = [
   { id: 'oct-13', date: '2025-10-21', category: '差餉及地租 Rates & Government Rent', description: '差餉', income: 0, expense: 2550 },
   { id: 'oct-14', date: '2025-10-23', category: '公司用品 Supplies Expenses', description: '紋繡用品', income: 0, expense: 60 },
   { id: 'oct-15', date: '2025-10-24', category: '公司用品 Supplies Expenses', description: '紋繡機', income: 0, expense: 548 },
-  { id: 'oct-16', date: '2025-10-25', category: '其他 Others', description: '集運費', income: 0, expense: 138 },
+  // UPDATED: Logistics
+  { id: 'oct-16', date: '2025-10-25', category: '集運及運費 Logistics & Shipping Expenses', description: '集運費', income: 0, expense: 138 },
   { id: 'oct-17', date: '2025-10-26', category: '公司用品 Supplies Expenses', description: '棉片', income: 0, expense: 492 },
   { id: 'oct-18', date: '2025-10-29', category: '公司用品 Supplies Expenses', description: '紋繡針', income: 0, expense: 688 },
-  { id: 'oct-19', date: '2025-10-29', category: '其他 Others', description: '集運費', income: 0, expense: 191 },
+  // UPDATED: Logistics
+  { id: 'oct-19', date: '2025-10-29', category: '集運及運費 Logistics & Shipping Expenses', description: '集運費', income: 0, expense: 191 },
   { id: 'oct-20', date: '2025-10-29', category: '公司用品 Supplies Expenses', description: '黃金微針', income: 0, expense: 4143.84 },
   { id: 'oct-21', date: '2025-10-30', category: '公司用品 Supplies Expenses', description: '紋繡針', income: 0, expense: 143 },
   { id: 'oct-22', date: '2025-10-30', category: '其他 Others', description: '公司墻面板', income: 0, expense: 7126 },
@@ -128,7 +133,8 @@ export const INITIAL_TRANSACTIONS: Transaction[] = [
   { id: 'nov-1', date: '2025-11-01', category: '廣告費 Advertising Fees', description: '/', income: 0, expense: 91250 },
   { id: 'nov-2', date: '2025-11-01', category: '租金 Rental Fee', description: '/', income: 0, expense: 20675 },
   { id: 'nov-3', date: '2025-11-04', category: '公司用品 Supplies Expenses', description: '工作服', income: 0, expense: 679 },
-  { id: 'nov-4', date: '2025-11-05', category: '其他 Others', description: '集運費', income: 0, expense: 157 },
+  // UPDATED: Logistics
+  { id: 'nov-4', date: '2025-11-05', category: '集運及運費 Logistics & Shipping Expenses', description: '集運費', income: 0, expense: 157 },
   { id: 'nov-5', date: '2025-11-05', category: '其他 Others', description: '唇褪色', income: 0, expense: 935.29 },
   { id: 'nov-6', date: '2025-11-06', category: '其他 Others', description: '超市紙巾飲品', income: 0, expense: 703.60 },
   { id: 'nov-7', date: '2025-11-07', category: '電費 Electricity For Office', description: '/', income: 0, expense: 1405 },
@@ -139,7 +145,8 @@ export const INITIAL_TRANSACTIONS: Transaction[] = [
   { id: 'nov-12', date: '2025-11-13', category: '公司用品 Supplies Expenses', description: '紋繡針', income: 0, expense: 44 },
   { id: 'nov-13', date: '2025-11-14', category: '公司用品 Supplies Expenses', description: '拖鞋', income: 0, expense: 217 },
   { id: 'nov-42', date: '2025-11-14', category: '公司用品 Supplies Expenses', description: '生髮精華細', income: 0, expense: 2955.50 },
-  { id: 'nov-14', date: '2025-11-17', category: '公司用品 Supplies Expenses', description: '集運費', income: 0, expense: 250 },
+  // UPDATED: Logistics
+  { id: 'nov-14', date: '2025-11-17', category: '集運及運費 Logistics & Shipping Expenses', description: '集運費', income: 0, expense: 250 },
   // UPDATED: Management Fees -> Building Management Fees
   { id: 'nov-15', date: '2025-11-20', category: '大廈管理費 Building Management Fees', description: '/', income: 0, expense: 3735 },
   { id: 'nov-16', date: '2025-11-20', category: '其他 Others', description: '勞工保險', income: 0, expense: 5092.34 },
@@ -162,7 +169,8 @@ export const INITIAL_TRANSACTIONS: Transaction[] = [
   { id: 'nov-32', date: '2025-11-30', category: '銷售 Sales', description: '銀聯', income: 30680, expense: 0 },
   { id: 'nov-33', date: '2025-11-30', category: '銀行手續費 Bank Charge', description: '銀聯*1.8%', income: 0, expense: 552.24 },
   { id: 'nov-34', date: '2025-11-30', category: '銷售 Sales', description: 'Payme', income: 18200, expense: 0 },
-  { id: 'nov-35', date: '2025-11-30', category: '銷售 Sales', description: 'FPS', income: 32240, expense: 0 },
+  { id: 'nov-35', date: '2025-11-30', category: '薪金 SALARY', description: 'Pinky', income: 0, expense: 30000 },
+  { id: 'nov-36', date: '2025-11-30', category: '銷售 Sales', description: 'FPS', income: 32240, expense: 0 },
   { id: 'nov-37', date: '2025-11-30', category: '銷售 Sales', description: '儲值', income: 15000, expense: 0 },
   { id: 'nov-38', date: '2025-11-30', category: '薪金 SALARY', description: 'Frankie', income: 0, expense: 14700 },
   { id: 'nov-39', date: '2025-11-30', category: '薪金 SALARY', description: 'Ling', income: 0, expense: 68681.80 },

@@ -45,10 +45,13 @@ export const INITIAL_TRANSACTIONS: Transaction[] = [
   { id: 'sep-4', date: '2025-09-04', category: '美容療程用品 Supplies – Beauty & Treatment', description: '八槍機', income: 0, expense: 818 },
   // UPDATED: Beauty Treatment
   { id: 'sep-5', date: '2025-09-04', category: '美容療程用品 Supplies – Beauty & Treatment', description: '八槍機針', income: 0, expense: 442 },
-  { id: 'sep-6', date: '2025-09-04', category: '公司用品 Supplies Expenses', description: '手套20盒', income: 0, expense: 313 },
+  // UPDATED: Office Supplies
+  { id: 'sep-6', date: '2025-09-04', category: '辦公用品 Supplies – Office', description: '手套20盒', income: 0, expense: 313 },
   { id: 'sep-7', date: '2025-09-08', category: '電費 Electricity For Office', description: '/', income: 0, expense: 1274 },
-  { id: 'sep-8', date: '2025-09-09', category: '公司用品 Supplies Expenses', description: '手套20盒', income: 0, expense: 342 },
-  { id: 'sep-9', date: '2025-09-10', category: '公司用品 Supplies Expenses', description: '生理鹽水', income: 0, expense: 109 },
+  // UPDATED: Office Supplies
+  { id: 'sep-8', date: '2025-09-09', category: '辦公用品 Supplies – Office', description: '手套20盒', income: 0, expense: 342 },
+  // UPDATED: Medical Consumables
+  { id: 'sep-9', date: '2025-09-10', category: '醫療耗材 Supplies – Medical & Consumables', description: '生理鹽水', income: 0, expense: 109 },
   // UPDATED: Beauty Treatment
   { id: 'sep-10', date: '2025-09-13', category: '美容療程用品 Supplies – Beauty & Treatment', description: '紋繡針', income: 0, expense: 283 },
   // UPDATED: Logistics
@@ -59,7 +62,8 @@ export const INITIAL_TRANSACTIONS: Transaction[] = [
   { id: 'sep-13', date: '2025-09-15', category: '利得稅－交稅 Tax Expense – Profits Tax', description: '/', income: 0, expense: 1643 },
   // UPDATED: Tax Prepayment
   { id: 'sep-14', date: '2025-09-15', category: '利得稅－預繳 Tax Prepayment – Profits Tax', description: '/', income: 0, expense: 502 },
-  { id: 'sep-15', date: '2025-09-16', category: '公司用品 Supplies Expenses', description: '公司紙巾雜物', income: 0, expense: 217.90 },
+  // UPDATED: Office Supplies
+  { id: 'sep-15', date: '2025-09-16', category: '辦公用品 Supplies – Office', description: '公司紙巾雜物', income: 0, expense: 217.90 },
   { id: 'sep-16', date: '2025-09-20', category: '網絡費 Internet Service', description: '/', income: 0, expense: 228 },
   // UPDATED: Management Fees -> Building Management Fees
   { id: 'sep-17', date: '2025-09-20', category: '大廈管理費 Building Management Fees', description: '/', income: 0, expense: 3735 },

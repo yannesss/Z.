@@ -273,6 +273,22 @@ export const INITIAL_TRANSACTIONS: Transaction[] = [
   { id: 'dec-35', date: '2025-12-31', category: '銷售 Sales', description: 'FPS', income: 67800.00, expense: 0 },
   // UPDATED: Accounting Fee -> 營運費用 / 會計費
   { id: 'dec-36', date: '2025-12-31', category: '營運費用 Operating Expense', description: '會計費 Accounting Fees', income: 0, expense: 800 },
+
+  // January 2026
+  { id: 'jan-26-1', date: '2026-01-31', category: '現金 Cash', description: '/', income: 50600.00, expense: 0 },
+  { id: 'jan-26-2', date: '2026-01-31', category: '銷售 Sales', description: 'Visa', income: 583704.00, expense: 0 },
+  { id: 'jan-26-3', date: '2026-01-31', category: '銀行手續費 Bank Charge', description: 'Visa*1.8%', income: 0, expense: 10506.67 },
+  { id: 'jan-26-4', date: '2026-01-31', category: '銷售 Sales', description: 'Master', income: 245970.00, expense: 0 },
+  { id: 'jan-26-5', date: '2026-01-31', category: '銀行手續費 Bank Charge', description: 'Master*1.8%', income: 0, expense: 4427.46 },
+  { id: 'jan-26-6', date: '2026-01-31', category: '銷售 Sales', description: 'Alipay', income: 41298.00, expense: 0 },
+  { id: 'jan-26-7', date: '2026-01-31', category: '銀行手續費 Bank Charge', description: 'Alipay*1.2%', income: 0, expense: 495.58 },
+  { id: 'jan-26-8', date: '2026-01-31', category: '銷售 Sales', description: 'Wechat Pay', income: 12860.00, expense: 0 },
+  { id: 'jan-26-9', date: '2026-01-31', category: '銀行手續費 Bank Charge', description: 'Wechat Pay*1.2%', income: 0, expense: 154.32 },
+  { id: 'jan-26-10', date: '2026-01-31', category: '銷售 Sales', description: '銀聯', income: 84260.00, expense: 0 },
+  { id: 'jan-26-11', date: '2026-01-31', category: '銀行手續費 Bank Charge', description: '銀聯*1.8%', income: 0, expense: 1516.68 },
+  { id: 'jan-26-12', date: '2026-01-31', category: '銷售 Sales', description: 'Payme', income: 14300.00, expense: 0 },
+  { id: 'jan-26-13', date: '2026-01-31', category: '銷售 Sales', description: 'FPS', income: 24940.00, expense: 0 },
+  { id: 'jan-26-14', date: '2026-01-31', category: '營運費用 Operating Expense', description: '會計費 Accounting Fees', income: 0, expense: 800.00 },
 ];
 
 export const CATEGORIES = [

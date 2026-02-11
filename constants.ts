@@ -289,7 +289,6 @@ export const INITIAL_TRANSACTIONS: Transaction[] = [
   { id: 'jan-26-12', date: '2026-01-31', category: '銷售 Sales', description: 'Payme', income: 14300.00, expense: 0 },
   { id: 'jan-26-13', date: '2026-01-31', category: '銷售 Sales', description: 'FPS', income: 24940.00, expense: 0 },
   { id: 'jan-26-14', date: '2026-01-31', category: '營運費用 Operating Expense', description: '會計費 Accounting Fees', income: 0, expense: 800.00 },
-  // ADDED NEW TRANSACTIONS
   { id: 'jan-26-15', date: '2026-01-01', category: '租金 Rental Fee', description: '/', income: 0, expense: 20675.00 },
   { id: 'jan-26-16', date: '2026-01-01', category: '廣告費 Advertising Fees', description: '/', income: 0, expense: 153400.00 },
   { id: 'jan-26-17', date: '2026-01-08', category: '美容療程用品 Supplies – Beauty & Treatment', description: '紋繡針', income: 0, expense: 681.00 },
@@ -311,6 +310,13 @@ export const INITIAL_TRANSACTIONS: Transaction[] = [
   { id: 'jan-26-33', date: '2026-01-30', category: '大廈管理費 Building Management Fees', description: '/', income: 0, expense: 3955.00 },
   { id: 'jan-26-34', date: '2026-01-30', category: '美容療程用品 Supplies – Beauty & Treatment', description: '紋繡針', income: 0, expense: 560.00 },
   { id: 'jan-26-35', date: '2026-01-31', category: '強積金供款 MPF Contribution', description: '/', income: 0, expense: 3000.00 },
+  // ADDED NEW SALARY TRANSACTIONS
+  { id: 'jan-26-36', date: '2026-01-31', category: '薪金 SALARY', description: 'Mi', income: 0, expense: 105793.20 },
+  { id: 'jan-26-37', date: '2026-01-31', category: '薪金 SALARY', description: 'Pinky', income: 0, expense: 30000.00 },
+  { id: 'jan-26-38', date: '2026-01-31', category: '薪金 SALARY', description: '鄧麗萍 Ling', income: 0, expense: 63704.80 },
+  { id: 'jan-26-39', date: '2026-01-31', category: '薪金 SALARY', description: '梁桂梅 Yuki', income: 0, expense: 48346.00 },
+  { id: 'jan-26-40', date: '2026-01-31', category: '薪金 SALARY', description: '劉敏 KK', income: 0, expense: 45555.40 },
+  { id: 'jan-26-41', date: '2026-01-31', category: '薪金 SALARY', description: '盧慧縈 Frankie', income: 0, expense: 39592.50 },
 ];
 
 export const CATEGORIES = [

@@ -315,7 +315,7 @@ export const INITIAL_TRANSACTIONS: Transaction[] = [
   { id: 'jan-26-37', date: '2026-01-31', category: '薪金 SALARY', description: 'Pinky', income: 0, expense: 30000.00 },
   { id: 'jan-26-38', date: '2026-01-31', category: '薪金 SALARY', description: '鄧麗萍 Ling', income: 0, expense: 63704.80 },
   { id: 'jan-26-39', date: '2026-01-31', category: '薪金 SALARY', description: '梁桂梅 Yuki', income: 0, expense: 48346.00 },
-  { id: 'jan-26-40', date: '2026-01-31', category: '薪金 SALARY', description: '劉敏 KK', income: 0, expense: 45555.40 },
+  { id: 'jan-26-40', date: '2026-01-31', category: '薪金 SALARY', description: '劉敏 KK', income: 0, expense: 47555.40 }, // UPDATED to 47555.40
   { id: 'jan-26-41', date: '2026-01-31', category: '薪金 SALARY', description: '盧慧縈 Frankie', income: 0, expense: 39592.50 },
 ];
 

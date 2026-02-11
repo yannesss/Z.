@@ -289,6 +289,28 @@ export const INITIAL_TRANSACTIONS: Transaction[] = [
   { id: 'jan-26-12', date: '2026-01-31', category: '銷售 Sales', description: 'Payme', income: 14300.00, expense: 0 },
   { id: 'jan-26-13', date: '2026-01-31', category: '銷售 Sales', description: 'FPS', income: 24940.00, expense: 0 },
   { id: 'jan-26-14', date: '2026-01-31', category: '營運費用 Operating Expense', description: '會計費 Accounting Fees', income: 0, expense: 800.00 },
+  // ADDED NEW TRANSACTIONS
+  { id: 'jan-26-15', date: '2026-01-01', category: '租金 Rental Fee', description: '/', income: 0, expense: 20675.00 },
+  { id: 'jan-26-16', date: '2026-01-01', category: '廣告費 Advertising Fees', description: '/', income: 0, expense: 153400.00 },
+  { id: 'jan-26-17', date: '2026-01-08', category: '美容療程用品 Supplies – Beauty & Treatment', description: '紋繡針', income: 0, expense: 681.00 },
+  { id: 'jan-26-18', date: '2026-01-09', category: '美容療程用品 Supplies – Beauty & Treatment', description: '保濕機', income: 0, expense: 1388.00 },
+  { id: 'jan-26-19', date: '2026-01-13', category: '美容療程用品 Supplies – Beauty & Treatment', description: '紋繡針', income: 0, expense: 2584.00 },
+  { id: 'jan-26-20', date: '2026-01-13', category: '美容療程用品 Supplies – Beauty & Treatment', description: '生髮精華', income: 0, expense: 1590.00 },
+  { id: 'jan-26-21', date: '2026-01-15', category: '美容療程用品 Supplies – Beauty & Treatment', description: '紋繡針', income: 0, expense: 90.00 },
+  { id: 'jan-26-22', date: '2026-01-17', category: '維修及安裝費 Repair & Installation', description: '招牌字', income: 0, expense: 362.00 },
+  { id: 'jan-26-23', date: '2026-01-17', category: '辦公用品 Supplies – Office', description: 'A4紙3包', income: 0, expense: 69.00 },
+  { id: 'jan-26-24', date: '2026-01-20', category: '網絡費 Internet Service', description: '/', income: 0, expense: 228.00 },
+  { id: 'jan-26-25', date: '2026-01-20', category: '電費 Electricity For Office', description: '/', income: 0, expense: 784.00 },
+  { id: 'jan-26-26', date: '2026-01-21', category: '集運及運費 Logistics & Shipping Expenses', description: '招牌字 順豐運費', income: 0, expense: 89.00 },
+  { id: 'jan-26-27', date: '2026-01-21', category: '員工福利 Staff Entertainment', description: '同事聖誕餐', income: 0, expense: 1003.30 },
+  { id: 'jan-26-28', date: '2026-01-24', category: '辦公用品 Supplies – Office', description: '公司新春裝飾', income: 0, expense: 53.00 },
+  { id: 'jan-26-29', date: '2026-01-25', category: '辦公用品 Supplies – Office', description: '日本城用品', income: 0, expense: 137.90 },
+  { id: 'jan-26-30', date: '2026-01-26', category: '辦公用品 Supplies – Office', description: '紙巾', income: 0, expense: 56.00 },
+  { id: 'jan-26-31', date: '2026-01-26', category: '美容療程用品 Supplies – Beauty & Treatment', description: '紋繡機', income: 0, expense: 730.00 },
+  { id: 'jan-26-32', date: '2026-01-29', category: '美容療程用品 Supplies – Beauty & Treatment', description: '紋繡針', income: 0, expense: 245.00 },
+  { id: 'jan-26-33', date: '2026-01-30', category: '大廈管理費 Building Management Fees', description: '/', income: 0, expense: 3955.00 },
+  { id: 'jan-26-34', date: '2026-01-30', category: '美容療程用品 Supplies – Beauty & Treatment', description: '紋繡針', income: 0, expense: 560.00 },
+  { id: 'jan-26-35', date: '2026-01-31', category: '強積金供款 MPF Contribution', description: '/', income: 0, expense: 3000.00 },
 ];
 
 export const CATEGORIES = [

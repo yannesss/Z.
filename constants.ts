@@ -317,6 +317,22 @@ export const INITIAL_TRANSACTIONS: Transaction[] = [
   { id: 'jan-26-39', date: '2026-01-31', category: '薪金 SALARY', description: '梁桂梅 Yuki', income: 0, expense: 48346.00 },
   { id: 'jan-26-40', date: '2026-01-31', category: '薪金 SALARY', description: '劉敏 KK', income: 0, expense: 47555.40 }, // UPDATED to 47555.40
   { id: 'jan-26-41', date: '2026-01-31', category: '薪金 SALARY', description: '盧慧縈 Frankie', income: 0, expense: 39592.50 },
+
+  // February 2026
+  { id: 'feb-26-1', date: '2026-02-28', category: '現金 Cash', description: '/', income: 41220.00, expense: 0 },
+  { id: 'feb-26-2', date: '2026-02-28', category: '銷售 Sales', description: 'Visa', income: 296498.00, expense: 0 },
+  { id: 'feb-26-3', date: '2026-02-28', category: '銀行手續費 Bank Charge', description: 'Visa*1.8%', income: 0, expense: 5336.96 },
+  { id: 'feb-26-4', date: '2026-02-28', category: '銷售 Sales', description: 'Master', income: 218720.00, expense: 0 },
+  { id: 'feb-26-5', date: '2026-02-28', category: '銀行手續費 Bank Charge', description: 'Master*1.8%', income: 0, expense: 3936.96 },
+  { id: 'feb-26-6', date: '2026-02-28', category: '銷售 Sales', description: 'Alipay', income: 47680.00, expense: 0 },
+  { id: 'feb-26-7', date: '2026-02-28', category: '銀行手續費 Bank Charge', description: 'Alipay*1.2%', income: 0, expense: 572.16 },
+  { id: 'feb-26-8', date: '2026-02-28', category: '銷售 Sales', description: 'Wechat Pay', income: 1680.00, expense: 0 },
+  { id: 'feb-26-9', date: '2026-02-28', category: '銀行手續費 Bank Charge', description: 'Wechat Pay*1.2%', income: 0, expense: 20.16 },
+  { id: 'feb-26-10', date: '2026-02-28', category: '銷售 Sales', description: '銀聯', income: 63410.00, expense: 0 },
+  { id: 'feb-26-11', date: '2026-02-28', category: '銀行手續費 Bank Charge', description: '銀聯*1.8%', income: 0, expense: 1141.38 },
+  { id: 'feb-26-12', date: '2026-02-28', category: '銷售 Sales', description: 'Payme', income: 15580.00, expense: 0 },
+  { id: 'feb-26-13', date: '2026-02-28', category: '銷售 Sales', description: 'FPS', income: 20800.00, expense: 0 },
+  { id: 'feb-26-14', date: '2026-02-28', category: '營運費用 Operating Expense', description: '會計費 Accounting Fees', income: 0, expense: 800.00 },
 ];
 
 export const CATEGORIES = [

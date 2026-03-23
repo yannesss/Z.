@@ -359,7 +359,7 @@ export const INITIAL_TRANSACTIONS: Transaction[] = [
   { id: 'feb-26-38', date: '2026-02-27', category: '員工福利 Staff Entertainment', description: '尖沙咀3人食飯', income: 0, expense: 928.40 },
   { id: 'feb-26-39', date: '2026-02-27', category: '美容療程用品 Supplies – Beauty & Treatment', description: '補1月16日黃金微針', income: 0, expense: 8477.20 },
   { id: 'feb-26-40', date: '2026-02-19', category: '員工福利 Staff Entertainment', description: '開工利是', income: 0, expense: 5000.00 },
-  { id: 'feb-26-41', date: '2026-02-28', category: '強積金供款 MPF Contribution', description: '/', income: 0, expense: 5304.46 },
+  { id: 'feb-26-41', date: '2026-02-28', category: '強積金供款 MPF Contribution', description: '/', income: 0, expense: 6804.46 },
 ];
 
 export const CATEGORIES = [

@@ -333,6 +333,12 @@ export const INITIAL_TRANSACTIONS: Transaction[] = [
   { id: 'feb-26-12', date: '2026-02-28', category: '銷售 Sales', description: 'Payme', income: 15580.00, expense: 0 },
   { id: 'feb-26-13', date: '2026-02-28', category: '銷售 Sales', description: 'FPS', income: 20800.00, expense: 0 },
   { id: 'feb-26-14', date: '2026-02-28', category: '營運費用 Operating Expense', description: '會計費 Accounting Fees', income: 0, expense: 800.00 },
+  { id: 'feb-26-15', date: '2026-02-28', category: '薪金 SALARY', description: 'Pinky', income: 0, expense: 30000.00 },
+  { id: 'feb-26-16', date: '2026-02-28', category: '薪金 SALARY', description: 'Yuki', income: 0, expense: 15284.69 },
+  { id: 'feb-26-17', date: '2026-02-28', category: '薪金 SALARY', description: 'KK', income: 0, expense: 36718.00 },
+  { id: 'feb-26-18', date: '2026-02-28', category: '薪金 SALARY', description: 'Ling', income: 0, expense: 61957.00 },
+  { id: 'feb-26-19', date: '2026-02-28', category: '薪金 SALARY', description: 'Frankie', income: 0, expense: 36611.76 },
+  { id: 'feb-26-20', date: '2026-02-28', category: '薪金 SALARY', description: 'MI', income: 0, expense: 70558.80 },
 ];
 
 export const CATEGORIES = [

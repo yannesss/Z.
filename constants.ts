@@ -360,6 +360,13 @@ export const INITIAL_TRANSACTIONS: Transaction[] = [
   { id: 'feb-26-39', date: '2026-02-27', category: '美容療程用品 Supplies – Beauty & Treatment', description: '補1月16日黃金微針', income: 0, expense: 8477.20 },
   { id: 'feb-26-40', date: '2026-02-19', category: '員工福利 Staff Entertainment', description: '開工利是', income: 0, expense: 5000.00 },
   { id: 'feb-26-41', date: '2026-02-28', category: '強積金供款 MPF Contribution', description: '/', income: 0, expense: 6804.46 },
+  // March 2026
+  { id: 'mar-26-1', date: '2026-03-16', category: '租賃及水電按金 Deposits', description: '旺角新店 - 租金按金', income: 0, expense: 60726.00 },
+  { id: 'mar-26-2', date: '2026-03-16', category: '租賃及水電按金 Deposits', description: '旺角新店 - 管理費按金', income: 0, expense: 10051.20 },
+  { id: 'mar-26-3', date: '2026-03-16', category: '租賃及水電按金 Deposits', description: '旺角新店 - 差餉按金', income: 0, expense: 2775.00 },
+  { id: 'mar-26-4', date: '2026-03-16', category: '租金 Rental Fee', description: '旺角新店上期租金 (16/03-15/04/2026)', income: 0, expense: 20242.00 },
+  { id: 'mar-26-5', date: '2026-03-16', category: '大廈管理費 Building Management Fees', description: '旺角新店上期管理費 (16/03-15/04/2026)', income: 0, expense: 3350.40 },
+  { id: 'mar-26-6', date: '2026-03-16', category: '營運費用 Operating Expense', description: '旺角新店 - 租約厘印費', income: 0, expense: 1220.00 },
 ];
 
 export const CATEGORIES = [
@@ -389,7 +396,8 @@ export const CATEGORIES = [
   '辦公用品 Supplies – Office',
   '醫療耗材 Supplies – Medical & Consumables',
   '制服及鞋類 Supplies – Uniform & Shoes',
-  '大廈管理費 Building Management Fees'
+  '大廈管理費 Building Management Fees',
+  '租賃及水電按金 Deposits'
 ];
 
 export const TRANSLATIONS = {

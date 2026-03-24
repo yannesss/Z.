@@ -56,10 +56,7 @@ service cloud.firestore {
     }
 
     match /transactions/{transactionId} {
-      allow read: if isAdmin() || isBoss();
-      allow create: if isAdmin() && isValidTransaction(request.resource.data) && request.resource.data.userId == request.auth.uid;
-      allow update: if isAdmin() && isValidTransaction(request.resource.data) && request.resource.data.userId == resource.data.userId && request.resource.data.createdAt == resource.data.createdAt;
-      allow delete: if isAdmin();
+      allow read, write: if true;
     }
   }
 }

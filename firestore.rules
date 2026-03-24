@@ -1,0 +1,65 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // ===============================================================
+    // Assumed Data Model
+    // ===============================================================
+    //
+    // Collection: transactions
+    // Document ID: Auto-generated
+    // Fields:
+    //   - userId: string (required) - Owner ID
+    //   - date: string (required) - Date string YYYY-MM-DD
+    //   - category: string (required) - Category name
+    //   - description: string (required) - Description text
+    //   - income: number (required) - Income amount >= 0
+    //   - expense: number (required) - Expense amount >= 0
+    //   - store: string (required) - 'main' or 'branch'
+    //   - createdAt: timestamp (required) - Creation time
+    //
+    // ===============================================================
+
+    // ===============================================================
+    // Helper Functions
+    // ===============================================================
+    
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function isAdmin() {
+      return isAuthenticated() && (
+        request.auth.token.email == 'admin@company.com' ||
+        request.auth.token.email == 'yannes.work@gmail.com'
+      );
+    }
+
+    function isBoss() {
+      return isAuthenticated() && request.auth.token.email == 'boss@company.com';
+    }
+    
+    function hasRequiredFields(fields) {
+      return request.resource.data.keys().hasAll(fields);
+    }
+
+    function isValidTransaction(data) {
+      return hasRequiredFields(['userId', 'date', 'category', 'description', 'income', 'expense', 'store', 'createdAt']) &&
+             data.userId is string && data.userId.size() > 0 && data.userId.size() < 100 &&
+             data.date is string && data.date.size() == 10 &&
+             data.category is string && data.category.size() > 0 && data.category.size() < 100 &&
+             data.description is string && data.description.size() >= 0 && data.description.size() < 500 &&
+             data.income is number && data.income >= 0 &&
+             data.expense is number && data.expense >= 0 &&
+             data.store is string && data.store in ['main', 'branch'] &&
+             data.createdAt is timestamp;
+    }
+
+    match /transactions/{transactionId} {
+      allow read: if isAdmin() || isBoss();
+      allow create: if isAdmin() && isValidTransaction(request.resource.data) && request.resource.data.userId == request.auth.uid;
+      allow update: if isAdmin() && isValidTransaction(request.resource.data) && request.resource.data.userId == resource.data.userId && request.resource.data.createdAt == resource.data.createdAt;
+      allow delete: if isAdmin();
+    }
+  }
+}

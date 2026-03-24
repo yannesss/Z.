@@ -1,0 +1,26 @@
+{
+  "entities": {
+    "Transaction": {
+      "title": "Transaction",
+      "description": "A financial transaction record",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "The ID of the user who owns this transaction" },
+        "date": { "type": "string", "description": "Transaction date (YYYY-MM-DD)" },
+        "category": { "type": "string", "description": "Transaction category" },
+        "description": { "type": "string", "description": "Transaction description" },
+        "income": { "type": "number", "description": "Income amount" },
+        "expense": { "type": "number", "description": "Expense amount" },
+        "store": { "type": "string", "description": "Store location (main or branch)" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Creation timestamp" }
+      },
+      "required": ["userId", "date", "category", "description", "income", "expense", "store", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/transactions/{transactionId}": {
+      "schema": { "$ref": "#/entities/Transaction" },
+      "description": "Collection of all transactions"
+    }
+  }
+}

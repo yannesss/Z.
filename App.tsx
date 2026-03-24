@@ -7,27 +7,147 @@ import { TransactionTable } from './components/TransactionTable';
 import { AddTransactionForm } from './components/AddTransactionForm';
 import { SmartEntry } from './components/SmartEntry';
 import { FinancialCharts } from './components/Charts';
-import { LayoutDashboard, Table2, TrendingUp, TrendingDown, Wallet, Languages, CalendarRange, Filter, Printer, Download, Upload, ArrowUpDown, FileSpreadsheet, Search, Store } from 'lucide-react';
+import { LayoutDashboard, Table2, TrendingUp, TrendingDown, Wallet, Languages, CalendarRange, Filter, Printer, Download, Upload, ArrowUpDown, FileSpreadsheet, Search, Store, LogOut } from 'lucide-react';
+
+import { auth, db } from './firebase';
+import { onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, User } from 'firebase/auth';
+import { collection, onSnapshot, addDoc, deleteDoc, doc, query, Timestamp } from 'firebase/firestore';
+
+enum OperationType {
+  CREATE = 'create',
+  UPDATE = 'update',
+  DELETE = 'delete',
+  LIST = 'list',
+  GET = 'get',
+  WRITE = 'write',
+}
+
+interface FirestoreErrorInfo {
+  error: string;
+  operationType: OperationType;
+  path: string | null;
+  authInfo: {
+    userId: string | undefined;
+    email: string | null | undefined;
+    emailVerified: boolean | undefined;
+    isAnonymous: boolean | undefined;
+    tenantId: string | null | undefined;
+    providerInfo: {
+      providerId: string;
+      displayName: string | null;
+      email: string | null;
+      photoUrl: string | null;
+    }[];
+  }
+}
+
+function handleFirestoreError(error: unknown, operationType: OperationType, path: string | null) {
+  const errInfo: FirestoreErrorInfo = {
+    error: error instanceof Error ? error.message : String(error),
+    authInfo: {
+      userId: auth.currentUser?.uid,
+      email: auth.currentUser?.email,
+      emailVerified: auth.currentUser?.emailVerified,
+      isAnonymous: auth.currentUser?.isAnonymous,
+      tenantId: auth.currentUser?.tenantId,
+      providerInfo: auth.currentUser?.providerData.map(provider => ({
+        providerId: provider.providerId,
+        displayName: provider.displayName,
+        email: provider.email,
+        photoUrl: provider.photoURL
+      })) || []
+    },
+    operationType,
+    path
+  }
+  console.error('Firestore Error: ', JSON.stringify(errInfo));
+  throw new Error(JSON.stringify(errInfo));
+}
 
 const App: React.FC = () => {
-  // Initialize transactions from Local Storage to fix data persistence issue
-  // UPDATED KEY to 'finreport_transactions_v34' to clear old data for the user and load NEW DATA
-  const [transactions, setTransactions] = useState<Transaction[]>(() => {
-    try {
-      const savedData = localStorage.getItem('finreport_transactions_v34');
-      if (savedData) {
-        return JSON.parse(savedData);
-      }
-    } catch (e) {
-      console.error("Failed to load transactions from local storage", e);
-    }
-    return INITIAL_TRANSACTIONS;
-  });
+  const [user, setUser] = useState<User | null>(null);
+  const [isAuthReady, setIsAuthReady] = useState(false);
+  const [transactions, setTransactions] = useState<Transaction[]>([]);
+  const [loginUsername, setLoginUsername] = useState('');
+  const [loginPassword, setLoginPassword] = useState('');
+  const [loginError, setLoginError] = useState('');
 
-  // Save to Local Storage whenever transactions change
+  const isReadOnly = user?.email === 'boss@company.com';
+
   useEffect(() => {
-    localStorage.setItem('finreport_transactions_v34', JSON.stringify(transactions));
-  }, [transactions]);
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+      setIsAuthReady(true);
+    });
+    return () => unsubscribe();
+  }, []);
+
+  useEffect(() => {
+    if (!isAuthReady || !user) {
+      setTransactions([]);
+      return;
+    }
+
+    // Migration from local storage to Firestore
+    const migrateData = async () => {
+      const localData = localStorage.getItem('finreport_transactions_stable') || localStorage.getItem('finreport_transactions_v34');
+      if (localData) {
+        try {
+          const parsed = JSON.parse(localData);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            if (window.confirm(lang === 'zh' ? '發現本地有未同步的帳目資料，是否要上傳至雲端？' : 'Found unsynced local data. Do you want to upload it to the cloud?')) {
+              for (const tx of parsed) {
+                await addDoc(collection(db, 'transactions'), {
+                  date: tx.date,
+                  category: tx.category,
+                  description: tx.description,
+                  income: tx.income || 0,
+                  expense: tx.expense || 0,
+                  store: tx.store || 'main',
+                  userId: user.uid,
+                  createdAt: Timestamp.now()
+                });
+              }
+              alert(lang === 'zh' ? '上傳成功！' : 'Upload successful!');
+            }
+          }
+          // Clear local storage so it doesn't prompt again
+          localStorage.removeItem('finreport_transactions_stable');
+          localStorage.removeItem('finreport_transactions_v34');
+        } catch (e) {
+          console.error('Migration failed', e);
+        }
+      }
+    };
+    migrateData();
+
+    const q = query(
+      collection(db, 'transactions')
+    );
+
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      const txs: Transaction[] = [];
+      snapshot.forEach((doc) => {
+        const data = doc.data();
+        txs.push({
+          id: doc.id,
+          date: data.date,
+          category: data.category,
+          description: data.description,
+          income: data.income,
+          expense: data.expense,
+          store: data.store,
+          userId: data.userId,
+          createdAt: data.createdAt
+        });
+      });
+      setTransactions(txs);
+    }, (error) => {
+      handleFirestoreError(error, OperationType.LIST, 'transactions');
+    });
+
+    return () => unsubscribe();
+  }, [user, isAuthReady]);
 
   const [view, setView] = useState<AppView>(AppView.TABLE);
   const [aiDraft, setAiDraft] = useState<AiParsedResult | null>(null);
@@ -59,21 +179,26 @@ const App: React.FC = () => {
 
   const t = TRANSLATIONS[lang];
 
-  const handleAddTransaction = (newTx: Omit<Transaction, 'id'>) => {
-    // Generate a safer random ID that works in all contexts (including non-secure HTTP)
-    const newId = Date.now().toString(36) + Math.random().toString(36).substr(2, 5);
-    
-    const transaction: Transaction = {
-      ...newTx,
-      id: newId,
-    };
-    // Add to list
-    setTransactions(prev => [...prev, transaction]);
+  const handleAddTransaction = async (newTx: Omit<Transaction, 'id'>) => {
+    if (!user) return;
+    try {
+      await addDoc(collection(db, 'transactions'), {
+        ...newTx,
+        userId: user.uid,
+        createdAt: Timestamp.now()
+      });
+    } catch (error) {
+      handleFirestoreError(error, OperationType.CREATE, 'transactions');
+    }
   };
 
-  const handleDeleteTransaction = (id: string) => {
+  const handleDeleteTransaction = async (id: string) => {
     if (window.confirm(lang === 'zh' ? '確定要刪除此記錄嗎？' : 'Are you sure you want to delete this record?')) {
-      setTransactions(prev => prev.filter(t => t.id !== id));
+      try {
+        await deleteDoc(doc(db, 'transactions', id));
+      } catch (error) {
+        handleFirestoreError(error, OperationType.DELETE, `transactions/${id}`);
+      }
     }
   };
 
@@ -136,28 +261,43 @@ const App: React.FC = () => {
     document.body.removeChild(link);
   };
 
-  const handleImportData = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImportData = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
-    if (!file) return;
+    if (!file || !user) return;
 
     const reader = new FileReader();
-    reader.onload = (e) => {
+    reader.onload = async (e) => {
       try {
         const content = e.target?.result as string;
         const parsed = JSON.parse(content);
         if (Array.isArray(parsed) && parsed.length > 0) {
           if (window.confirm(t.restoreConfirm)) {
-             setTransactions(parsed);
-             // CRITICAL FIX: Clear the date range filter immediately after import.
-             // This ensures imported data from other months is visible immediately.
+             // Delete existing data
+             for (const tx of transactions) {
+               await deleteDoc(doc(db, 'transactions', tx.id));
+             }
+             // Upload new data
+             for (const tx of parsed) {
+               await addDoc(collection(db, 'transactions'), {
+                 date: tx.date,
+                 category: tx.category,
+                 description: tx.description,
+                 income: tx.income || 0,
+                 expense: tx.expense || 0,
+                 store: tx.store || 'main',
+                 userId: user.uid,
+                 createdAt: Timestamp.now()
+               });
+             }
              setDateRange({ start: '', end: '' });
              alert(t.importSuccess);
           }
         } else {
-           // Allow empty array imports if someone wants to clear data, or handle error
            if(Array.isArray(parsed) && parsed.length === 0) {
               if (window.confirm(t.restoreConfirm)) {
-                setTransactions([]);
+                for (const tx of transactions) {
+                  await deleteDoc(doc(db, 'transactions', tx.id));
+                }
                 setDateRange({ start: '', end: '' });
                 alert(t.importSuccess);
              }
@@ -171,7 +311,6 @@ const App: React.FC = () => {
       }
     };
     reader.readAsText(file);
-    // Reset the input value so the same file can be selected again if needed
     event.target.value = '';
   };
 
@@ -222,6 +361,85 @@ const App: React.FC = () => {
   // Get current date/time for footer
   const printDate = new Date().toLocaleString(lang === 'zh' ? 'zh-HK' : 'en-HK');
 
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoginError('');
+    if (!loginUsername || !loginPassword) {
+      setLoginError(lang === 'zh' ? '請輸入帳號和密碼' : 'Please enter username and password');
+      return;
+    }
+    
+    const email = `${loginUsername.toLowerCase()}@company.com`;
+    try {
+      await signInWithEmailAndPassword(auth, email, loginPassword);
+    } catch (err: any) {
+      try {
+        // If sign in fails, try to create the account (first time login)
+        await createUserWithEmailAndPassword(auth, email, loginPassword);
+      } catch (createErr: any) {
+        setLoginError(lang === 'zh' ? '帳號或密碼錯誤！' : 'Invalid credentials!');
+      }
+    }
+  };
+
+  if (!isAuthReady) {
+    return <div className="min-h-screen flex items-center justify-center bg-gray-50"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600"></div></div>;
+  }
+
+  if (!user) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4">
+        <div className="bg-white p-8 rounded-2xl shadow-xl max-w-md w-full text-center">
+          <div className="w-16 h-16 bg-indigo-100 text-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+            <Wallet className="w-8 h-8" />
+          </div>
+          <h1 className="text-2xl font-bold text-gray-900 mb-2">{t.appTitle}</h1>
+          <p className="text-gray-500 mb-8">{lang === 'zh' ? '請登入以存取您的雲端帳目' : 'Please sign in to access your cloud ledger'}</p>
+          
+          <form onSubmit={handleLogin} className="space-y-4 text-left">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">{lang === 'zh' ? '帳號' : 'Username'}</label>
+              <input
+                type="text"
+                value={loginUsername}
+                onChange={(e) => setLoginUsername(e.target.value)}
+                className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all"
+                placeholder="e.g. admin or boss"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">{lang === 'zh' ? '密碼' : 'Password'}</label>
+              <input
+                type="password"
+                value={loginPassword}
+                onChange={(e) => setLoginPassword(e.target.value)}
+                className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all"
+                placeholder="••••••••"
+              />
+            </div>
+            {loginError && (
+              <p className="text-rose-500 text-sm">{loginError}</p>
+            )}
+            <button
+              type="submit"
+              className="w-full flex items-center justify-center gap-3 bg-indigo-600 text-white font-medium py-3 px-4 rounded-xl hover:bg-indigo-700 transition-colors shadow-sm mt-6"
+            >
+              {lang === 'zh' ? '登入' : 'Sign In'}
+            </button>
+          </form>
+
+          <button
+            onClick={toggleLanguage}
+            className="mt-6 text-sm text-gray-500 hover:text-gray-700 flex items-center justify-center gap-1 mx-auto"
+          >
+            <Languages className="w-4 h-4" />
+            {lang === 'en' ? '切換至中文' : 'Switch to English'}
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gray-50 text-gray-800 pb-20 print:pb-0 print:bg-white relative">
       
@@ -264,10 +482,12 @@ const App: React.FC = () => {
               >
                 <Download className="w-5 h-5" />
               </button>
-              <label className="p-2 text-gray-500 hover:text-indigo-600 hover:bg-indigo-50 rounded-full transition-colors cursor-pointer" title={t.restore}>
-                <Upload className="w-5 h-5" />
-                <input type="file" accept=".json" onChange={handleImportData} className="hidden" />
-              </label>
+              {!isReadOnly && (
+                <label className="p-2 text-gray-500 hover:text-indigo-600 hover:bg-indigo-50 rounded-full transition-colors cursor-pointer" title={t.restore}>
+                  <Upload className="w-5 h-5" />
+                  <input type="file" accept=".json" onChange={handleImportData} className="hidden" />
+                </label>
+              )}
             </div>
 
             <button
@@ -284,6 +504,14 @@ const App: React.FC = () => {
             >
               <Languages className="w-4 h-4" />
               {lang === 'en' ? '中文' : 'English'}
+            </button>
+
+            <button
+              onClick={() => signOut(auth)}
+              className="flex items-center gap-1 px-3 py-1.5 rounded-md text-sm font-medium text-rose-600 hover:bg-rose-50 transition-colors mr-4"
+              title={lang === 'zh' ? '登出' : 'Sign Out'}
+            >
+              <LogOut className="w-4 h-4" />
             </button>
 
             <div className="flex bg-gray-100 p-1 rounded-lg">

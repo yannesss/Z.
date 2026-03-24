@@ -7,9 +7,10 @@ interface TransactionTableProps {
   transactions: Transaction[];
   onDelete: (id: string) => void;
   t: typeof TRANSLATIONS['en'];
+  isReadOnly?: boolean;
 }
 
-export const TransactionTable: React.FC<TransactionTableProps> = ({ transactions, onDelete, t }) => {
+export const TransactionTable: React.FC<TransactionTableProps> = ({ transactions, onDelete, t, isReadOnly = false }) => {
   const stats: SummaryStats = transactions.reduce(
     (acc, t) => ({
       totalIncome: acc.totalIncome + t.income,
@@ -72,13 +73,15 @@ export const TransactionTable: React.FC<TransactionTableProps> = ({ transactions
                     </span>
                   </td>
                   <td className="px-6 py-3 text-center no-print">
-                    <button
-                      onClick={() => onDelete(tItem.id)}
-                      className="p-1.5 text-gray-400 hover:text-rose-600 hover:bg-rose-50 rounded-md transition-colors"
-                      title={t.deleteTitle}
-                    >
-                      <Trash2 className="w-4 h-4" />
-                    </button>
+                    {!isReadOnly && (
+                      <button
+                        onClick={() => onDelete(tItem.id)}
+                        className="p-1.5 text-gray-400 hover:text-rose-600 hover:bg-rose-50 rounded-md transition-colors"
+                        title={t.deleteTitle}
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    )}
                   </td>
                 </tr>
               ))

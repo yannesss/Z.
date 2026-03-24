@@ -8,6 +8,8 @@ export interface Transaction {
   income: number;
   expense: number;
   store?: StoreType;
+  userId?: string;
+  createdAt?: any;
 }
 
 export interface SummaryStats {

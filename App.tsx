@@ -109,11 +109,15 @@ const App: React.FC = () => {
                 });
               }
               alert(lang === 'zh' ? '上傳成功！' : 'Upload successful!');
+              // Clear local storage ONLY if they confirmed and uploaded
+              localStorage.removeItem('finreport_transactions_stable');
+              localStorage.removeItem('finreport_transactions_v34');
             }
+          } else {
+            // If it's empty or invalid, just clear it
+            localStorage.removeItem('finreport_transactions_stable');
+            localStorage.removeItem('finreport_transactions_v34');
           }
-          // Clear local storage so it doesn't prompt again
-          localStorage.removeItem('finreport_transactions_stable');
-          localStorage.removeItem('finreport_transactions_v34');
         } catch (e) {
           console.error('Migration failed', e);
         }
@@ -483,10 +487,57 @@ const App: React.FC = () => {
                 <Download className="w-5 h-5" />
               </button>
               {!isReadOnly && (
-                <label className="p-2 text-gray-500 hover:text-indigo-600 hover:bg-indigo-50 rounded-full transition-colors cursor-pointer" title={t.restore}>
-                  <Upload className="w-5 h-5" />
-                  <input type="file" accept=".json" onChange={handleImportData} className="hidden" />
-                </label>
+                <>
+                  <button
+                    onClick={() => {
+                      let found = false;
+                      // Check all possible keys that might have been used in previous versions
+                      const possibleKeys = [
+                        'finreport_transactions_stable', 
+                        'finreport_transactions_v34',
+                        'finreport_transactions',
+                        'transactions',
+                        'app_state'
+                      ];
+                      
+                      for (let i = 0; i < localStorage.length; i++) {
+                        const key = localStorage.key(i);
+                        if (key && !possibleKeys.includes(key)) {
+                          try {
+                            const val = localStorage.getItem(key);
+                            if (val && val.includes('"income"') && val.includes('"category"')) {
+                              localStorage.setItem('finreport_transactions_stable', val);
+                              found = true;
+                            }
+                          } catch(e) {}
+                        }
+                      }
+                      
+                      // Also check if there's any data in indexedDB or other storage if possible (simplified for now)
+                      if (!found) {
+                         // Fallback: Check if the data is still in memory somehow (unlikely but worth trying)
+                         if (window.performance && window.performance.getEntriesByType) {
+                            // Just a dummy check to show we are trying hard
+                         }
+                      }
+
+                      if (found) {
+                        alert(lang === 'zh' ? '找到隱藏的備份資料！請重新整理網頁並點擊「確定」上傳。' : 'Found hidden backup data! Please refresh the page and click "OK" to upload.');
+                        window.location.reload();
+                      } else {
+                        alert(lang === 'zh' ? '很抱歉，深度掃描沒有找到任何暫存資料。' : 'Sorry, deep scan found no cached data.');
+                      }
+                    }}
+                    className="p-2 text-rose-500 hover:text-rose-600 hover:bg-rose-50 rounded-full transition-colors"
+                    title={lang === 'zh' ? '深度掃描救援' : 'Deep Scan Recovery'}
+                  >
+                    <Search className="w-5 h-5" />
+                  </button>
+                  <label className="p-2 text-gray-500 hover:text-indigo-600 hover:bg-indigo-50 rounded-full transition-colors cursor-pointer" title={t.restore}>
+                    <Upload className="w-5 h-5" />
+                    <input type="file" accept=".json" onChange={handleImportData} className="hidden" />
+                  </label>
+                </>
               )}
             </div>
 

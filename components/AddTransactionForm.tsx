@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { CATEGORIES, TRANSLATIONS } from '../constants';
-import { Transaction, AiParsedResult } from '../types';
+import { CATEGORIES, CATEGORY_GROUPS, TRANSLATIONS } from '../constants';
+import { Transaction, AiParsedResult, StoreType } from '../types';
 import { PlusCircle } from 'lucide-react';
 
 interface AddTransactionFormProps {
@@ -16,6 +16,7 @@ export const AddTransactionForm: React.FC<AddTransactionFormProps> = ({ onAdd, a
   const [description, setDescription] = useState('');
   const [amount, setAmount] = useState<string>('');
   const [type, setType] = useState<'income' | 'expense'>('expense');
+  const [store, setStore] = useState<StoreType>('main');
 
   // Auto-fill form when AI draft arrives
   useEffect(() => {
@@ -29,6 +30,7 @@ export const AddTransactionForm: React.FC<AddTransactionFormProps> = ({ onAdd, a
       if (aiDraft.description) setDescription(aiDraft.description);
       if (aiDraft.amount) setAmount(aiDraft.amount.toString());
       if (aiDraft.type) setType(aiDraft.type);
+      if (aiDraft.store) setStore(aiDraft.store);
       
       // Cleanup draft after consumption
       onClearDraft();
@@ -46,6 +48,7 @@ export const AddTransactionForm: React.FC<AddTransactionFormProps> = ({ onAdd, a
       description,
       income: type === 'income' ? numAmount : 0,
       expense: type === 'expense' ? numAmount : 0,
+      store,
     });
 
     // Reset fields
@@ -60,7 +63,7 @@ export const AddTransactionForm: React.FC<AddTransactionFormProps> = ({ onAdd, a
         <PlusCircle className="w-5 h-5 text-indigo-600" />
         {t.addTransactionTitle}
       </h3>
-      <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4 items-end">
+      <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-7 gap-4 items-end">
         <div className="lg:col-span-1">
           <label className="block text-xs font-medium text-gray-500 mb-1">{t.date}</label>
           <input
@@ -101,13 +104,29 @@ export const AddTransactionForm: React.FC<AddTransactionFormProps> = ({ onAdd, a
         </div>
 
         <div className="lg:col-span-1">
+          <label className="block text-xs font-medium text-gray-500 mb-1">{t.store}</label>
+          <select
+            value={store}
+            onChange={(e) => setStore(e.target.value as StoreType)}
+            className="w-full p-2.5 rounded-md border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm"
+          >
+            <option value="main">{t.storeMain}</option>
+            <option value="branch">{t.storeBranch}</option>
+          </select>
+        </div>
+
+        <div className="lg:col-span-1">
           <label className="block text-xs font-medium text-gray-500 mb-1">{t.category}</label>
           <select
             value={category}
             onChange={(e) => setCategory(e.target.value)}
             className="w-full p-2.5 rounded-md border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm"
           >
-            {CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
+            {Object.entries(CATEGORY_GROUPS).map(([groupName, categories]) => (
+              <optgroup key={groupName} label={groupName}>
+                {categories.map(c => <option key={c} value={c}>{c}</option>)}
+              </optgroup>
+            ))}
           </select>
         </div>
 
@@ -137,7 +156,7 @@ export const AddTransactionForm: React.FC<AddTransactionFormProps> = ({ onAdd, a
           />
         </div>
 
-        <div className="hidden lg:block lg:col-span-6 flex justify-end">
+        <div className="hidden lg:block lg:col-span-7 flex justify-end">
            {/* Invisible placeholder for alignment if needed */}
         </div>
         

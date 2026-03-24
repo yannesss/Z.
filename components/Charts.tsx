@@ -14,7 +14,7 @@ import {
   Cell
 } from 'recharts';
 import { Transaction } from '../types';
-import { TRANSLATIONS } from '../constants';
+import { TRANSLATIONS, CATEGORY_GROUPS } from '../constants';
 
 interface ChartsProps {
   transactions: Transaction[];
@@ -23,16 +23,27 @@ interface ChartsProps {
 
 const COLORS = ['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6', '#ec4899', '#6366f1', '#14b8a6', '#f97316', '#84cc16'];
 
+// Helper to find Main Category
+const getMainCategory = (subCategory: string): string => {
+  for (const [mainCat, subCats] of Object.entries(CATEGORY_GROUPS)) {
+    if (subCats.includes(subCategory)) {
+      return mainCat;
+    }
+  }
+  return subCategory; // Fallback
+};
+
 export const FinancialCharts: React.FC<ChartsProps> = ({ transactions, t }) => {
-  // Aggregate data by category for expenses
+  // Aggregate data by MAIN category for expenses
   const rawExpenses = transactions
     .filter(t => t.expense > 0)
     .reduce((acc, t) => {
-      const existing = acc.find(item => item.name === t.category);
+      const mainCat = getMainCategory(t.category);
+      const existing = acc.find(item => item.name === mainCat);
       if (existing) {
         existing.value += t.expense;
       } else {
-        acc.push({ name: t.category, value: t.expense });
+        acc.push({ name: mainCat, value: t.expense });
       }
       return acc;
     }, [] as { name: string; value: number }[])

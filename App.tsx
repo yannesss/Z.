@@ -1,20 +1,20 @@
 
 
 import React, { useState, useMemo, useEffect } from 'react';
-import { Transaction, AppView, AiParsedResult, Language } from './types';
+import { Transaction, AppView, AiParsedResult, Language, StoreType } from './types';
 import { INITIAL_TRANSACTIONS, TRANSLATIONS } from './constants';
 import { TransactionTable } from './components/TransactionTable';
 import { AddTransactionForm } from './components/AddTransactionForm';
 import { SmartEntry } from './components/SmartEntry';
 import { FinancialCharts } from './components/Charts';
-import { LayoutDashboard, Table2, TrendingUp, TrendingDown, Wallet, Languages, CalendarRange, Filter, Printer, Download, Upload, ArrowUpDown, FileSpreadsheet, Search } from 'lucide-react';
+import { LayoutDashboard, Table2, TrendingUp, TrendingDown, Wallet, Languages, CalendarRange, Filter, Printer, Download, Upload, ArrowUpDown, FileSpreadsheet, Search, Store } from 'lucide-react';
 
 const App: React.FC = () => {
   // Initialize transactions from Local Storage to fix data persistence issue
-  // UPDATED KEY to 'finreport_transactions_v33' to clear old data for the user and load NEW DATA
+  // UPDATED KEY to 'finreport_transactions_v34' to clear old data for the user and load NEW DATA
   const [transactions, setTransactions] = useState<Transaction[]>(() => {
     try {
-      const savedData = localStorage.getItem('finreport_transactions_v33');
+      const savedData = localStorage.getItem('finreport_transactions_v34');
       if (savedData) {
         return JSON.parse(savedData);
       }
@@ -26,7 +26,7 @@ const App: React.FC = () => {
 
   // Save to Local Storage whenever transactions change
   useEffect(() => {
-    localStorage.setItem('finreport_transactions_v33', JSON.stringify(transactions));
+    localStorage.setItem('finreport_transactions_v34', JSON.stringify(transactions));
   }, [transactions]);
 
   const [view, setView] = useState<AppView>(AppView.TABLE);
@@ -34,6 +34,7 @@ const App: React.FC = () => {
   const [lang, setLang] = useState<Language>('zh');
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc'); // Default to 'desc' (Newest first)
   const [searchTerm, setSearchTerm] = useState('');
+  const [storeFilter, setStoreFilter] = useState<'all' | 'main' | 'branch'>('all');
   
   // Date filter state - Defaults to Current Month
   const [dateRange, setDateRange] = useState(() => {
@@ -177,6 +178,10 @@ const App: React.FC = () => {
   // Filter and Sort transactions
   const filteredTransactions = useMemo(() => {
     let result = transactions.filter(t => {
+      // Store filter
+      const txStore = t.store || 'main';
+      if (storeFilter !== 'all' && txStore !== storeFilter) return false;
+
       const tDate = new Date(t.date);
       const start = dateRange.start ? new Date(dateRange.start) : null;
       const end = dateRange.end ? new Date(dateRange.end) : null;
@@ -203,7 +208,7 @@ const App: React.FC = () => {
     });
 
     return result;
-  }, [transactions, dateRange, sortOrder, searchTerm]);
+  }, [transactions, dateRange, sortOrder, searchTerm, storeFilter]);
 
   // Summary Cards logic (based on filtered data)
   const summary = useMemo(() => {
@@ -307,6 +312,39 @@ const App: React.FC = () => {
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         
+        {/* Store Toggle - Added above summary metrics */}
+        <div className="flex justify-center mb-6 no-print">
+          <div className="flex bg-white p-1 rounded-xl border border-gray-200 shadow-sm inline-flex">
+            <button
+              onClick={() => setStoreFilter('all')}
+              className={`flex items-center gap-2 px-6 py-2.5 rounded-lg text-sm font-medium transition-all ${
+                storeFilter === 'all' ? 'bg-indigo-50 text-indigo-700 shadow-sm border border-indigo-100' : 'text-gray-500 hover:text-gray-700 hover:bg-gray-50'
+              }`}
+            >
+              <Store className="w-4 h-4" />
+              {t.storeAll}
+            </button>
+            <button
+              onClick={() => setStoreFilter('main')}
+              className={`flex items-center gap-2 px-6 py-2.5 rounded-lg text-sm font-medium transition-all ${
+                storeFilter === 'main' ? 'bg-indigo-50 text-indigo-700 shadow-sm border border-indigo-100' : 'text-gray-500 hover:text-gray-700 hover:bg-gray-50'
+              }`}
+            >
+              <Store className="w-4 h-4" />
+              {t.storeMain}
+            </button>
+            <button
+              onClick={() => setStoreFilter('branch')}
+              className={`flex items-center gap-2 px-6 py-2.5 rounded-lg text-sm font-medium transition-all ${
+                storeFilter === 'branch' ? 'bg-indigo-50 text-indigo-700 shadow-sm border border-indigo-100' : 'text-gray-500 hover:text-gray-700 hover:bg-gray-50'
+              }`}
+            >
+              <Store className="w-4 h-4" />
+              {t.storeBranch}
+            </button>
+          </div>
+        </div>
+
         {/* Top Summary Metrics - Always visible to show current status */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 print:grid-cols-3 print:gap-4 print:mb-4">
           <div className="bg-white p-5 rounded-xl border border-emerald-100 shadow-sm flex items-center justify-between print:border-gray-200">

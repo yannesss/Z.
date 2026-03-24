@@ -361,12 +361,12 @@ export const INITIAL_TRANSACTIONS: Transaction[] = [
   { id: 'feb-26-40', date: '2026-02-19', category: '員工福利 Staff Entertainment', description: '開工利是', income: 0, expense: 5000.00 },
   { id: 'feb-26-41', date: '2026-02-28', category: '強積金供款 MPF Contribution', description: '/', income: 0, expense: 6804.46 },
   // March 2026
-  { id: 'mar-26-1', date: '2026-03-16', category: '租賃及水電按金 Deposits', description: '旺角新店 - 租金按金', income: 0, expense: 60726.00 },
-  { id: 'mar-26-2', date: '2026-03-16', category: '租賃及水電按金 Deposits', description: '旺角新店 - 管理費按金', income: 0, expense: 10051.20 },
-  { id: 'mar-26-3', date: '2026-03-16', category: '租賃及水電按金 Deposits', description: '旺角新店 - 差餉按金', income: 0, expense: 2775.00 },
-  { id: 'mar-26-4', date: '2026-03-16', category: '租金 Rental Fee', description: '旺角新店上期租金 (16/03-15/04/2026)', income: 0, expense: 20242.00 },
-  { id: 'mar-26-5', date: '2026-03-16', category: '大廈管理費 Building Management Fees', description: '旺角新店上期管理費 (16/03-15/04/2026)', income: 0, expense: 3350.40 },
-  { id: 'mar-26-6', date: '2026-03-16', category: '營運費用 Operating Expense', description: '旺角新店 - 租約厘印費', income: 0, expense: 1220.00 },
+  { id: 'mar-26-1', date: '2026-03-16', category: '租賃及水電按金 Deposits', description: '旺角新店 - 租金按金', income: 0, expense: 60726.00, store: 'branch' },
+  { id: 'mar-26-2', date: '2026-03-16', category: '租賃及水電按金 Deposits', description: '旺角新店 - 管理費按金', income: 0, expense: 10051.20, store: 'branch' },
+  { id: 'mar-26-3', date: '2026-03-16', category: '租賃及水電按金 Deposits', description: '旺角新店 - 差餉按金', income: 0, expense: 2775.00, store: 'branch' },
+  { id: 'mar-26-4', date: '2026-03-16', category: '租金 Rental Fee', description: '旺角新店上期租金 (16/03-15/04/2026)', income: 0, expense: 20242.00, store: 'branch' },
+  { id: 'mar-26-5', date: '2026-03-16', category: '大廈管理費 Building Management Fees', description: '旺角新店上期管理費 (16/03-15/04/2026)', income: 0, expense: 3350.40, store: 'branch' },
+  { id: 'mar-26-6', date: '2026-03-16', category: '營運費用 Operating Expense', description: '旺角新店 - 租約厘印費', income: 0, expense: 1220.00, store: 'branch' },
 ];
 
 export const CATEGORIES = [
@@ -399,6 +399,51 @@ export const CATEGORIES = [
   '大廈管理費 Building Management Fees',
   '租賃及水電按金 Deposits'
 ];
+
+export const CATEGORY_GROUPS: Record<string, string[]> = {
+  '收入 Income': [
+    '銷售 Sales',
+    '現金 Cash'
+  ],
+  '營運開支 Operating Expenses': [
+    '租金 Rental Fee',
+    '管理費 Management Fees',
+    '大廈管理費 Building Management Fees',
+    '電費 Electricity For Office',
+    '網絡費 Internet Service',
+    '差餉及地租 Rates & Government Rent',
+    '營運費用 Operating Expense',
+    '銀行手續費 Bank Charge',
+    '集運及運費 Logistics & Shipping Expenses',
+    '維修及安裝費 Repair & Installation'
+  ],
+  '員工開支 Staff Expenses': [
+    '薪金 SALARY',
+    '強積金供款 MPF Contribution',
+    '員工福利 Staff Entertainment',
+    '員工保險－勞工保險 Staff Insurance – Employees\' Compensation'
+  ],
+  '市場推廣 Marketing & Promotion': [
+    '廣告費 Advertising Fees',
+    '市場推廣－拍攝及模特費 Marketing & Promotion – Shooting & Model'
+  ],
+  '用品及耗材 Supplies & Consumables': [
+    '公司用品 Supplies Expenses',
+    '美容療程用品 Supplies – Beauty & Treatment',
+    '辦公用品 Supplies – Office',
+    '醫療耗材 Supplies – Medical & Consumables',
+    '制服及鞋類 Supplies – Uniform & Shoes'
+  ],
+  '稅務及資產 Tax & Assets': [
+    '利得稅－交稅 Tax Expense – Profits Tax',
+    '利得稅－預繳 Tax Prepayment – Profits Tax',
+    '固定資產－裝修費 Fixed Asset – Renovation',
+    '租賃及水電按金 Deposits'
+  ],
+  '其他 Others': [
+    '其他 Others'
+  ]
+};
 
 export const TRANSLATIONS = {
   en: {
@@ -447,6 +492,10 @@ export const TRANSLATIONS = {
     sortDesc: 'Newest First',
     search: 'Search description or category...',
     percentage: 'Percentage',
+    store: 'Store',
+    storeAll: 'All Stores',
+    storeMain: 'Main Store',
+    storeBranch: 'Mong Kok Branch',
   },
   zh: {
     appTitle: '財務報表',
@@ -494,5 +543,9 @@ export const TRANSLATIONS = {
     sortDesc: '日期 (新→舊)',
     search: '搜尋說明或類別...',
     percentage: '百分比',
+    store: '店舖',
+    storeAll: '全部店舖',
+    storeMain: '總店',
+    storeBranch: '旺角分店',
   }
 };

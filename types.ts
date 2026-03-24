@@ -1,3 +1,5 @@
+export type StoreType = 'main' | 'branch';
+
 export interface Transaction {
   id: string;
   date: string; // YYYY-MM-DD
@@ -5,6 +7,7 @@ export interface Transaction {
   description: string;
   income: number;
   expense: number;
+  store?: StoreType;
 }
 
 export interface SummaryStats {
@@ -24,6 +27,7 @@ export interface AiParsedResult {
   description?: string;
   amount?: number;
   type?: 'income' | 'expense';
+  store?: StoreType;
 }
 
 export type Language = 'en' | 'zh';

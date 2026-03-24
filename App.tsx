@@ -535,98 +535,16 @@ const App: React.FC = () => {
                   </button>
                   <button
                     onClick={async () => {
-                      if (!window.confirm('確定要匯入 2026 年 1 月和 2 月的 PDF 資料嗎？這將會新增約 40 筆資料。')) return;
+                      if (!window.confirm('確定要匯入「旺角分店 3月支出」的資料嗎？')) return;
                       
                       const pdfData = [
-                        // 2025/11/30
-                        { date: '2025-11-30', category: 'salary', description: 'Pinky', income: 0, expense: 30000, store: 'main' },
-                        // 2026/02/28 MPF
-                        { date: '2026-02-28', category: 'MPF', description: '/', income: 0, expense: 6804.46, store: 'main' },
-                        
-                        // 2026-01
-                        { date: '2026-01-01', category: '租金 Rental Fee', description: '/', income: 0, expense: 20675.00, store: 'main' },
-                        { date: '2026-01-01', category: '廣告費 Advertising Fees', description: '/', income: 0, expense: 153400.00, store: 'main' },
-                        { date: '2026-01-08', category: '美容療程用品 Supplies – Beauty & Treatment', description: '紋繡針', income: 0, expense: 681.00, store: 'main' },
-                        { date: '2026-01-09', category: '美容療程用品 Supplies – Beauty & Treatment', description: '保濕機', income: 0, expense: 1388.00, store: 'main' },
-                        { date: '2026-01-13', category: '美容療程用品 Supplies – Beauty & Treatment', description: '紋繡針', income: 0, expense: 2584.00, store: 'main' },
-                        { date: '2026-01-13', category: '美容療程用品 Supplies – Beauty & Treatment', description: '生髮精華', income: 0, expense: 1590.00, store: 'main' },
-                        { date: '2026-01-15', category: '美容療程用品 Supplies – Beauty & Treatment', description: '紋繡針', income: 0, expense: 90.00, store: 'main' },
-                        { date: '2026-01-17', category: '維修及安裝費 Repair & Installation', description: '招牌字', income: 0, expense: 362.00, store: 'main' },
-                        { date: '2026-01-17', category: '辦公用品 Supplies – Office', description: 'A4紙3包', income: 0, expense: 69.00, store: 'main' },
-                        { date: '2026-01-20', category: '網絡費 Internet Service', description: '/', income: 0, expense: 228.00, store: 'main' },
-                        { date: '2026-01-20', category: '電費 Electricity For Office', description: '/', income: 0, expense: 784.00, store: 'main' },
-                        { date: '2026-01-21', category: '集運及運費 Logistics & Shipping Expenses', description: '招牌字 順豐運費', income: 0, expense: 89.00, store: 'main' },
-                        { date: '2026-01-21', category: '員工福利 Staff Entertainment', description: '同事聖誕餐', income: 0, expense: 1003.30, store: 'main' },
-                        { date: '2026-01-24', category: '辦公用品 Supplies – Office', description: '公司新春裝飾', income: 0, expense: 53.00, store: 'main' },
-                        { date: '2026-01-25', category: '辦公用品 Supplies – Office', description: '日本城用品', income: 0, expense: 137.90, store: 'main' },
-                        { date: '2026-01-26', category: '辦公用品 Supplies – Office', description: '紙巾', income: 0, expense: 56.00, store: 'main' },
-                        { date: '2026-01-26', category: '美容療程用品 Supplies – Beauty & Treatment', description: '紋繡機', income: 0, expense: 730.00, store: 'main' },
-                        { date: '2026-01-29', category: '美容療程用品 Supplies – Beauty & Treatment', description: '紋繡針', income: 0, expense: 245.00, store: 'main' },
-                        { date: '2026-01-30', category: '大廈管理費 Building Management Fees', description: '/', income: 0, expense: 3955.00, store: 'main' },
-                        { date: '2026-01-30', category: '美容療程用品 Supplies – Beauty & Treatment', description: '紋繡針', income: 0, expense: 560.00, store: 'main' },
-                        { date: '2026-01-31', category: '現金 Cash', description: '/', income: 50600.00, expense: 0, store: 'main' },
-                        { date: '2026-01-31', category: '銷售 Sales', description: 'Visa', income: 583704.00, expense: 0, store: 'main' },
-                        { date: '2026-01-31', category: '銀行手續費 Bank Charge', description: 'Visa*1.8%', income: 0, expense: 10506.67, store: 'main' },
-                        { date: '2026-01-31', category: '銷售 Sales', description: 'Master', income: 245970.00, expense: 0, store: 'main' },
-                        { date: '2026-01-31', category: '銀行手續費 Bank Charge', description: 'Master*1.8%', income: 0, expense: 4427.46, store: 'main' },
-                        { date: '2026-01-31', category: '銷售 Sales', description: 'Alipay', income: 41298.00, expense: 0, store: 'main' },
-                        { date: '2026-01-31', category: '銀行手續費 Bank Charge', description: 'Alipay*1.2%', income: 0, expense: 495.58, store: 'main' },
-                        { date: '2026-01-31', category: '銷售 Sales', description: 'Wechat Pay', income: 12860.00, expense: 0, store: 'main' },
-                        { date: '2026-01-31', category: '銀行手續費 Bank Charge', description: 'Wechat Pay*1.2%', income: 0, expense: 154.32, store: 'main' },
-                        { date: '2026-01-31', category: '銷售 Sales', description: '銀聯', income: 84260.00, expense: 0, store: 'main' },
-                        { date: '2026-01-31', category: '銀行手續費 Bank Charge', description: '銀聯*1.8%', income: 0, expense: 1516.68, store: 'main' },
-                        { date: '2026-01-31', category: '銷售 Sales', description: 'Payme', income: 14300.00, expense: 0, store: 'main' },
-                        { date: '2026-01-31', category: '銷售 Sales', description: 'FPS', income: 24940.00, expense: 0, store: 'main' },
-                        { date: '2026-01-31', category: '營運費用 Operating Expense', description: '會計費 Accounting Fees', income: 0, expense: 800.00, store: 'main' },
-                        { date: '2026-01-31', category: '強積金供款 MPF Contribution', description: '/', income: 0, expense: 3000.00, store: 'main' },
-                        { date: '2026-01-31', category: '薪金 SALARY', description: 'Mi', income: 0, expense: 105793.20, store: 'main' },
-                        { date: '2026-01-31', category: '薪金 SALARY', description: 'Pinky', income: 0, expense: 30000.00, store: 'main' },
-                        { date: '2026-01-31', category: '薪金 SALARY', description: '鄧麗萍 Ling', income: 0, expense: 63704.80, store: 'main' },
-                        { date: '2026-01-31', category: '薪金 SALARY', description: '梁桂梅 Yuki', income: 0, expense: 48346.00, store: 'main' },
-                        { date: '2026-01-31', category: '薪金 SALARY', description: '劉敏 KK', income: 0, expense: 47555.40, store: 'main' },
-                        { date: '2026-01-31', category: '薪金 SALARY', description: '盧慧縈 Frankie', income: 0, expense: 39592.50, store: 'main' },
-
-                        // 2026-02
-                        { date: '2026-02-01', category: '租金 Rental Fee', description: '/', income: 0, expense: 20675.00, store: 'main' },
-                        { date: '2026-02-01', category: '廣告費 Advertising Fees', description: '/', income: 0, expense: 120320.00, store: 'main' },
-                        { date: '2026-02-01', category: '大廈管理費 Building Management Fees', description: '/', income: 0, expense: 3955.00, store: 'main' },
-                        { date: '2026-02-01', category: '醫療耗材 Supplies – Medical & Consumables', description: '止痛膏', income: 0, expense: 712.00, store: 'main' },
-                        { date: '2026-02-02', category: '美容療程用品 Supplies – Beauty & Treatment', description: '生髮精華', income: 0, expense: 1590.00, store: 'main' },
-                        { date: '2026-02-02', category: '醫療耗材 Supplies – Medical & Consumables', description: '止痛膏', income: 0, expense: 272.00, store: 'main' },
-                        { date: '2026-02-02', category: '美容療程用品 Supplies – Beauty & Treatment', description: '生髮針頭', income: 0, expense: 329.00, store: 'main' },
-                        { date: '2026-02-07', category: '辦公用品 Supplies – Office', description: '紙杯', income: 0, expense: 110.00, store: 'main' },
-                        { date: '2026-02-07', category: '辦公用品 Supplies – Office', description: '清潔泡泡', income: 0, expense: 90.00, store: 'main' },
-                        { date: '2026-02-07', category: '辦公用品 Supplies – Office', description: '垃圾袋', income: 0, expense: 86.00, store: 'main' },
-                        { date: '2026-02-07', category: '美容療程用品 Supplies – Beauty & Treatment', description: '紋繡機', income: 0, expense: 1555.00, store: 'main' },
-                        { date: '2026-02-07', category: '辦公用品 Supplies – Office', description: '名片', income: 0, expense: 205.00, store: 'main' },
-                        { date: '2026-02-12', category: '員工福利 Staff Entertainment', description: '團年飯', income: 0, expense: 6000.00, store: 'main' },
-                        { date: '2026-02-12', category: '員工福利 Staff Entertainment', description: '團年飯紅包', income: 0, expense: 4000.00, store: 'main' },
-                        { date: '2026-02-19', category: '員工福利 Staff Entertainment', description: '開工利是', income: 0, expense: 5000.00, store: 'main' },
-                        { date: '2026-02-20', category: '網絡費 Internet Service', description: '/', income: 0, expense: 228.00, store: 'main' },
-                        { date: '2026-02-21', category: '電費 Electricity For Office', description: '/', income: 0, expense: 732.00, store: 'main' },
-                        { date: '2026-02-27', category: '醫療耗材 Supplies – Medical & Consumables', description: '化妝棉片', income: 0, expense: 1094.00, store: 'main' },
-                        { date: '2026-02-27', category: '員工福利 Staff Entertainment', description: '尖沙咀3人食飯', income: 0, expense: 928.40, store: 'main' },
-                        { date: '2026-02-27', category: '美容療程用品 Supplies – Beauty & Treatment', description: '補1月16日黃金微針', income: 0, expense: 8477.20, store: 'main' },
-                        { date: '2026-02-28', category: '現金 Cash', description: '/', income: 41220.00, expense: 0, store: 'main' },
-                        { date: '2026-02-28', category: '銷售 Sales', description: 'Visa', income: 296498.00, expense: 0, store: 'main' },
-                        { date: '2026-02-28', category: '銀行手續費 Bank Charge', description: 'Visa*1.8%', income: 0, expense: 5336.96, store: 'main' },
-                        { date: '2026-02-28', category: '銷售 Sales', description: 'Master', income: 218720.00, expense: 0, store: 'main' },
-                        { date: '2026-02-28', category: '銀行手續費 Bank Charge', description: 'Master*1.8%', income: 0, expense: 3936.96, store: 'main' },
-                        { date: '2026-02-28', category: '銷售 Sales', description: 'Alipay', income: 47680.00, expense: 0, store: 'main' },
-                        { date: '2026-02-28', category: '銀行手續費 Bank Charge', description: 'Alipay*1.2%', income: 0, expense: 572.16, store: 'main' },
-                        { date: '2026-02-28', category: '銷售 Sales', description: 'Wechat Pay', income: 1680.00, expense: 0, store: 'main' },
-                        { date: '2026-02-28', category: '銀行手續費 Bank Charge', description: 'Wechat Pay*1.2%', income: 0, expense: 20.16, store: 'main' },
-                        { date: '2026-02-28', category: '銷售 Sales', description: '銀聯', income: 63410.00, expense: 0, store: 'main' },
-                        { date: '2026-02-28', category: '銀行手續費 Bank Charge', description: '銀聯*1.8%', income: 0, expense: 1141.38, store: 'main' },
-                        { date: '2026-02-28', category: '銷售 Sales', description: 'Payme', income: 15580.00, expense: 0, store: 'main' },
-                        { date: '2026-02-28', category: '銷售 Sales', description: 'FPS', income: 20800.00, expense: 0, store: 'main' },
-                        { date: '2026-02-28', category: '營運費用 Operating Expense', description: '會計費 Accounting Fees', income: 0, expense: 800.00, store: 'main' },
-                        { date: '2026-02-28', category: '薪金 SALARY', description: 'Pinky', income: 0, expense: 30000.00, store: 'main' },
-                        { date: '2026-02-28', category: '薪金 SALARY', description: 'Yuki', income: 0, expense: 15284.69, store: 'main' },
-                        { date: '2026-02-28', category: '薪金 SALARY', description: 'KK', income: 0, expense: 36718.00, store: 'main' },
-                        { date: '2026-02-28', category: '薪金 SALARY', description: 'Ling', income: 0, expense: 61957.00, store: 'main' },
-                        { date: '2026-02-28', category: '薪金 SALARY', description: 'Frankie', income: 0, expense: 36611.76, store: 'main' },
-                        { date: '2026-02-28', category: '薪金 SALARY', description: 'MI', income: 0, expense: 70558.80, store: 'main' }
+                        // 2026-03 旺角分店
+                        { date: '2026-03-16', category: '租賃及水電按金 Deposits', description: '旺角新店 - 租金按金', income: 0, expense: 60726.00, store: 'branch' },
+                        { date: '2026-03-16', category: '租賃及水電按金 Deposits', description: '旺角新店 - 管理費按金', income: 0, expense: 10051.20, store: 'branch' },
+                        { date: '2026-03-16', category: '租賃及水電按金 Deposits', description: '旺角新店 - 差餉按金', income: 0, expense: 2775.00, store: 'branch' },
+                        { date: '2026-03-16', category: '租金 Rental Fee', description: '旺角新店上期租金 (16/03-15/04/2026)', income: 0, expense: 20242.00, store: 'branch' },
+                        { date: '2026-03-16', category: '大廈管理費 Building Management Fees', description: '旺角新店上期管理費 (16/03-15/04/2026)', income: 0, expense: 3350.40, store: 'branch' },
+                        { date: '2026-03-16', category: '營運費用 Operating Expense', description: '旺角新店 - 租約厘印費', income: 0, expense: 1220.00, store: 'branch' }
                       ];
 
                       try {
@@ -640,16 +558,16 @@ const App: React.FC = () => {
                           });
                         });
                         await batch.commit();
-                        alert('資料匯入成功！');
+                        alert('旺角分店資料匯入成功！');
                       } catch (e) {
                         console.error(e);
                         alert('匯入失敗');
                       }
                     }}
                     className="p-2 text-indigo-500 hover:text-indigo-600 hover:bg-indigo-50 rounded-full transition-colors"
-                    title="一鍵匯入 PDF 資料"
+                    title="一鍵匯入 旺角分店 3月支出"
                   >
-                    <FileSpreadsheet className="w-5 h-5" />
+                    <Store className="w-5 h-5" />
                   </button>
                   <label className="p-2 text-gray-500 hover:text-indigo-600 hover:bg-indigo-50 rounded-full transition-colors cursor-pointer" title={t.restore}>
                     <Upload className="w-5 h-5" />

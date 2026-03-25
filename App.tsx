@@ -7,7 +7,7 @@ import { TransactionTable } from './components/TransactionTable';
 import { AddTransactionForm } from './components/AddTransactionForm';
 import { SmartEntry } from './components/SmartEntry';
 import { FinancialCharts } from './components/Charts';
-import { LayoutDashboard, Table2, TrendingUp, TrendingDown, Wallet, Languages, CalendarRange, Filter, Download, ArrowUpDown, Search, Store, FileSpreadsheet } from 'lucide-react';
+import { LayoutDashboard, Table2, TrendingUp, TrendingDown, Wallet, Languages, CalendarRange, Filter, Download, ArrowUpDown, Search, Store, FileSpreadsheet, Printer, Upload } from 'lucide-react';
 
 import { db } from './firebase';
 import { collection, onSnapshot, addDoc, deleteDoc, doc, query, Timestamp, writeBatch } from 'firebase/firestore';
@@ -99,34 +99,6 @@ const App: React.FC = () => {
       }
     };
     migrateData();
-
-    // Temporary script to add Mong Kok deposits
-    const addMongKokDeposits = async () => {
-      const added = localStorage.getItem('finreport_added_mongkok_deposits_v2');
-      if (!added) {
-        try {
-          const newTransactions = [
-            { date: '2026-03-16', category: '租賃及水電按金 Deposits', description: '旺角新店 - 租金按金', income: 0, expense: 60726, store: 'branch' },
-            { date: '2026-03-16', category: '租賃及水電按金 Deposits', description: '旺角新店 - 管理費按金', income: 0, expense: 10051.20, store: 'branch' },
-            { date: '2026-03-16', category: '租賃及水電按金 Deposits', description: '旺角新店 - 差餉按金', income: 0, expense: 2775, store: 'branch' },
-            { date: '2026-03-16', category: '租金 Rental Fee', description: '旺角新店上期租金 (16/03-15/04/2026)', income: 0, expense: 20242, store: 'branch' },
-            { date: '2026-03-16', category: '大廈管理費 Building Management Fees', description: '旺角新店上期管理費 (16/03-15/04/2026)', income: 0, expense: 3350.40, store: 'branch' },
-            { date: '2026-03-16', category: '營運費用 Operating Expense', description: '旺角新店 - 租約厘印費', income: 0, expense: 1220, store: 'branch' }
-          ];
-          for (const tx of newTransactions) {
-            await addDoc(collection(db, 'transactions'), {
-              ...tx,
-              userId: 'anonymous',
-              createdAt: Timestamp.now()
-            });
-          }
-          localStorage.setItem('finreport_added_mongkok_deposits_v2', 'true');
-        } catch (e) {
-          console.error('Failed to add Mong Kok deposits', e);
-        }
-      }
-    };
-    addMongKokDeposits();
 
     const q = query(
       collection(db, 'transactions')
@@ -227,6 +199,54 @@ const App: React.FC = () => {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+  };
+
+  const handlePrint = () => {
+    window.print();
+  };
+
+  const fileInputRef = React.useRef<HTMLInputElement>(null);
+
+  const handleImportData = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = async (e) => {
+      try {
+        const content = e.target?.result as string;
+        const parsed = JSON.parse(content);
+        if (Array.isArray(parsed)) {
+          if (window.confirm(lang === 'zh' ? '確定要匯入資料嗎？這將會新增到現有的資料中。' : 'Are you sure you want to import data? This will add to existing data.')) {
+            for (const tx of parsed) {
+              await addDoc(collection(db, 'transactions'), {
+                date: tx.date || new Date().toISOString().split('T')[0],
+                category: tx.category || '其他 Others',
+                description: tx.description || '',
+                income: tx.income || 0,
+                expense: tx.expense || 0,
+                store: tx.store || 'main',
+                userId: 'anonymous',
+                createdAt: Timestamp.now()
+              });
+            }
+            alert(lang === 'zh' ? '匯入成功！' : 'Import successful!');
+            // Clear date range filter to show all data
+            setDateRange({ start: '', end: '' });
+          }
+        } else {
+          alert(lang === 'zh' ? '檔案格式錯誤' : 'Invalid file format');
+        }
+      } catch (error) {
+        console.error('Import failed', error);
+        alert(lang === 'zh' ? '匯入失敗' : 'Import failed');
+      }
+      // Reset file input
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
+    };
+    reader.readAsText(file);
   };
 
   const handleExportCSV = () => {
@@ -338,6 +358,28 @@ const App: React.FC = () => {
           <div className="flex items-center gap-2">
             {/* Data Management Controls */}
             <div className="flex items-center mr-2 border-r border-gray-200 pr-2 gap-1">
+              <button
+                onClick={handlePrint}
+                className="p-2 text-gray-500 hover:text-indigo-600 hover:bg-indigo-50 rounded-full transition-colors"
+                title={t.print}
+              >
+                <Printer className="w-5 h-5" />
+              </button>
+              <input
+                type="file"
+                accept=".json"
+                onChange={handleImportData}
+                ref={fileInputRef}
+                className="hidden"
+                id="import-data"
+              />
+              <label
+                htmlFor="import-data"
+                className="p-2 text-gray-500 hover:text-indigo-600 hover:bg-indigo-50 rounded-full transition-colors cursor-pointer"
+                title={t.restore}
+              >
+                <Upload className="w-5 h-5" />
+              </label>
                <button
                 onClick={handleExportCSV}
                 className="p-2 text-gray-500 hover:text-emerald-600 hover:bg-emerald-50 rounded-full transition-colors"

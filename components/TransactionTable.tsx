@@ -40,7 +40,7 @@ export const TransactionTable: React.FC<TransactionTableProps> = ({ transactions
               <th className="px-6 py-3 text-right whitespace-nowrap text-emerald-600">{t.income} (HKD)</th>
               <th className="px-6 py-3 text-right whitespace-nowrap text-rose-600">{t.expense} (HKD)</th>
               <th className="px-6 py-3 text-right whitespace-nowrap text-blue-600">{t.netIncome} (HKD)</th>
-              <th className="px-6 py-3 text-center whitespace-nowrap w-16 no-print"></th>
+              <th className="px-6 py-3 text-center whitespace-nowrap w-16 no-print sticky right-0 bg-gray-50 shadow-[-4px_0_6px_-2px_rgba(0,0,0,0.05)]"></th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-100">
@@ -72,7 +72,7 @@ export const TransactionTable: React.FC<TransactionTableProps> = ({ transactions
                       {formatCurrency(tItem.income - tItem.expense)}
                     </span>
                   </td>
-                  <td className="px-6 py-3 text-center no-print">
+                  <td className="px-6 py-3 text-center no-print sticky right-0 bg-white group-hover:bg-gray-50 shadow-[-4px_0_6px_-2px_rgba(0,0,0,0.05)] transition-colors">
                     {!isReadOnly && (
                       <button
                         onClick={() => onDelete(tItem.id)}

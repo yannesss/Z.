@@ -5,12 +5,13 @@ import { Transaction, AppView, AiParsedResult, Language, StoreType } from './typ
 import { INITIAL_TRANSACTIONS, TRANSLATIONS } from './constants';
 import { TransactionTable } from './components/TransactionTable';
 import { AddTransactionForm } from './components/AddTransactionForm';
+import { EditTransactionModal } from './components/EditTransactionModal';
 import { SmartEntry } from './components/SmartEntry';
 import { FinancialCharts } from './components/Charts';
 import { LayoutDashboard, Table2, TrendingUp, TrendingDown, Wallet, Languages, CalendarRange, Filter, Download, ArrowUpDown, Search, Store, FileSpreadsheet, Printer, Upload } from 'lucide-react';
 
 import { db } from './firebase';
-import { collection, onSnapshot, addDoc, deleteDoc, doc, query, Timestamp, writeBatch } from 'firebase/firestore';
+import { collection, onSnapshot, addDoc, updateDoc, deleteDoc, doc, query, Timestamp, writeBatch } from 'firebase/firestore';
 
 enum OperationType {
   CREATE = 'create',
@@ -134,6 +135,7 @@ const App: React.FC = () => {
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc'); // Default to 'desc' (Newest first)
   const [searchTerm, setSearchTerm] = useState('');
   const [storeFilter, setStoreFilter] = useState<'all' | 'main' | 'branch'>('all');
+  const [editingTransaction, setEditingTransaction] = useState<Transaction | null>(null);
   
   // Date filter state - Defaults to Current Month
   const [dateRange, setDateRange] = useState(() => {
@@ -177,6 +179,15 @@ const App: React.FC = () => {
       } catch (error) {
         handleFirestoreError(error, OperationType.DELETE, `transactions/${id}`);
       }
+    }
+  };
+
+  const handleUpdateTransaction = async (id: string, updatedData: Partial<Transaction>) => {
+    try {
+      await updateDoc(doc(db, 'transactions', id), updatedData);
+      setEditingTransaction(null);
+    } catch (error) {
+      handleFirestoreError(error, OperationType.UPDATE, `transactions/${id}`);
     }
   };
 
@@ -591,6 +602,7 @@ const App: React.FC = () => {
             <TransactionTable 
               transactions={filteredTransactions} 
               onDelete={handleDeleteTransaction}
+              onEdit={setEditingTransaction}
               t={t} 
             />
         </div>
@@ -609,6 +621,15 @@ const App: React.FC = () => {
         <p>{printDate}</p>
         <p>Website Author: Z.</p>
       </footer>
+
+      {editingTransaction && (
+        <EditTransactionModal
+          transaction={editingTransaction}
+          onUpdate={handleUpdateTransaction}
+          onClose={() => setEditingTransaction(null)}
+          t={t}
+        />
+      )}
     </div>
   );
 };

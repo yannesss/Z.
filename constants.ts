@@ -497,6 +497,10 @@ export const TRANSLATIONS = {
     storeAll: 'All Stores',
     storeMain: 'Main Store',
     storeBranch: 'Mong Kok Branch',
+    editTitle: 'Edit Record',
+    editTransaction: 'Edit Transaction',
+    update: 'Update',
+    cancel: 'Cancel',
   },
   zh: {
     appTitle: '財務報表',
@@ -549,5 +553,9 @@ export const TRANSLATIONS = {
     storeAll: '全部店舖',
     storeMain: '總店',
     storeBranch: '旺角分店',
+    editTitle: '修改記錄',
+    editTransaction: '修改交易',
+    update: '更新',
+    cancel: '取消',
   }
 };

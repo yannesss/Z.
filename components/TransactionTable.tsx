@@ -1,16 +1,17 @@
 import React from 'react';
 import { Transaction, SummaryStats } from '../types';
 import { TRANSLATIONS } from '../constants';
-import { Trash2 } from 'lucide-react';
+import { Trash2, Pencil } from 'lucide-react';
 
 interface TransactionTableProps {
   transactions: Transaction[];
   onDelete: (id: string) => void;
+  onEdit: (transaction: Transaction) => void;
   t: typeof TRANSLATIONS['en'];
   isReadOnly?: boolean;
 }
 
-export const TransactionTable: React.FC<TransactionTableProps> = ({ transactions, onDelete, t, isReadOnly = false }) => {
+export const TransactionTable: React.FC<TransactionTableProps> = ({ transactions, onDelete, onEdit, t, isReadOnly = false }) => {
   const stats: SummaryStats = transactions.reduce(
     (acc, t) => ({
       totalIncome: acc.totalIncome + t.income,
@@ -74,13 +75,22 @@ export const TransactionTable: React.FC<TransactionTableProps> = ({ transactions
                   </td>
                   <td className="px-3 py-2 text-center no-print sticky right-0 bg-white group-hover:bg-gray-50 shadow-[-4px_0_6px_-2px_rgba(0,0,0,0.05)] transition-colors">
                     {!isReadOnly && (
-                      <button
-                        onClick={() => onDelete(tItem.id)}
-                        className="p-1.5 text-gray-400 hover:text-rose-600 hover:bg-rose-50 rounded-md transition-colors"
-                        title={t.deleteTitle}
-                      >
-                        <Trash2 className="w-4 h-4" />
-                      </button>
+                      <div className="flex items-center justify-center gap-1">
+                        <button
+                          onClick={() => onEdit(tItem)}
+                          className="p-1.5 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-colors"
+                          title={t.editTitle}
+                        >
+                          <Pencil className="w-4 h-4" />
+                        </button>
+                        <button
+                          onClick={() => onDelete(tItem.id)}
+                          className="p-1.5 text-gray-400 hover:text-rose-600 hover:bg-rose-50 rounded-md transition-colors"
+                          title={t.deleteTitle}
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </button>
+                      </div>
                     )}
                   </td>
                 </tr>

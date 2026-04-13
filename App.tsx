@@ -100,6 +100,40 @@ const App: React.FC = () => {
     };
     migrateData();
 
+    // Temporary script to add March 2026 batch 1
+    const addMar2026Batch1 = async () => {
+      const added = localStorage.getItem('finreport_added_mar2026_batch1');
+      if (!added) {
+        try {
+          const newTransactions = [
+            { date: '2026-03-01', category: '租金 Rental Fee', description: '/', income: 0, expense: 20675.00, store: 'main' },
+            { date: '2026-03-01', category: '醫療耗材 Supplies – Medical & Consumables', description: '一次性拖鞋', income: 0, expense: 475.40, store: 'main' },
+            { date: '2026-03-02', category: '集運及運費 Logistics & Shipping Expenses', description: '集運', income: 0, expense: 256.27, store: 'main' },
+            { date: '2026-03-05', category: '辦公用品 Supplies – Office', description: '清潔泡泡', income: 0, expense: 67.00, store: 'main' },
+            { date: '2026-03-07', category: '美容療程用品 Supplies – Beauty & Treatment', description: '色料', income: 0, expense: 193.98, store: 'main' },
+            { date: '2026-03-08', category: '市場推廣－拍攝及模特費 Marketing & Promotion – Shooting & Model', description: '模特拍攝費用', income: 0, expense: 1100.00, store: 'main' },
+            { date: '2026-03-09', category: '美容療程用品 Supplies – Beauty & Treatment', description: '生髮精華', income: 0, expense: 2955.50, store: 'main' },
+            { date: '2026-03-09', category: '醫療耗材 Supplies – Medical & Consumables', description: '生理鹽水', income: 0, expense: 115.00, store: 'main' },
+            { date: '2026-03-09', category: '醫療耗材 Supplies – Medical & Consumables', description: '一次性色料杯', income: 0, expense: 77.00, store: 'main' },
+            { date: '2026-03-09', category: '醫療耗材 Supplies – Medical & Consumables', description: '一次性紗布', income: 0, expense: 115.00, store: 'main' },
+            { date: '2026-03-09', category: '辦公用品 Supplies – Office', description: '公司卡片', income: 0, expense: 438.13, store: 'main' },
+            { date: '2026-03-10', category: '美容療程用品 Supplies – Beauty & Treatment', description: '唇褪色2套（人民幣735，匯率1.132）', income: 0, expense: 832.02, store: 'main' }
+          ];
+          for (const tx of newTransactions) {
+            await addDoc(collection(db, 'transactions'), {
+              ...tx,
+              userId: 'anonymous',
+              createdAt: Timestamp.now()
+            });
+          }
+          localStorage.setItem('finreport_added_mar2026_batch1', 'true');
+        } catch (e) {
+          console.error('Failed to add March 2026 batch 1', e);
+        }
+      }
+    };
+    addMar2026Batch1();
+
     const q = query(
       collection(db, 'transactions')
     );

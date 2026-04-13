@@ -389,6 +389,7 @@ export const CATEGORIES = [
   '利得稅－預繳 Tax Prepayment – Profits Tax',
   '差餉及地租 Rates & Government Rent',
   '固定資產－裝修費 Fixed Asset – Renovation',
+  '固定資產－設備及器材 Fixed Asset – Equipment',
   '員工保險－勞工保險 Staff Insurance – Employees\' Compensation',
   '維修及安裝費 Repair & Installation',
   '市場推廣－拍攝及模特費 Marketing & Promotion – Shooting & Model',
@@ -438,6 +439,7 @@ export const CATEGORY_GROUPS: Record<string, string[]> = {
     '利得稅－交稅 Tax Expense – Profits Tax',
     '利得稅－預繳 Tax Prepayment – Profits Tax',
     '固定資產－裝修費 Fixed Asset – Renovation',
+    '固定資產－設備及器材 Fixed Asset – Equipment',
     '租賃及水電按金 Deposits'
   ],
   '其他 Others': [

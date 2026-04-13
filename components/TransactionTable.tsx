@@ -33,46 +33,46 @@ export const TransactionTable: React.FC<TransactionTableProps> = ({ transactions
         <table className="w-full text-sm text-left">
           <thead className="bg-gray-50 text-gray-700 font-semibold border-b border-gray-200 uppercase tracking-wider">
             <tr>
-              <th className="px-6 py-3 whitespace-nowrap">{t.date}</th>
-              <th className="px-6 py-3 whitespace-nowrap">{t.store}</th>
-              <th className="px-6 py-3 whitespace-nowrap">{t.category}</th>
-              <th className="px-6 py-3 min-w-[200px]">{t.description}</th>
-              <th className="px-6 py-3 text-right whitespace-nowrap text-emerald-600">{t.income} (HKD)</th>
-              <th className="px-6 py-3 text-right whitespace-nowrap text-rose-600">{t.expense} (HKD)</th>
-              <th className="px-6 py-3 text-right whitespace-nowrap text-blue-600">{t.netIncome} (HKD)</th>
-              <th className="px-6 py-3 text-center whitespace-nowrap w-16 no-print sticky right-0 bg-gray-50 shadow-[-4px_0_6px_-2px_rgba(0,0,0,0.05)]"></th>
+              <th className="px-3 py-2 whitespace-nowrap">{t.date}</th>
+              <th className="px-3 py-2 whitespace-nowrap">{t.store}</th>
+              <th className="px-3 py-2">{t.category}</th>
+              <th className="px-3 py-2 min-w-[120px]">{t.description}</th>
+              <th className="px-3 py-2 text-right whitespace-nowrap text-emerald-600">{t.income} (HKD)</th>
+              <th className="px-3 py-2 text-right whitespace-nowrap text-rose-600">{t.expense} (HKD)</th>
+              <th className="px-3 py-2 text-right whitespace-nowrap text-blue-600">{t.netIncome} (HKD)</th>
+              <th className="px-3 py-2 text-center whitespace-nowrap w-12 no-print sticky right-0 bg-gray-50 shadow-[-4px_0_6px_-2px_rgba(0,0,0,0.05)]"></th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-100">
             {transactions.length === 0 ? (
               <tr>
-                <td colSpan={8} className="px-6 py-8 text-center text-gray-400 italic">
+                <td colSpan={8} className="px-3 py-6 text-center text-gray-400 italic">
                   {t.noRecords}
                 </td>
               </tr>
             ) : (
               transactions.map((tItem) => (
                 <tr key={tItem.id} className="hover:bg-gray-50 transition-colors group">
-                  <td className="px-6 py-3 whitespace-nowrap font-medium text-gray-900">{tItem.date}</td>
-                  <td className="px-6 py-3 whitespace-nowrap text-gray-600">
+                  <td className="px-3 py-2 whitespace-nowrap font-medium text-gray-900">{tItem.date}</td>
+                  <td className="px-3 py-2 whitespace-nowrap text-gray-600">
                     <span className={`px-2 py-1 rounded-full text-xs font-medium ${tItem.store === 'branch' ? 'bg-purple-100 text-purple-700' : 'bg-indigo-100 text-indigo-700'}`}>
                       {tItem.store === 'branch' ? t.storeBranch : t.storeMain}
                     </span>
                   </td>
-                  <td className="px-6 py-3 whitespace-nowrap text-gray-600">{tItem.category}</td>
-                  <td className="px-6 py-3 text-gray-600">{tItem.description}</td>
-                  <td className="px-6 py-3 text-right text-gray-900">
+                  <td className="px-3 py-2 text-gray-600">{tItem.category}</td>
+                  <td className="px-3 py-2 text-gray-600">{tItem.description}</td>
+                  <td className="px-3 py-2 text-right text-gray-900">
                     {tItem.income > 0 ? formatCurrency(tItem.income) : '-'}
                   </td>
-                  <td className="px-6 py-3 text-right text-gray-900">
+                  <td className="px-3 py-2 text-right text-gray-900">
                     {tItem.expense > 0 ? formatCurrency(tItem.expense) : '-'}
                   </td>
-                  <td className="px-6 py-3 text-right font-medium text-gray-900">
+                  <td className="px-3 py-2 text-right font-medium text-gray-900">
                     <span className={tItem.income - tItem.expense < 0 ? 'text-rose-600' : 'text-emerald-600'}>
                       {formatCurrency(tItem.income - tItem.expense)}
                     </span>
                   </td>
-                  <td className="px-6 py-3 text-center no-print sticky right-0 bg-white group-hover:bg-gray-50 shadow-[-4px_0_6px_-2px_rgba(0,0,0,0.05)] transition-colors">
+                  <td className="px-3 py-2 text-center no-print sticky right-0 bg-white group-hover:bg-gray-50 shadow-[-4px_0_6px_-2px_rgba(0,0,0,0.05)] transition-colors">
                     {!isReadOnly && (
                       <button
                         onClick={() => onDelete(tItem.id)}
@@ -88,14 +88,14 @@ export const TransactionTable: React.FC<TransactionTableProps> = ({ transactions
             )}
             {/* Total Row */}
             <tr className="bg-yellow-50 font-bold border-t-2 border-gray-200 print:bg-gray-100">
-              <td className="px-6 py-4 text-gray-900">{t.total}:</td>
+              <td className="px-3 py-3 text-gray-900">{t.total}:</td>
               <td colSpan={3}></td>
-              <td className="px-6 py-4 text-right text-emerald-700">{formatCurrency(stats.totalIncome)}</td>
-              <td className="px-6 py-4 text-right text-rose-700">{formatCurrency(stats.totalExpense)}</td>
-              <td className="px-6 py-4 text-right bg-yellow-300 text-gray-900 border border-yellow-400 print:bg-transparent print:border-gray-300">
+              <td className="px-3 py-3 text-right text-emerald-700">{formatCurrency(stats.totalIncome)}</td>
+              <td className="px-3 py-3 text-right text-rose-700">{formatCurrency(stats.totalExpense)}</td>
+              <td className="px-3 py-3 text-right bg-yellow-300 text-gray-900 border border-yellow-400 print:bg-transparent print:border-gray-300">
                 {formatCurrency(stats.netIncome)}
               </td>
-              <td className="no-print"></td>
+              <td className="no-print sticky right-0 bg-yellow-50 shadow-[-4px_0_6px_-2px_rgba(0,0,0,0.05)]"></td>
             </tr>
           </tbody>
         </table>
